@@ -14,7 +14,7 @@
   width: 100%;
   margin-bottom: 2%;
   justify-content: center;
-  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 form {
@@ -34,6 +34,15 @@ input, button {
   font-size: large;
 }
 
+.rememberMe-section {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  margin-top: -20px;
+  width: 90%;
+}
+
 @media only screen and (max-width: 620px) {
   .form-section {
     width: 100%;
@@ -46,5 +55,9 @@ input, button {
 
   label {
     margin-bottom: 10px;
+  }
+
+  .rememberMe-section input {
+    width: 3%;
   }
 }
