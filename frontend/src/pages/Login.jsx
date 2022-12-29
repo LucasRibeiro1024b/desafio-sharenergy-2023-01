@@ -8,11 +8,6 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleChange({ target }) {
-    if (target.name === 'username') setUsername(target.value);
-    else setPassword(target.value);
-  }
-
   function handleClick() {
     console.log("Clicou");
   }
@@ -22,7 +17,7 @@ function Login() {
       { logged && <Navigate to="/users" replace={ true } /> }
       <form>
         <section className="form-section">
-          <label>Username:&nbsp;</label>
+          <label>Username&nbsp;&nbsp;</label>
           <div>
             <input
               type="text"
@@ -30,12 +25,12 @@ function Login() {
               name="username"
               placeholder="Sharenergy"
               value={ username }
-              onChange={ handleChange }
+              onChange={ ({ target }) => setUsername(target.value) }
             />
           </div>
         </section>
         <section className="form-section">
-          <label>Password:&nbsp;</label>
+          <label>Password&nbsp;&nbsp;</label>
           <div>
             <input
               type="password"
@@ -43,7 +38,7 @@ function Login() {
               name="password"
               placeholder="123456"
               value={ password }
-              onChange={ handleChange }
+              onChange={ ({ target }) => setPassword(target.value) }
             />
           </div>
         </section>
