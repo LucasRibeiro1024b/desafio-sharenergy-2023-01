@@ -1,0 +1,25 @@
+#form-main {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 5%;
+}
+
+.form-section {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2%;
+}
+
+form {
+  text-align: center;
+  font-size: large;
+}
+
+label {
+  font-size: larger;
+}
