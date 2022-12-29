@@ -1,8 +1,11 @@
 import React from 'react';
+import '../styles/NotFound.css';
 
 function NotFound() {
   return (
-    <h1>Page not found</h1>
+    <main id="not-found-main">
+      <h1>Page not found</h1>
+    </main>
   );
 }
 
