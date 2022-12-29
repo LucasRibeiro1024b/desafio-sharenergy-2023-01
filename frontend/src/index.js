@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { NotFound } from './components';
-import { Login } from './pages';
+import { Login, Users } from './pages';
 import { ContextProvider } from './contexts/Context';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
@@ -14,6 +14,11 @@ const myRouter = createBrowserRouter([
     element: <Login />,
     errorElement: <NotFound />,
   },
+  {
+    path: '/users',
+    element: <Users />,
+    errorElement: <NotFound />,
+  }
 ]);
 
 root.render(
