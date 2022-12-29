@@ -1,13 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { NotFound } from './components';
+import { Login } from './pages';
+import { ContextProvider } from './contexts/Context';
 import reportWebVitals from './reportWebVitals';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+const myRouter = createBrowserRouter([
+  {
+    path: '/',
+    element: <Login />,
+    errorElement: <NotFound />,
+  },
+]);
+
 root.render(
   <React.StrictMode>
-    <App />
+    <ContextProvider>
+      <RouterProvider router={ myRouter } />
+    </ContextProvider>
   </React.StrictMode>
 );
 
