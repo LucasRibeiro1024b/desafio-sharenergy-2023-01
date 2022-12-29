@@ -5,7 +5,7 @@ import { NotFound } from './components';
 import { Login } from './pages';
 import { ContextProvider } from './contexts/Context';
 import reportWebVitals from './reportWebVitals';
-import './index.css';
+import './styles/index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const myRouter = createBrowserRouter([
