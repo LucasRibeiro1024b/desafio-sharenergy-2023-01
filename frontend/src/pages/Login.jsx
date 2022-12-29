@@ -7,6 +7,7 @@ function Login() {
   const { logged, setLogged } = useContext(Context);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   function handleClick() {
     console.log("Clicou");
@@ -15,6 +16,7 @@ function Login() {
   return (
     <main id='form-main'>
       { logged && <Navigate to="/users" replace={ true } /> }
+      <h1>Login</h1>
       <form>
         <section className="form-section">
           <label>Username&nbsp;&nbsp;</label>
@@ -42,9 +44,18 @@ function Login() {
             />
           </div>
         </section>
+        <section className="rememberMe-section">
+          <input
+            type="checkbox"
+            name="rememberMe"
+            value={ rememberMe }
+            onChange={ () => setRememberMe(!rememberMe) }
+          />
+          <p>remember me</p>
+        </section>
         <section>
           <br/>
-          <button type="button" onClick={ handleClick }>Adicionar</button>
+          <button type="button" onClick={ handleClick }>Entrar</button>
         </section>
       </form>
     </main>
