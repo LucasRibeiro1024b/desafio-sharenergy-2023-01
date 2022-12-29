@@ -13,13 +13,38 @@
   align-items: center;
   width: 100%;
   margin-bottom: 2%;
+  justify-content: center;
+  margin-bottom: 40px;
 }
 
 form {
+  display: flex;
+  flex-flow: column wrap;
   text-align: center;
   font-size: large;
+  width: 100%;
+  align-items: center;
 }
 
 label {
   font-size: larger;
+}
+
+input, button {
+  font-size: large;
+}
+
+@media only screen and (max-width: 620px) {
+  .form-section {
+    width: 100%;
+    flex-flow: column nowrap;
+  }
+
+  input {
+    width: 90%;
+  }
+
+  label {
+    margin-bottom: 10px;
+  }
 }
