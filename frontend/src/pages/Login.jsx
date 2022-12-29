@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import { Context } from '../contexts/Context';
 import { localStorage } from '../utils';
@@ -13,7 +13,7 @@ function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [validCredentials, setValidCredentials] = useState(true);  
 
-  useState(() => {
+  useEffect(() => {
     const { REACT_APP_USERNAME, REACT_APP_PASSWORD } = process.env;
     const remembered = localStorage.getItem(KEY_LOCAL_STORAGE);
     
