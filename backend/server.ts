@@ -1,13 +1,20 @@
-import  Express  from "express";
-import { Router } from "express";
-const app = Express();
-const router = Router();
-const port = process.env.PORT_SERVER
+import express from "express";
+import router from "./src/Rotas";
 
+
+const app = express();
+
+
+
+app.use(express.json());
+app.use(router)
+
+
+const port = process.env.PORT_SERVER ?? 3000
 
 app.listen(port,() =>{
   console.log(`Você está conectado na porta ${port}`)
 })
 
 
-export default {router};
+export default router;
