@@ -13,10 +13,10 @@ function User({ user }) {
     <section className="user-section">
       <img src={ large } alt="Photo of the user" />
       <section className="user-info">
-        <h2>Nome: { `${first} ${last}` } </h2>
-        <h2>E-mail: { email } </h2>
-        <h2>Username: { username } </h2>
-        <h2>Idade: { age } </h2>
+        <p>Nome: { `${first} ${last}` } </p>
+        <p>E-mail: { email } </p>
+        <p>Username: { username } </p>
+        <p>Idade: { age } </p>
       </section>
     </section>
   );
