@@ -1,8 +1,45 @@
 #users-main {
   display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
+  flex-flow: column nowrap;
   align-items: center;
   width: 100%;
-  margin-top: 5%;
+  margin-top: 2%;
+}
+
+#users-container {
+  display: flex;
+  flex-flow: row wrap;
+  text-align: initial;
+  width: 100%;
+  margin-top: 6%;
+  justify-content: space-around;
+}
+
+.user-section {
+  display: flex;
+  flex-flow: column wrap;
+  width: 430px;
+  min-width: 325px;
+  align-items: center;
+  margin-bottom: 7%;
+  border-color: black;
+  border-style: solid;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  padding-top: 15px;
+}
+
+.user-section img {
+  width: max-content;
+  border-radius: 15px;
+}
+
+.user-info {
+  width: 100%;
+  margin-left: 10px;
+  font-size: larger;
+}
+
+#users-buttons {
+  margin: 5% 3%;
 }
