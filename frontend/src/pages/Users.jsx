@@ -11745,8 +11745,8 @@ function Users() {
             "thumbnail": "https://randomuser.me/api/portraits/thumb/men/3.jpg"
         }
       },
-    ]
-  ]);
+      ]
+    ]);
 
     async function fetchData() {
       const payload = await fetchApi.get(BASE_URL);
@@ -11766,12 +11766,11 @@ function Users() {
   return (
     <main id='users-main'>
       <h1>Usuários</h1>
-      { console.log(users) }
       <div id='users-container'>
         {
           users
             .slice(page, resultsPerPage)
-            .map((user) => <User user={ user } key={ user.email } />)
+            .map((user) => <User user={ user } key={ `${user.username}-${user.email}` } />)
         }
       </div>
       <div id='users-buttons'>
