@@ -13,10 +13,10 @@ function LayoutGeral ({children} : ILayoutGeral) {
     <Layout>
       <Header className="header">
       </Header>
-      <Content style={{padding: '50px 50px', margin:"100px 50px", backgroundColor:"blue"}}>
+      <Content style={{padding: '50px 50px'}}>
         {children}
       </Content>
-      <Footer style={{ textAlign: 'center', backgroundColor:"red", alignItems:"end" }}>©2023 Created by Rafael Carlos De Souza</Footer>
+      <Footer style={{ textAlign: 'center', alignItems:"end" }}>©2023 Created by Rafael Carlos De Souza</Footer>
     </Layout>
   );
 };

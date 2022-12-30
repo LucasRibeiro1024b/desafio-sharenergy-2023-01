@@ -1,24 +1,71 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Checkbox, Form, Input } from "antd";
+import { Checkbox, Form, Input, Space } from "antd";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import IUser from "../../../../Interfaces/User";
-
+import Botao from "../../../Button";
+import Titulo from "../../../Titulo";
+import S from "../../../Container/index"
 
 function LoginForm () {
   const [form]= Form.useForm<IUser>()
 
+  function handleClick (){
+    form.validateFields().then(()=>{
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const login : IUser = form.getFieldsValue();
+    }).catch(err =>{
+      console.log(err)
+    })
+  }
+
+
   return (
-    <Form form={form} layout="vertical">
-      <Form.Item label="Usuário" >
-        <Input prefix={<UserOutlined className="site-form-item-icon" />} allowClear placeholder="Digite seu usuário" />
+  <S.ContainerBloco>
+  <Titulo>Faça Login</Titulo>
+    <Form
+      form={form}
+      layout="vertical"
+    >
+      <Form.Item
+      name="nome"
+      label="Usuário"
+      rules={[{
+        required : true,
+        message : "Campo é obrigatório"
+      }]} required>
+        <Input
+        style={{width:"400px", height :"32px" }}
+        prefix={<UserOutlined className="site-form-item-icon" />}
+        allowClear
+        placeholder="Digite seu usuário" />
       </Form.Item>
-      <Form.Item label="Senha">
-        <Input type="password"  prefix={<LockOutlined className="site-form-item-icon" />} allowClear placeholder="Digite sua senha" />
+      <Form.Item
+        name="senha"
+        label="Senha"
+        rules={[{
+          required : true,
+          message : "Campo é obrigatório"
+        }]} required>
+        <Input
+          style={{width:"400px", height :"32px" }}
+          type="password"
+          prefix={<LockOutlined
+          className="site-form-item-icon" />}
+          allowClear
+          placeholder="Digite sua senha"
+        />
       </Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
+        <Form.Item name="checked" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
+        <Space direction="vertical">
+          <Botao
+            handleClick={handleClick}
+            textoBotao="Enviar"
+          />
+        </Space>
     </Form>
+    </S.ContainerBloco>
   )
 }
 

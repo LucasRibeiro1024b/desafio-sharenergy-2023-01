@@ -3,10 +3,19 @@ import styled from "styled-components";
 
 
 const Container = styled.div`
-display : flex;
-width : 600px;
-align-items : center;
-justify-content : center;
+  display : flex;
+  justify-content: center;
+  align-items : center;
+  background-color :white;
+  width : 100%;
+  height : 430px;
+`
+
+const ContainerBloco = styled.div`
+  display : flex;
+  flex-direction : column;
+  justify-content: center;
+  align-items : center;
 `
 
 
@@ -14,4 +23,4 @@ justify-content : center;
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {Container}
+export default {Container, ContainerBloco}
