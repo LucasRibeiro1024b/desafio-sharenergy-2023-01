@@ -1,5 +1,5 @@
 import express from "express";
-import router from "./src/Rotas";
+import router from "./src/Controllers/LoginController";
 
 
 const app = express();
