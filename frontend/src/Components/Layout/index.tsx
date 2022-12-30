@@ -1,12 +1,12 @@
-import React from 'react';
 import { Layout} from 'antd';
-//import PageLogin from '../Entidades/Login';
-import LoginForm from '../Entidades/Login/form';
+import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 const { Header, Content, Footer} = Layout;
 
-
-function LayoutGeral () {
+interface ILayoutGeral{
+  children : ReactJSXElement
+}
+function LayoutGeral ({children} : ILayoutGeral) {
 
 
   return (
@@ -14,7 +14,7 @@ function LayoutGeral () {
       <Header className="header">
       </Header>
       <Content style={{padding: '50px 50px', margin:"100px 50px", backgroundColor:"blue"}}>
-        <LoginForm/>
+        {children}
       </Content>
       <Footer style={{ textAlign: 'center', backgroundColor:"red", alignItems:"end" }}>©2023 Created by Rafael Carlos De Souza</Footer>
     </Layout>

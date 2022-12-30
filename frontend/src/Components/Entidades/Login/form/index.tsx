@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Form, Input } from "antd";
+import { Checkbox, Form, Input } from "antd";
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import IUser from "../../../../Interfaces/User";
 
 
@@ -8,12 +9,15 @@ function LoginForm () {
 
   return (
     <Form form={form} layout="vertical">
-      <Form.Item label="Usuário">
-        <Input placeholder="Digite seu usuário" />
+      <Form.Item label="Usuário" >
+        <Input prefix={<UserOutlined className="site-form-item-icon" />} allowClear placeholder="Digite seu usuário" />
       </Form.Item>
       <Form.Item label="Senha">
-        <Input placeholder="Digite sua senha" />
+        <Input type="password"  prefix={<LockOutlined className="site-form-item-icon" />} allowClear placeholder="Digite sua senha" />
       </Form.Item>
+        <Form.Item name="remember" valuePropName="checked" noStyle>
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
     </Form>
   )
 }

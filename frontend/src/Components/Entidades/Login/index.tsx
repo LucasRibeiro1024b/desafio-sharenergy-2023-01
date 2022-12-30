@@ -1,23 +1,15 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import Modal from "antd/es/modal/Modal";
+import S from "../../Container/index"
+import LoginForm from "./form";
 
-interface IPageLogin{
-  children : ReactJSXElement
-  handleOk : () => void
-  visivel : boolean
-  handleCancel : () => void
-}
-function PageLogin({children, handleOk, visivel, handleCancel }: IPageLogin) : ReactJSXElement{
+
+function PageLogin() : ReactJSXElement{
 
   return(
-    <Modal
-    onOk={handleOk}
-    open={visivel}
-    onCancel={handleCancel}
-    >
-      {children}
-    </Modal>
+    <S.Container>
+      <LoginForm/>
+    </S.Container>
   )
 }
 

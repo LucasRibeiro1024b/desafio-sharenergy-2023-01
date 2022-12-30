@@ -1,9 +1,8 @@
-import './App.css';
-import LayoutGeral from './Components/Layout';
+import Home from './Pages/Home';
 
 function App() {
   return (
-   <LayoutGeral/>
+   <Home/>
   );
 }
 
