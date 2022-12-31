@@ -10,15 +10,15 @@ function User({ user }) {
   } = user;
 
   return (
-    <section className="user-section">
+    <div className="user-section">
       <img src={ large } alt="Photo of the user" />
-      <section className="user-info">
+      <div className="user-info">
         <p>Nome: { `${first} ${last}` } </p>
         <p>E-mail: { email } </p>
         <p>Username: { username } </p>
         <p>Idade: { age } </p>
-      </section>
-    </section>
+      </div>
+    </div>
   );
 }
 
