@@ -6,6 +6,11 @@
   margin-top: 2%;
 }
 
+#users-pagination {
+  display: flex;
+  flex-direction: row;
+}
+
 #users-container {
   display: flex;
   flex-flow: row wrap;
