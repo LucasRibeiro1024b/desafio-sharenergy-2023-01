@@ -9,6 +9,12 @@
 #users-pagination {
   display: flex;
   flex-direction: row;
+  align-items: baseline;
+  font-size: larger;
+}
+
+#users-pagination select {
+  font-size: large;
 }
 
 #users-container {

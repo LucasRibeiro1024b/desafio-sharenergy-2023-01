@@ -1327,7 +1327,7 @@ function Users() {
         onChange={ ({ target }) => setResultsPerPage(parseInt(target.value)) }
         value={ resultsPerPage }
       >
-        <p>Usuários por página</p>
+        <p>Usuários por página:&nbsp;&nbsp;</p>
         <select>
           <option value="5">5</option>
           <option value="10">10</option>
