@@ -16,6 +16,7 @@ const ContainerBloco = styled.div`
   flex-direction : column;
   justify-content: center;
   align-items : center;
+  margin : 20px 20px;
 `
 
 

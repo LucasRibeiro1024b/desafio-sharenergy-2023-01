@@ -3,7 +3,7 @@ import LayoutGeral from "../Components/Layout";
 
 function Home () {
   return (
-    <LayoutGeral>
+    <LayoutGeral header="none">
       <PageLogin/>
     </LayoutGeral>
   )

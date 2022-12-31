@@ -1,8 +1,8 @@
-import Home from './Pages/Home';
+import Rotas from './Routes';
 
 function App() {
   return (
-   <Home/>
+   <Rotas/>
   );
 }
 

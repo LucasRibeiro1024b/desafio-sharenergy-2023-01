@@ -5,13 +5,13 @@ const { Header, Content, Footer} = Layout;
 
 interface ILayoutGeral{
   children : ReactJSXElement
+  header ?: string
 }
-function LayoutGeral ({children} : ILayoutGeral) {
-
+function LayoutGeral ({children, header} : ILayoutGeral) {
 
   return (
     <Layout>
-      <Header className="header">
+      <Header className="header" style={{display:header}}>
       </Header>
       <Content style={{padding: '50px 50px'}}>
         {children}
