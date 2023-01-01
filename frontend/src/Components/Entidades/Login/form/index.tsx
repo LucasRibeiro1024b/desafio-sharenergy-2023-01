@@ -16,6 +16,7 @@ function LoginForm () {
       const login : IUser = form.getFieldsValue();
        // eslint-disable-next-line @typescript-eslint/no-unused-vars
        const resposta =  await servico.logar({nome: login.nome, senha: login.senha})
+       console.log(resposta)
     }).catch(err =>{
       console.log(err)
     })
