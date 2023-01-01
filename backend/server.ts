@@ -8,7 +8,7 @@ const app = express();
 
 app.use(cors({origin:"http://localhost:3000"}))
 app.use(express.json());
-app.use(router)
+app.use("/api",router)
 
 const port = process.env.PORT_SERVER ?? 3001
 
