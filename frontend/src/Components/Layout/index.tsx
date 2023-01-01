@@ -4,7 +4,7 @@ import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 const { Header, Content, Footer} = Layout;
 
 interface ILayoutGeral{
-  children : ReactJSXElement
+  children ?: ReactJSXElement
   header ?: string
 }
 function LayoutGeral ({children, header} : ILayoutGeral) {
