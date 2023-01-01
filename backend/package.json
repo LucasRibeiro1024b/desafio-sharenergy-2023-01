@@ -11,6 +11,8 @@
   "author": "Rafael carlos de souza",
   "license": "ISC",
   "dependencies": {
+    "@types/cors": "^2.8.13",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "typescript": "^4.9.4"
   },
