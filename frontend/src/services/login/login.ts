@@ -8,6 +8,7 @@ interface IDadosLogin {
 }
 const logar = async (dados: IDadosLogin)=>{
   const resultado =  await api.post('http://localhost:3001/api/login',dados)
+     localStorage.setItem("user", JSON.stringify(resultado.data))
   return resultado.data
 }
 

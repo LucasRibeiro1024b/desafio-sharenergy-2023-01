@@ -1,21 +1,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
-import { BrowserRouter, Routes, Route, RouterProps } from "react-router-dom";
-
+import React from "react";
 
 interface IRotasPrivadas {
-  estaAutenticado : boolean,
-  elemento : ReactJSXElement
-  rest ?: RouterProps
+  estaAutenticado :string | boolean | any,
+  children : React.ReactElement
 }
 
-function RotasPrivadas({estaAutenticado, elemento, rest}: IRotasPrivadas){
+function RotasPrivadas({estaAutenticado, children , ...rest}: IRotasPrivadas){
 
-  return (
-    estaAutenticado && estaAutenticado ?
-    <Route element={elemento} {...rest}/>
-     : <>{5858585}</>
-    )
+  return(<> {children}</>)
 
 }
 

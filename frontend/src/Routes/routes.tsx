@@ -2,7 +2,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../Pages/Home";
 import NaoExiste from "../Pages/NaoExiste";
-//import RotasPrivadas from "./rotaPrivada";
+import pegarToken from "../services/pegarToken";
+import RotasPrivadas from "./rotaPrivada";
 
 
 function Rotas (){
@@ -11,6 +12,7 @@ function Rotas (){
     <Routes>
       <Route index element={<Home/>}/>
       <Route path="*" element={<NaoExiste/>}/>
+      <Route path="/login" element={<RotasPrivadas estaAutenticado={pegarToken() != null ? true : false} children={<NaoExiste/>} />}/>
    </Routes>
   </BrowserRouter>
   )
