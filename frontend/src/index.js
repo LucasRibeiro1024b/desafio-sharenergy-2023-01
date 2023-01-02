@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { NotFound } from './components';
-import { Cats, Login, Users } from './pages';
+import { Cats, Login, Users, RandomDog } from './pages';
 import { ContextProvider } from './contexts/Context';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
@@ -22,6 +22,11 @@ const myRouter = createBrowserRouter([
   {
     path: '/cats',
     element: <Cats />,
+    errorElement: <NotFound />,
+  },
+  {
+    path: '/dogs',
+    element: <RandomDog />,
     errorElement: <NotFound />,
   },
 ]);
