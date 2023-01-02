@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../contexts/Context';
-import { User } from '../components';
+import { Navbar, User } from '../components';
 import { fetchApi, validateLoginLocalStorage } from '../utils';
 import '../styles/Users.css';
 
@@ -1368,6 +1368,7 @@ function Users() {
 
   return (
     <main id='users-main'>
+      <Navbar />
       <h1>Usuários</h1>
       <section
         id='users-pagination-filter'

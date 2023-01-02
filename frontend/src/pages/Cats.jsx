@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useContext } from 'react';
+import { Navbar } from '../components';
 import { Context } from '../contexts/Context';
 import { validateLoginLocalStorage } from '../utils';
 //  import '../styles/Cats.css';
@@ -15,6 +15,7 @@ function Cats() {
 
   return (
     <main id='cats-main'>
+      <Navbar />
       <h1>Cats</h1>
     </main>
   );
