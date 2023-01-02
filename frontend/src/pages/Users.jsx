@@ -1370,9 +1370,7 @@ function Users() {
     <main id='users-main'>
       <Navbar />
       <h1>Usuários</h1>
-      <section
-        id='users-pagination-filter'
-      >
+      <section id='users-pagination-filter'>
         <div id='users-pagination-filter-pagination'>
           <p>Usuários por página:&nbsp;</p>
           <select
