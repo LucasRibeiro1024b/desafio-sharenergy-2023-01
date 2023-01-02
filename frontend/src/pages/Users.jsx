@@ -1372,8 +1372,8 @@ function Users() {
       <section
         id='users-pagination-filter'
       >
-        <div>
-          <p>Usuários por página:&nbsp;&nbsp;</p>
+        <div id='users-pagination-filter-pagination'>
+          <p>Usuários por página:&nbsp;</p>
           <select
             onChange={ ({ target }) => setResultsPerPage(parseInt(target.value)) }
             value={ resultsPerPage }
@@ -1384,8 +1384,8 @@ function Users() {
             <option value="50">50</option>
           </select>          
         </div>
-        <div>
-          <p>Filtrar usuários:&nbsp;&nbsp;</p>
+        <div id='users-pagination-filter-filter'>
+          <p>Filtrar usuários por:</p>
           <select
             onChange={ ({ target }) => setTypeFilter(target.value) }
             value={ typeFilter }

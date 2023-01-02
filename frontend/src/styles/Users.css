@@ -6,14 +6,41 @@
   margin-top: 2%;
 }
 
-#users-pagination {
+#users-pagination-filter {
   display: flex;
-  flex-direction: row;
+  flex-flow: row wrap;
   align-items: baseline;
   font-size: larger;
+  width: 90%;
+  justify-content: center;
+  margin-left: 8%;
 }
 
-#users-pagination select {
+#users-pagination-filter-pagination {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 20%;
+  min-width: 230px;
+  justify-content: space-evenly;
+}
+
+#users-pagination-filter-filter {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  width: 70%;
+  min-width: 500px;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+#users-pagination-filter-filter select {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+#users-pagination-filter div select {
   font-size: large;
 }
 
@@ -53,4 +80,24 @@
 
 #users-buttons {
   margin: 5% 3%;
+}
+
+@media only screen and (max-width: 876px) {
+  #users-pagination-filter {
+    margin-left: -10px;
+  }
+
+  #users-pagination-filter-pagination, #users-pagination-filter-filter {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  #users-pagination-filter-filter {
+    width: 100%;
+    flex-flow: row wrap;
+  }
+
+  #users-pagination-filter-filter input {
+    width: 107px;
+  }
 }
