@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { NotFound } from './components';
-import { Login, Users } from './pages';
+import { Cats, Login, Users } from './pages';
 import { ContextProvider } from './contexts/Context';
 import reportWebVitals from './reportWebVitals';
 import './styles/index.css';
@@ -18,7 +18,12 @@ const myRouter = createBrowserRouter([
     path: '/users',
     element: <Users />,
     errorElement: <NotFound />,
-  }
+  },
+  {
+    path: '/cats',
+    element: <Cats />,
+    errorElement: <NotFound />,
+  },
 ]);
 
 root.render(
