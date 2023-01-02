@@ -60,6 +60,9 @@ function Cats() {
           <option value="599">599</option>
         </select>        
       </section>
+      <section id='cats-img-section'>
+        <img src={ BASE_URL } alt="Image of HTTP status code based on cats actions." />
+      </section>
     </main>
   );
 }
