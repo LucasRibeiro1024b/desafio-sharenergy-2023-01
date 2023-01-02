@@ -1,6 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
 import { Context } from '../contexts/Context';
+import { validateLoginLocalStorage } from '../utils';
 //  import '../styles/Cats.css';
 
 function Cats() {
@@ -8,7 +10,7 @@ function Cats() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!logged) navigate('/');
+    if (!(validateLoginLocalStorage() || logged)) navigate('/');
   }, []);
 
   return (

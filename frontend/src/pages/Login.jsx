@@ -1,53 +1,42 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Context } from '../contexts/Context';
-import { localStorage } from '../utils';
+import { localStorage, validateLoginLocalStorage } from '../utils';
 import '../styles/Login.css';
 
-const KEY_LOCAL_STORAGE = 'remembered';
+const {
+  REACT_APP_USERNAME,
+  REACT_APP_PASSWORD,
+  REACT_APP_KEY_LOCAL_STORAGE,
+} = process.env;
 
 function Login() {
   const { logged, setLogged } = useContext(Context);
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [validCredentials, setValidCredentials] = useState(true);  
 
-  useEffect(() => {
-    const { REACT_APP_USERNAME, REACT_APP_PASSWORD } = process.env;
-    const remembered = localStorage.getItem(KEY_LOCAL_STORAGE);
-    
-    if (remembered) {
-      setValidCredentials(true);
-      const { username: user, password: pass } = remembered;
-
-      if (user === REACT_APP_USERNAME && pass === REACT_APP_PASSWORD) {
-        setLogged(true);
-      } else {
-        setLogged(false);
-      }
-    }
-  }, []);
+  useEffect(() => { if (validateLoginLocalStorage()) navigate('/users') }, []);
 
   function handleClick() {
-    const { REACT_APP_USERNAME, REACT_APP_PASSWORD } = process.env;
-
     if (rememberMe) {
-      localStorage.setItem(KEY_LOCAL_STORAGE, { username, password });
+      localStorage.setItem(REACT_APP_KEY_LOCAL_STORAGE, { username, password });
     }
 
     if (username === REACT_APP_USERNAME && password === REACT_APP_PASSWORD) {
-      setValidCredentials(true);
       setLogged(true);
+      setValidCredentials(true);
+      navigate('/users');
     } else {
-      setValidCredentials(false);
       setLogged(false);
+      setValidCredentials(false);
     }
   }
 
   return (
     <main id='form-main'>
-      { logged && <Navigate to="/users" replace={ true } /> }
       <h1>Login</h1>
       { !validCredentials && <h2>Invalid credentials</h2>}
       <form>

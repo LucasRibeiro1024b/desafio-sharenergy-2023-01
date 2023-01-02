@@ -1,8 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Context } from '../contexts/Context';
 import { User } from '../components';
-import { fetchApi } from '../utils';
+import { fetchApi, validateLoginLocalStorage } from '../utils';
 import '../styles/Users.css';
 
 function Users() {
@@ -19,7 +19,7 @@ function Users() {
   const BASE_URL = `https://randomuser.me/api/?seed=gabrielpinheiromatiucci&results=1000&nat=br&inc=picture,name,email,dob,login`;
 
   useEffect(() => {
-    if (!logged) navigate('/');
+    if (!(validateLoginLocalStorage() || logged)) navigate('/');
 
     
 
