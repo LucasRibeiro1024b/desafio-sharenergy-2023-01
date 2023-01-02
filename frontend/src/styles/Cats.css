@@ -1,0 +1,31 @@
+#cats-main {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
+  margin-top: 2%;
+}
+
+#cats-code-section {
+  display: flex;
+  flex-flow: row wrap;
+  width: 90%;
+  align-items: center;
+  justify-content: center;
+  font-size: x-large;
+}
+
+#cats-code-section select {
+  font-size: large;
+  margin-left: 10px;
+}
+
+#cats-img-section {
+  display: flex;
+  justify-content: center;
+}
+
+#cats-img-section img {
+  width: 90%;
+  min-width: 430px;
+}
