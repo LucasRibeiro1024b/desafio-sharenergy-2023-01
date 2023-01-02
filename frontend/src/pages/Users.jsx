@@ -12,10 +12,16 @@ function Users() {
   const [resultsPerPage, setResultsPerPage] = useState(5);
   const [endUser, setEndUser] = useState(startUser + resultsPerPage);
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [typeFilter, setTypeFilter] = useState('name');
+  const [filterUsers, setFilterUsers] = useState('');
+  const [showUsers, setShowUsers] = useState(false);
   const BASE_URL = `https://randomuser.me/api/?seed=gabrielpinheiromatiucci&results=1000&nat=br&inc=picture,name,email,dob,login`;
 
   useEffect(() => {
     if (!logged) navigate('/');
+
+    
 
     setUsers([
       ...users,
@@ -1296,6 +1302,8 @@ function Users() {
       },
     ]]);
 
+    
+
     async function fetchData() {
       const payload = await fetchApi.get(BASE_URL);
       setUsers([...users, ...payload.results]);
@@ -1304,6 +1312,14 @@ function Users() {
     //  fetchData();
   }, []);
 
+  useEffect(() => { setEndUser(startUser + resultsPerPage); }, [resultsPerPage]);
+
+  useEffect(() => {
+    usersToShow();
+    setStartUser(0);
+    setEndUser(resultsPerPage);
+  }, [filterUsers, typeFilter, users]);
+
   function handleClickPage(option) {
     if (option === 0) {
       if (startUser - resultsPerPage < 0) setStartUser(0);
@@ -1311,42 +1327,90 @@ function Users() {
 
       if (endUser - resultsPerPage <= resultsPerPage) setEndUser(resultsPerPage);
       else setEndUser(endUser - resultsPerPage);
+
     } else {
       setStartUser(endUser);
       setEndUser(endUser + resultsPerPage);
     }
   }
 
-  useEffect(() => { setEndUser(startUser + resultsPerPage) }, [resultsPerPage]);
+  function filterUsersByName(name) {
+    if (name.first.toLowerCase().includes(filterUsers)) return true;
+    if (name.last.toLowerCase().includes(filterUsers)) return true;
+
+    return false;
+  }
+
+  function filterUsersByUsername(username) {
+    return username.toLowerCase().includes(filterUsers);
+  }
+
+  function filterUsersToShow(element) {
+    if (filterUsers.trim() === '') return true;
+
+    const { name, login: { username }, email } = element;
+
+    if (typeFilter === 'name') return filterUsersByName(name);
+    if (typeFilter === 'username') return filterUsersByUsername(username);
+
+    return email.toLowerCase().includes(filterUsers);
+  }
+
+  function usersToShow() {
+    setShowUsers(false);
+
+    const filtered = users
+      .filter(filterUsersToShow);
+
+    setFilteredUsers(filtered);
+    setShowUsers(true);
+  }
 
   return (
     <main id='users-main'>
       <h1>Usuários</h1>
       <section
-        id='users-pagination'
-        onChange={ ({ target }) => setResultsPerPage(parseInt(target.value)) }
-        value={ resultsPerPage }
+        id='users-pagination-filter'
       >
-        <p>Usuários por página:&nbsp;&nbsp;</p>
-        <select>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="50">50</option>
-        </select>
+        <div>
+          <p>Usuários por página:&nbsp;&nbsp;</p>
+          <select
+            onChange={ ({ target }) => setResultsPerPage(parseInt(target.value)) }
+            value={ resultsPerPage }
+          >
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="50">50</option>
+          </select>          
+        </div>
+        <div>
+          <p>Filtrar usuários:&nbsp;&nbsp;</p>
+          <select
+            onChange={ ({ target }) => setTypeFilter(target.value) }
+            value={ typeFilter }
+          >
+            <option value="name">Nome</option>
+            <option value="email">E-mail</option>
+            <option value="username">Username</option>
+          </select> 
+          <input
+            type="text"
+            onChange={ ({ target }) => setFilterUsers(target.value) }
+            value={ filterUsers }
+          />
+        </div>
       </section>
       <section id='users-container'>
         {
-          users
+          showUsers && filteredUsers
             .slice(startUser, endUser)
-            .map((user) => {
-              return (
-                <User
-                  user={ user }
-                  key={ `${user.username}-${user.email}-${user.dob.age}` }
-                />
-              );
-            })
+            .map((user) => (
+              <User
+                user={ user }
+                key={ `${user.username}-${user.email}-${user.dob.age}` }
+              />
+            ))
         }
       </section>
       <section id='users-buttons'>
@@ -1357,7 +1421,7 @@ function Users() {
             </button>
         }
         {
-          endUser < users.length &&
+          endUser < filteredUsers.length &&
             <button type='button' onClick={ () => handleClickPage(1) }>
               Próxima página
             </button>
