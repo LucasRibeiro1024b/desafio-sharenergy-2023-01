@@ -1,0 +1,22 @@
+#random-dog-main {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+#random-dog-main button {
+  margin-bottom: 2%;
+}
+
+#random-dog-img-section {
+  display: flex;
+  justify-content: center;
+}
+
+#random-dog-img-section img {
+  width: 90%;
+  min-width: 430px;
+}
