@@ -1,15 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
-
+import { Navigate, Outlet } from "react-router-dom";
+import pegarToken from "../services/pegarToken";
 interface IRotasPrivadas {
-  estaAutenticado :string | boolean | any,
-  children : React.ReactElement
+  estaAutenticado :string ,
 }
 
-function RotasPrivadas({estaAutenticado, children , ...rest}: IRotasPrivadas){
-
-  return(<> {children}</>)
-
+function RotasPrivadas(){
+  const estaAutenticado  = pegarToken()
+  return(  estaAutenticado ? <Outlet/> : <Navigate to={"/"}/> )
 }
 
 
