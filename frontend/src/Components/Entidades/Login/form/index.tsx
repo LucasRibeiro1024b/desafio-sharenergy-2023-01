@@ -40,9 +40,9 @@ function LoginForm () {
         message : "Campo é obrigatório"
       }]} required>
         <Input
-        style={{width:"400px", height :"32px" }}
+       // style={{width:"400px", height :"32px" }}
         prefix={<UserOutlined className="site-form-item-icon" />}
-        allowClear
+
         placeholder="Digite seu usuário" />
       </Form.Item>
       <Form.Item
@@ -53,19 +53,19 @@ function LoginForm () {
           message : "Campo é obrigatório"
         }]} required>
         <Input
-          style={{width:"400px", height :"32px" }}
+         style={{width:"100%", height :"20%" }}
           type="password"
           prefix={<LockOutlined
           className="site-form-item-icon" />}
-          allowClear
           placeholder="Digite sua senha"
         />
       </Form.Item>
+        <Space direction="vertical">
         <Form.Item name="checked" valuePropName="checked" noStyle>
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
-        <Space direction="vertical">
           <Botao
+
             handleClick={handleClick}
             textoBotao="Enviar"
           />

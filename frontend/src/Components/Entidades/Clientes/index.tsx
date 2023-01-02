@@ -14,7 +14,7 @@ const [linhaTabela , setLinhaTabela] = useState<IDadosTabela>({
     setLinhaTabela({cliente: value, visivel : visivel})
   }
 
-  return <><Tabela dados={[]} colunas={colunasTabela(pegarDadosLinha as any,linhaTabela) }/></>
+  return <><Tabela dados={[]} colunas={colunasTabela({pegarDadosLinha,linhaTabela}) }/></>
 }
 
 

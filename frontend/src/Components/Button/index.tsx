@@ -1,16 +1,19 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Button } from "antd";
+
+import { Button } from "./style";
+
+
 
 interface IBotao {
   handleClick : () => void
   textoBotao : string
 }
 
-function Botao ({handleClick, textoBotao}: IBotao){
+function Botao ({handleClick, textoBotao, ...rest}: IBotao){
 
 
 
-  return <Button onClick={handleClick}>{textoBotao}</Button>
+  return <Button  type="primary" onClick={handleClick} {...rest}>{textoBotao}</Button>
 
 
 }
