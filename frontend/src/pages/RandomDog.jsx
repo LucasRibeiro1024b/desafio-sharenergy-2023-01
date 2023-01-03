@@ -13,9 +13,9 @@ function RandomDog() {
 
   useEffect(() => {
     if (!(validateLoginLocalStorage() || logged)) navigate('/');
-
     
-    fetchData();
+    //  fetchData();
+    setImgURL(`${process.env.PUBLIC_URL}/a433a374-775a-4815-8c72-15826db1f1ee.jpg`);
   }, []);
   
   async function fetchData() {
