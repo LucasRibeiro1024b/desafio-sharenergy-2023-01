@@ -1,13 +1,13 @@
-import {Router ,Request, Response } from 'express'
+import {Router,Request, Response } from 'express'
 import User from '../Domain/Entidades/User';
 import Usuario from '../Domain/Interfaces/Usuario';
-const router = Router();
+const routerLogin = Router()
 
-router.get("/", async (req : Request, res : Response)=>{
+routerLogin.get("/", async (req : Request, res : Response)=>{
     res.send({"msg":"você está conectado"})
 })
 
-router.post("/login", async (req : Request, res : Response)=>{
+routerLogin.post("/login", async (req : Request, res : Response)=>{
   const { nome , senha}: Usuario = req.body;
   const usuario = new User({nome, senha});
   res.send({usuario}).status(500)
@@ -15,4 +15,4 @@ router.post("/login", async (req : Request, res : Response)=>{
 
 
 
-export default router;
+export default routerLogin;
