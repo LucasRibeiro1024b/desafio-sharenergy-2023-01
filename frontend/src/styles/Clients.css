@@ -1,0 +1,8 @@
+#clients-main {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  width: 100%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
