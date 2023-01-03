@@ -11,19 +11,30 @@ datasource db {
 }
 
 model Cliente {
-  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  id       String  @id @default(uuid()) @map("_id") @db.ObjectId
   nome     String   @unique
   email    String    @unique
   telefone String
   endereco  Endereco?
   cpf       String    @unique
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 }
 
 model Endereco {
-  id  String  @id @default(auto()) @map("_id") @db.ObjectId
+  id  String  @id @default(uuid()) @map("_id") @db.ObjectId
   rua String
   bairro String
-  cidade String
+  cidade String 
   cliente Cliente @relation(fields: [clienteId], references: [id])
   clienteId String @unique @db.ObjectId
+}
+
+
+model User {
+  id  String  @id @default(uuid()) @map("_id") @db.ObjectId
+  user String @unique
+  senha String
+  create_at DateTime @default(now())
+  update_at DateTime @updatedAt
 }
