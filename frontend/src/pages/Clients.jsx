@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components';
 import { Context } from '../contexts/Context';
 import { validateLoginLocalStorage } from '../utils';
-//  import '../styles/Clients.css';
+import '../styles/Clients.css';
 
 function Clients() {
   const { logged } = useContext(Context);
