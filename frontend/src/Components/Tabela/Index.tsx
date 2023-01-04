@@ -4,7 +4,7 @@ import  { ReactElement } from 'react';
 
 
 type TabelaProps<T> = TableProps<T> & {
-  dados: Array<T> | undefined;
+  dados: Array<T> ;
   paginacao?:  undefined;
   mudarPaginacao?: (page: number, pageSize: number) => void;
   colunas:  ColumnsType<T> ;
@@ -25,7 +25,7 @@ const col=colunas.map(col =>{
   <Table
     rowKey={"id"}
     columns={col}
-    dataSource={dados}
+    dataSource={dados ? dados : []}
     onChange={onChange}
     style={{ minHeight: 400}}
     size={"large"}

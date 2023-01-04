@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { ICliente, IDadosTabela } from "../../../Interfaces/Cliente";
+import Usuarios from "../../../Interfaces/Usuarios";
 import Tabela from "../../Tabela/Index";
 import { colunasTabela } from "./lista/colunas";
 
 
 function ListaClientes(){
-const [linhaTabela , setLinhaTabela] = useState<IDadosTabela>({
+const [linhaTabela , setLinhaTabela] = useState<IDadosTabela<any>>({
   visivel : false,
   cliente : null
 });

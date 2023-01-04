@@ -2,11 +2,12 @@
 import { Button} from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { ICliente, IDadosTabela } from '../../../../../Interfaces/Cliente';
+import Usuarios from '../../../../../Interfaces/Usuarios';
 
 
 interface Colunas {
   pegarDadosLinha : ( value : ICliente, visivel : boolean) => void | any,
-  linhaTabela ?: IDadosTabela
+  linhaTabela ?: IDadosTabela<Usuarios>
 }
 
   export const colunasTabela = ({pegarDadosLinha, linhaTabela} : Colunas) =>{

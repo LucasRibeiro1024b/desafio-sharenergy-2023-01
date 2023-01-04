@@ -5,6 +5,7 @@ const routerUsuarios = Router()
 
 
 routerUsuarios.get("/usuarios", async (req : Request, res : Response)=>{
+  console.log("ok")
    const resposta = await buscarTodos({
     page : 1,
     resultado : 10

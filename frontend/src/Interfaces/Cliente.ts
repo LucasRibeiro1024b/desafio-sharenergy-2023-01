@@ -7,7 +7,7 @@ export interface ICliente{
 }
 
 
-export interface IDadosTabela{
+export interface IDadosTabela<T>{
   visivel : boolean
-  cliente : ICliente | null
+  cliente : T | null
 }

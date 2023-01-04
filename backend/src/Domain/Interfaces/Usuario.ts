@@ -1,4 +1,3 @@
-
 interface Usuario {
    name : {
       first : string

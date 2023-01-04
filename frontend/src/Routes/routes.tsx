@@ -2,6 +2,7 @@
 import { BrowserRouter, Routes, Route, redirect } from "react-router-dom";
 import Home from "../Pages/Home";
 import NaoExiste from "../Pages/NaoExiste";
+import Usuarios from "../Pages/Usuarios";
 import RotasPrivadas from "./rotaPrivada";
 
 
@@ -14,6 +15,7 @@ function Rotas (){
       <Route  element={<RotasPrivadas/>}>
         <Route path="/clientes" element={<h1>Não</h1>}/>
       </Route>
+      <Route path="/usuarios" element={<Usuarios/>}/>
    </Routes>
   </BrowserRouter>
   )
