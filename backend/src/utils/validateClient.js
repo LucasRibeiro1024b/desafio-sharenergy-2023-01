@@ -49,7 +49,7 @@ function validateCpf(cpf) {
   return true;
 }
 
-function validateCreateBody({ name, email, phoneNumber, address, cpf }) {
+function validateClient({ name, email, phoneNumber, address, cpf }) {
   if (!validateName(name)) return false;
   if (!validateEmail(email)) return false;
   if (!validatePhoneNumber(phoneNumber)) return false;
@@ -58,4 +58,4 @@ function validateCreateBody({ name, email, phoneNumber, address, cpf }) {
   return true;
 }
 
-module.exports = validateCreateBody;
+module.exports = validateClient;
