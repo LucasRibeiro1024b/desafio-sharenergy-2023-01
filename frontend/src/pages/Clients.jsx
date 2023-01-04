@@ -46,10 +46,46 @@ function Clients() {
     }
   }
 
+  function toggleModal() {
+    const modal = document.getElementById('clients-modal-create');
+
+    if (modal.style.display === 'none') modal.style.display = 'block';
+    else modal.style.display = 'none';
+  }
+
   return (
     <main id='clients-main'>
       <Navbar />
       <h1>Clientes</h1>
+      <section id="clients-modal-create" style={{ display: 'none' }}>
+        <div id="clients-modal-create-content">
+          <div>
+            <p>Nome:</p>
+            <input type="text" />
+          </div>
+          <div>
+            <p>E-mail:</p>
+            <input type="text" />
+          </div>
+          <div>
+            <p>Telefone:</p>
+            <input type="text" maxLength=''/>
+          </div>
+          <div>
+            <p>CPF:</p>
+            <input type="text" />
+          </div>
+          <div>
+            <p>Endereço:</p>
+            <input type="text" />
+          </div>
+          <div id="clients-modal-create-content-buttons">
+            <button onClick={ () => toggleModal() }>Adicionar</button>
+            <button onClick={ () => toggleModal() }>Cancelar</button>
+          </div>
+        </div>
+      </section>
+      <button onClick={ () => toggleModal() }>Adicionar cliente</button>
       <section id='clients-pagination-filter'>
         <p>Clientes por página:&nbsp;</p>
         <select
@@ -67,12 +103,7 @@ function Clients() {
         {
           clients
             .slice(startClient, endClient)
-            .map((client) => (
-              <Client
-                client={ client }
-                key={ client._id }
-              />
-            ))
+            .map((client) => <Client client={ client } key={ client._id } />)
         }
       </section>
       <section id='clients-buttons'>
