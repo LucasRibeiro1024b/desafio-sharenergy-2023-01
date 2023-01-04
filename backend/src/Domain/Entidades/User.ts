@@ -1,10 +1,10 @@
 import Entidade from "./EntidadeBase";
-import Usuario from "../Interfaces/Usuario";
 
-class User extends Entidade implements Usuario{
+
+class User extends Entidade{
   nome!: string;
   senha!: string;
-  constructor({nome, senha }:Usuario){
+  constructor(nome : string, senha : string ){
     super()
     this.ValidarNome(nome)
     this.ValidarSenha(senha)

@@ -3,7 +3,8 @@
     "endregion",
     "Generico",
     "Repositorio",
-    "souza"
+    "souza",
+    "Usuarios"
   ],
   "dotenv.enableAutocloaking": false
 }
