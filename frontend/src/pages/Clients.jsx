@@ -12,6 +12,7 @@ function Clients() {
   const [startClient, setStartClient] = useState(0);
   const [resultsPerPage, setResultsPerPage] = useState(5);
   const [endClient, setEndClient] = useState(startClient + resultsPerPage);
+  const [loading, setLoading] = useState(true);
   const GET_URL = 'http://localhost:3001/clients';
 
   useEffect(() => {
@@ -28,6 +29,7 @@ function Clients() {
     const payload = await fetchApi.get(GET_URL);
 
     setClients(payload);
+    setLoading(false);
   }
 
   function handleClickPage(option) {
@@ -60,6 +62,7 @@ function Clients() {
           <option value="50">50</option>
         </select>          
       </section>
+      { loading && <h1>Loading...</h1> }
       <section id='clients-container'>
         {
           clients

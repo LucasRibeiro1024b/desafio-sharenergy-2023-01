@@ -22,6 +22,7 @@ function Users() {
   useEffect(() => {
     if (!(validateLoginLocalStorage() || logged)) navigate('/');    
 
+    setShowUsers(false);
     setUsers([ ...users, ...mockUsers() ]);
 
     async function fetchData() {
@@ -120,6 +121,7 @@ function Users() {
           />
         </div>
       </section>
+      { !showUsers && <h1>Loading...</h1> }
       <section id='users-container'>
         {
           showUsers && filteredUsers
