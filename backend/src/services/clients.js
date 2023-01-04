@@ -48,7 +48,7 @@ async function create({ name, email, phoneNumber, address, cpf }) {
   }
 }
 
-async function update({ name, email, phoneNumber, address, cpf, _id }) {
+async function updateOne({ name, email, phoneNumber, address, cpf, _id }) {
   if (!checkConnection()) return null;
 
   if (!validateClient({ name, email, phoneNumber, address, cpf })) {
@@ -73,8 +73,24 @@ async function update({ name, email, phoneNumber, address, cpf, _id }) {
   }
 }
 
+async function deleteOne(_id) {
+  if (!checkConnection()) return null;
+
+  try {
+    const response = await Client.findByIdAndDelete(_id);
+
+    return response === null ? 'Bad Request' : true;
+
+  } catch (err) {
+    console.error(err);
+
+    return null;
+  }
+}
+
 module.exports = {
   getAll,
   create,
-  update,
+  updateOne,
+  deleteOne,
 };
