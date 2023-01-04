@@ -6,3 +6,43 @@
   margin-top: 2%;
   margin-bottom: 2%;
 }
+
+#clients-pagination-filter {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: baseline;
+  font-size: larger;
+  width: 90%;
+  justify-content: center;
+}
+
+#clients-pagination-filter select {
+  font-size: large;
+}
+
+#clients-container {
+  display: flex;
+  flex-flow: row wrap;
+  text-align: initial;
+  width: 100%;
+  margin-top: 6%;
+  justify-content: space-around;
+}
+
+.client-section {
+  display: flex;
+  flex-flow: column wrap;
+  width: 430px;
+  min-width: 325px;
+  align-items: center;
+  margin-bottom: 7%;
+  border-color: black;
+  border-style: solid;
+  border-collapse: collapse;
+  box-sizing: border-box;
+  padding-top: 15px;
+}
+
+#clients-buttons {
+  margin: 5% 3%;
+}
