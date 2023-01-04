@@ -9,7 +9,7 @@ function validateEmail(email) {
   if (email === undefined) return false;
   if (email.trim() === '') return false;
   
-  email = email.toLowerCase();
+  email = email.toLowerCase().trim();
   const emailSplitted = email.split('@');
   
   if (emailSplitted.length !== 2) return false;
@@ -23,6 +23,9 @@ function validateEmail(email) {
 function validatePhoneNumber(phoneNumber) {
   if (phoneNumber === undefined) return false;
   if (phoneNumber.trim() === '') return false;
+
+  phoneNumber = phoneNumber.trim();
+
   if (phoneNumber.length < 10 || phoneNumber.length > 11) return false;
 
   return true;
@@ -38,6 +41,9 @@ function validateAddress(address) {
 function validateCpf(cpf) {
   if (cpf === undefined) return false;
   if (cpf.trim() === '') return false;
+
+  cpf = cpf.trim();
+
   if (cpf.length !== 11) return false;
 
   return true;
