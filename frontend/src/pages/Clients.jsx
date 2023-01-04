@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Navbar } from '../components';
+import { Navbar, Client } from '../components';
 import { Context } from '../contexts/Context';
 import { validateLoginLocalStorage, fetchApi } from '../utils';
 import '../styles/Clients.css';
@@ -27,7 +27,7 @@ function Clients() {
   async function fetchData() {
     const payload = await fetchApi.get(GET_URL);
 
-    console.log(payload);
+    setClients(payload);
   }
 
   function handleClickPage(option) {
@@ -64,12 +64,12 @@ function Clients() {
         {
           clients
             .slice(startClient, endClient)
-            /*  .map((user) => (
-              <User
-                user={ user }
-                key={ `${user.username}-${user.email}-${user.dob.age}` }
+            .map((client) => (
+              <Client
+                client={ client }
+                key={ client._id }
               />
-            ))  */
+            ))
         }
       </section>
       <section id='clients-buttons'>
