@@ -6,59 +6,57 @@ import Tabela from "../../Tabela/Index";
 import colunasTabela from "./lista/colunas";
 import servico from "../../../services/pegarUsuarios/index"
 import useSWR from 'swr'
-import { Avatar, Button, List, Skeleton } from "antd";
+import { Avatar, Button, Divider, List, Skeleton } from "antd";
 import Item from "antd/es/list/Item";
+import InfiniteScroll from 'react-infinite-scroll-component';
 
 
 function ListaUsuarios () {
 const [linhaTabela , setLinhaTabela] = useState<IDadosTabela<Usuarios>>();
-const [dados , setDados] = useState<any[]>([])
-const [loading, setLoading] = useState(false);
-/* const { data : dados, error, isLoading } =
+
+
+ const { data : dados, error, isLoading, mutate } =
  useSWR('usuarios', async ()=> await servico.buscarTodos())
- */
-  function pegarDadosLinha(value : Usuarios, visivel : boolean){
-    setLinhaTabela({
-      cliente : value,
-      visivel : visivel
-    })
+
+
+  const loadMoreData = () => {
+    if (isLoading) {
+      return;
+    }
+    mutate()
   }
 
 
-
-  useEffect(()=>{
-    const resultado = servico.buscarTodos()
-    .then(res => {setDados(res?.dados)});
-
-  }, [])
-
-  const loadMore =
-   !loading ? (
+  return(
     <div
+      id="scrollableDiv"
       style={{
-        textAlign: 'center',
-        marginTop: 12,
-        height: 32,
-        lineHeight: '32px',
+        height: 400,
+        overflow: 'auto',
+        padding: '0 16px',
+        border: '1px solid rgba(140, 140, 140, 0.35)',
       }}
     >
-      <Button onClick={()=>pegarDadosLinha}>loading more</Button>
-    </div>
-  ) : null;
-
-  return(
+    <InfiniteScroll
+    dataLength={dados?.dados ? dados.dados.length : []}
+    next={loadMoreData}
+    hasMore={dados?.dados.length < 5}
+    loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
+    endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+    scrollableTarget="scrollableDiv"
+  >
     <List
       className="demo-loadmore-list"
-      loading={loading}
+      loading={isLoading}
       itemLayout="horizontal"
-      loadMore={loadMore}
-      dataSource={dados}
+      loadMore={isLoading}
+      dataSource={dados?.dados as Usuarios[]}
        renderItem={(item) => (
         <List.Item
           // eslint-disable-next-line jsx-a11y/anchor-is-valid
           actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
         >
-          <Skeleton avatar title={false} loading={loading} active>
+          <Skeleton avatar title={false} loading={isLoading} active>
             <List.Item.Meta
               avatar={<Avatar src={item.photo} />}
               title={<a href="https://ant.design">{item.name}</a>}
@@ -69,6 +67,8 @@ const [loading, setLoading] = useState(false);
         </List.Item>
       )}
     />
+    </InfiniteScroll>
+    </div>
   )
 }
 
