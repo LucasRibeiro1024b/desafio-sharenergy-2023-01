@@ -12,7 +12,7 @@ async function getAll() {
   if (!checkConnection()) return null;
 
   try {
-    const response = await Client.find();
+    const response = await Client.find({}, { createdAt: 0, updatedAt: 0 });
 
     return response;
 
