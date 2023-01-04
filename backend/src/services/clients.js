@@ -32,11 +32,11 @@ async function create({ name, email, phoneNumber, address, cpf }) {
 
   try {
     const response = await Client.create({
-      name: name.toLowerCase(),
-      email: email.toLowerCase(),
-      phoneNumber,
-      address,
-      cpf,
+      name: name.trim(),
+      email: email.toLowerCase().trim(),
+      phoneNumber: phoneNumber.trim(),
+      address: address.trim(),
+      cpf: cpf.trim(),
     });
 
     return response;
