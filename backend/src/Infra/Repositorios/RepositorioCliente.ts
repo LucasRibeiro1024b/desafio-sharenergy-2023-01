@@ -9,7 +9,9 @@ class ClienteRepository implements Repository<Cliente> {
   constructor() {
     this.prisma = new PrismaClient();
   }
+  //#region //TODO:criar um cliente na base
   async criar(data: Cliente){
+   await this.prisma.$connect()
    const cliente = await this.prisma.cliente.create({
       data :{
         cpf : data.cpf,
@@ -19,9 +21,9 @@ class ClienteRepository implements Repository<Cliente> {
         endereco : {
           create:
              {
-              bairro : data.endereco?.bairro as string,
-              cidade : data.endereco?.cidade  as string,
-              rua : data.endereco?.rua  as string,
+              bairro : data.endereco?.bairro ? data.endereco?.bairro : "" ,
+              cidade : data.endereco?.cidade  ? data.endereco?.cidade : "",
+              rua : data.endereco?.rua  ? data.endereco?.rua : "",
             },
 
         }
@@ -36,10 +38,12 @@ class ClienteRepository implements Repository<Cliente> {
         endereco: true
       },
     })
-
-    return returnUser ;
+    this.desconectar()
+    return returnUser?.id ;
   }
-  async read(id: string): Promise<Cliente | null> {
+//#endregion
+
+  async buscarPorId(id: string): Promise<Cliente | null> {
     throw new Error('Method not implemented.');
   }
   async update(id: string, data: Cliente): Promise<Cliente | null> {
@@ -52,6 +56,10 @@ class ClienteRepository implements Repository<Cliente> {
     throw new Error('Method not implemented.');
   }
 
+
+  private  async desconectar(){
+    await this.prisma.$disconnect();
+  }
 
 }
 

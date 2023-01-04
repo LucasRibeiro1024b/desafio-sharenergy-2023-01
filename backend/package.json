@@ -8,6 +8,9 @@
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules ./server.ts",
     "build": "tsc"
   },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
+  },
   "author": "Rafael carlos de souza",
   "license": "ISC",
   "dependencies": {

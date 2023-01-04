@@ -40,9 +40,7 @@ function LoginForm () {
         message : "Campo é obrigatório"
       }]} required>
         <Input
-       // style={{width:"400px", height :"32px" }}
         prefix={<UserOutlined className="site-form-item-icon" />}
-
         placeholder="Digite seu usuário" />
       </Form.Item>
       <Form.Item
@@ -65,7 +63,6 @@ function LoginForm () {
           <Checkbox>Remember me</Checkbox>
         </Form.Item>
           <Botao
-
             handleClick={handleClick}
             textoBotao="Enviar"
           />

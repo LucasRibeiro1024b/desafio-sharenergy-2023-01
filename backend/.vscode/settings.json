@@ -1,7 +1,9 @@
 {
   "cSpell.words": [
+    "endregion",
     "Generico",
     "Repositorio",
     "souza"
-  ]
+  ],
+  "dotenv.enableAutocloaking": false
 }
