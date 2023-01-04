@@ -40,9 +40,22 @@
   border-style: solid;
   border-collapse: collapse;
   box-sizing: border-box;
-  padding-top: 15px;
+}
+
+.client-info {
+  width: 100%;
+  margin-left: 5px;
+  font-size: larger;
 }
 
 #clients-buttons {
   margin: 5% 3%;
+}
+
+.client-buttons {
+  display: flex;
+  margin-bottom: 3%;
+  align-items: center;
+  width: 45%;
+  justify-content: space-between;
 }
