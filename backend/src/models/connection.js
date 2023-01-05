@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+require('dotenv').config();
 
-const stringConnection = 'mongodb://localhost:27017/desafiosharenergy-gpm';
+const CONNECTION_STRING = process.env.CONNECTION_STRING;
 
-const connection = async function (string = stringConnection) {
+const connection = async function (string = CONNECTION_STRING) {
   try {
     await mongoose.connect(string);
   } catch (err) {
