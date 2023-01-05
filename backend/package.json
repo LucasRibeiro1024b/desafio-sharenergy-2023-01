@@ -9,7 +9,11 @@
   "scripts": {
     "dev": "nodemon --watch ./src",
     "start": "node ./src",
-    "docker:up": "chmod +x ./dockerMongoUp.sh && ./dockerMongoUp.sh",
-    "docker:down": "chmod +x ./dockerMongoDown.sh && ./dockerMongoDown.sh"
+    "docker:backend:up": "chmod +x ./dockerBackendUp.sh && ./dockerBackendUp.sh",
+    "docker:backend:down": "chmod +x ./dockerBackendDown.sh && ./dockerBackendDown.sh",
+    "docker:mongo:up": "chmod +x ./dockerMongoUp.sh && ./dockerMongoUp.sh",
+    "docker:mongo:down": "chmod +x ./dockerMongoDown.sh && ./dockerMongoDown.sh",
+    "docker:up": "npm run docker:mongo:up && npm run docker:backend:up",
+    "docker:down": "npm run docker:mongo:down && npm run docker:backend:down"
   }
 }
