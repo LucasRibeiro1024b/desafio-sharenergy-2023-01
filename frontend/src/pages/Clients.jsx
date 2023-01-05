@@ -58,7 +58,7 @@ function Clients() {
       <Navbar />
       <h1>Clientes</h1>
       <br />
-      <ModalCreateClient toggleModal={ toggleModal } />
+      <ModalCreateClient toggleModal={ toggleModal } fetchData={ fetchData }/>
       <button onClick={ () => toggleModal() }>Adicionar cliente</button>
       <section id='clients-pagination-filter'>
         <p>Clientes por página:&nbsp;</p>
