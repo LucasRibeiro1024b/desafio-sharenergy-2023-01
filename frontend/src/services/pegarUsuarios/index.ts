@@ -3,7 +3,12 @@
 import Usuarios from "../../Interfaces/Usuarios";
 import api from "../axiosConfig";
 
-const buscarTodos = async (paginacao ?:any) =>{
+interface Paginacao{
+  page : number
+  resultado : number
+}
+
+const buscarTodos = async (paginacao ?:Paginacao) =>{
   const resultado =  await api.get("usuarios",{
     params : paginacao,
   })
