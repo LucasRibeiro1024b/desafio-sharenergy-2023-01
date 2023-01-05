@@ -9,7 +9,7 @@ class ClienteRepository implements Repository<Cliente> {
   constructor() {
     this.prisma = new PrismaClient();
   }
-  //#region //TODO:criar um cliente na base
+  //#region TODO:criar um cliente na base
   async criar(data: Cliente){
    await this.prisma.$connect()
    const cliente = await this.prisma.cliente.create({

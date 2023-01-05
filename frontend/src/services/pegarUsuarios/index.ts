@@ -3,8 +3,10 @@
 import Usuarios from "../../Interfaces/Usuarios";
 import api from "../axiosConfig";
 
-const buscarTodos = async () =>{
-  const resultado =  await api.get("usuarios")
+const buscarTodos = async (paginacao ?:any) =>{
+  const resultado =  await api.get("usuarios",{
+    params : paginacao,
+  })
   return resultado.data
 }
 

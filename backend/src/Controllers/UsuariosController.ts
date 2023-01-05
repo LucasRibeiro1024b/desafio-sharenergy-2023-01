@@ -5,10 +5,10 @@ const routerUsuarios = Router()
 
 
 routerUsuarios.get("/usuarios", async (req : Request, res : Response)=>{
-  console.log("ok")
+  const {page , resultado} = req.query
    const resposta = await buscarTodos({
-    page : 1,
-    resultado : 10
+    page : Number(page),
+    resultado : Number(resultado)
    })
   res.send({dados:resposta}).status(200)
 })
