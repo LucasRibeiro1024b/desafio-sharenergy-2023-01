@@ -38,7 +38,7 @@ function Login() {
   return (
     <main id='form-main'>
       <h1>Login</h1>
-      { !validCredentials && <h2>Invalid credentials</h2>}
+      { !validCredentials && <h2>Credenciais inválidas</h2>}
       <form>
         <section className="form-section">
           <label>Username&nbsp;&nbsp;</label>
