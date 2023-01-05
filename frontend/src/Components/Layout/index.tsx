@@ -1,4 +1,4 @@
-import { Layout} from 'antd';
+import { Layout } from "antd";
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 const { Header, Content, Footer} = Layout;

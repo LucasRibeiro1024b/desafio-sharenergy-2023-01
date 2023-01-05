@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import type { PaginationProps } from 'antd';
 import { Pagination } from 'antd';
 

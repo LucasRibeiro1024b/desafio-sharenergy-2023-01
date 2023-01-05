@@ -1,4 +1,4 @@
-import { ReactJSXElement } from "@emotion/react/types/jsx-namespace"
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
 import { Modal as ModalMod } from "./style"
 
 interface IPageLogin{

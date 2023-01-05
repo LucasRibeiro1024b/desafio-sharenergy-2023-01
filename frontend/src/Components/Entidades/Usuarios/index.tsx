@@ -1,12 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
-import { IDadosTabela } from "../../../Interfaces/Cliente";
-import Usuarios from "../../../Interfaces/Usuarios";
-
-import servico from "../../../services/pegarUsuarios/index"
 import useSWR from 'swr'
-import { Avatar,List, Skeleton } from "antd";
+import { Avatar,Divider,List, Skeleton, Space } from "antd";
 import qs from 'qs'
+import Usuarios from "../../../Interfaces/Usuarios";
+import servico from "../../../services/pegarUsuarios/index"
+import S from "../../Container/index"
+
 
 function ListaUsuarios () {
 const [paginacao, setPaginacao] = useState({
@@ -18,8 +18,9 @@ const [paginacao, setPaginacao] = useState({
  useSWR(`usuarios?${qs.stringify(paginacao)}`, async ()=> await servico.buscarTodos(paginacao))
 
   return(
+    <S.Container>
     <List
-      className="demo-loadmore-list"
+      className="lista-usuarios"
       loading={isLoading}
       itemLayout="horizontal"
       loadMore={isLoading}
@@ -35,21 +36,26 @@ const [paginacao, setPaginacao] = useState({
       }}
       dataSource={dados?.dados as Usuarios[]}
        renderItem={(item) => (
-        <List.Item
-          // eslint-disable-next-line jsx-a11y/anchor-is-valid
-          actions={[<a key="list-loadmore-edit">edit</a>, <a key="list-loadmore-more">more</a>]}
-        >
-          <Skeleton avatar title={false} loading={isLoading} active>
+        <List.Item>
+          <Skeleton avatar title={true} loading={isLoading} active>
             <List.Item.Meta
               avatar={<Avatar src={item.photo} />}
-              title={<a href="https://ant.design">{item.name}</a>}
-              description="Ant Design, a design language for background applications, is refined by Ant UED Team"
+              title={<a href="/">{item.name}</a>}
+              description={<>
+               <Space direction="horizontal">
+                  Email:{item.email}
+                  <Divider type="vertical" />
+                  Username: {item.login}
+                  <Divider type="vertical" />
+                  Idade : {item.age}
+                  </Space>
+              </>}
             />
-            <div>{}</div>
           </Skeleton>
         </List.Item>
       )}
     />
+    </S.Container>
   )
 }
 
