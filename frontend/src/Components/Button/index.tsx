@@ -8,6 +8,7 @@ interface IBotao {
 }
 
 function Botao ({handleClick, textoBotao, ...rest}: IBotao){
+  // eslint-disable-next-line react/react-in-jsx-scope
   return <Button  type="primary" onClick={handleClick} {...rest}>{textoBotao}</Button>
 }
 
