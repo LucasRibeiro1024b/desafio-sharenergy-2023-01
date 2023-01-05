@@ -6,7 +6,9 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY .env.docker .env
+
+COPY ./src ./src
 
 EXPOSE 3001
 
