@@ -9,6 +9,28 @@ async function get(url) {
   return [];
 }
 
+async function post(url, data) {
+  const payload = JSON.stringify(data);
+  const myHeader = new Headers();
+
+  myHeader.append('Content-Type', 'application/json');
+
+  try {
+    const response = await fetch(
+      url,
+      { method: 'POST', body: payload, headers: myHeader },
+    );
+
+    if (response.status === 201) return true;
+    return false;
+
+  } catch (error) {
+    console.error(error);
+    return false
+  }
+}
+
 export default {
   get,
+  post,
 };
