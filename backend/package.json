@@ -8,6 +8,8 @@
   },
   "scripts": {
     "dev": "nodemon --watch ./src",
-    "start": "node ./src"
+    "start": "node ./src",
+    "docker:up": "chmod +x ./dockerMongoUp.sh && ./dockerMongoUp.sh",
+    "docker:down": "chmod +x ./dockerMongoDown.sh && ./dockerMongoDown.sh"
   }
 }
