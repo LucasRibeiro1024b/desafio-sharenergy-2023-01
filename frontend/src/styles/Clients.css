@@ -50,7 +50,11 @@
 }
 
 #clients-buttons {
-  margin: 5% 3%;
+  display: flex;
+  margin-bottom: 15px;
+  min-width: 280px;
+  width: 50%;
+  justify-content: space-evenly;
 }
 
 .client-buttons {
@@ -74,6 +78,9 @@
 }
 
 #clients-modal-create-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   background-color: #fefefe;
   margin-top: 10%;
   margin-left: 25%;
@@ -109,6 +116,6 @@
 
 @media only screen and (max-width: 876px) {
   #clients-modal-create-content div input {
-    min-width: 150px;
+    min-width: 100px;
   }
 }
