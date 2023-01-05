@@ -1,5 +1,3 @@
 /node_modules
 .gitignore
-dockerMongoUp.sh
-dockerMongoDown.sh
-.env
+*.sh
