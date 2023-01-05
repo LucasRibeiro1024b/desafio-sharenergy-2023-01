@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Navbar, Client } from '../components';
+import { Navbar, Client, ModalCreateClient } from '../components';
 import { Context } from '../contexts/Context';
 import { validateLoginLocalStorage, fetchApi } from '../utils';
 import '../styles/Clients.css';
@@ -57,34 +57,8 @@ function Clients() {
     <main id='clients-main'>
       <Navbar />
       <h1>Clientes</h1>
-      <section id="clients-modal-create" style={{ display: 'none' }}>
-        <div id="clients-modal-create-content">
-          <div>
-            <p>Nome:</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>E-mail:</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>Telefone:</p>
-            <input type="text" maxLength=''/>
-          </div>
-          <div>
-            <p>CPF:</p>
-            <input type="text" />
-          </div>
-          <div>
-            <p>Endereço:</p>
-            <input type="text" />
-          </div>
-          <div id="clients-modal-create-content-buttons">
-            <button onClick={ () => toggleModal() }>Adicionar</button>
-            <button onClick={ () => toggleModal() }>Cancelar</button>
-          </div>
-        </div>
-      </section>
+      <br />
+      <ModalCreateClient toggleModal={ toggleModal } />
       <button onClick={ () => toggleModal() }>Adicionar cliente</button>
       <section id='clients-pagination-filter'>
         <p>Clientes por página:&nbsp;</p>
