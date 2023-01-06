@@ -14,6 +14,7 @@ const Container = styled.div`
 
 const ContainerBloco = styled.div`
   display : flex;
+  background-color :white;
   flex-direction : column;
   justify-content: center;
   align-items : center;

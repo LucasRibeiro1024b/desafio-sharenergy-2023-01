@@ -3,7 +3,7 @@ import LayoutGeral from "../Components/Layout";
 
 function Usuarios () {
   return (
-    <LayoutGeral header="none">
+    <LayoutGeral header="block">
       <ListaUsuarios/>
     </LayoutGeral>
   )

@@ -9,7 +9,7 @@ const buscarGato =  (status : number) =>{
     responseType : 'arraybuffer'
   })
   .then(res => Buffer.from(res.data, 'binary').toString('base64'))
-  .catch(err =>  console.log(err))
+  .catch(err =>  err)
   return resultado
 }
 

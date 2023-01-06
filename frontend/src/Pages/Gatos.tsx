@@ -3,7 +3,7 @@ import LayoutGeral from "../Components/Layout";
 
 function Gatos () {
   return (
-    <LayoutGeral header="none">
+    <LayoutGeral header="block">
       <BuscaGatos/>
     </LayoutGeral>
   )
