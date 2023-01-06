@@ -1,5 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { BrowserRouter, Routes, Route, redirect } from "react-router-dom";
+import Dogs from "../Pages/Dogs";
 import Gatos from "../Pages/Gatos";
 import Home from "../Pages/Home";
 import NaoExiste from "../Pages/NaoExiste";
@@ -18,6 +19,7 @@ function Rotas (){
       </Route>
       <Route path="/usuarios" element={<Usuarios/>}/>
       <Route path="/gatos" element={<Gatos/>}/>
+      <Route path="/dogs" element={<Dogs/>}/>
    </Routes>
   </BrowserRouter>
   )

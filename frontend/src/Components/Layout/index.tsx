@@ -16,6 +16,7 @@ function LayoutGeral ({children, header} : ILayoutGeral) {
       <Space>
         <NavLink to="/usuarios"> Usuarios </NavLink>
         <NavLink to="/gatos"> Gatos </NavLink>
+        <NavLink to="/dogs"> Dogs </NavLink>
         <NavLink to="/clientes"> Clientes </NavLink>
       </Space>
       </Header>
