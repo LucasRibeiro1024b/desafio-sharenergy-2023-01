@@ -5,6 +5,8 @@ import { Context } from '../contexts/Context';
 import { validateLoginLocalStorage, fetchApi } from '../utils';
 import '../styles/Clients.css';
 
+const { REACT_APP_CLIENTS_BASE_URL } = process.env;
+
 function Clients() {
   const { logged } = useContext(Context);
   const navigate = useNavigate();
@@ -13,7 +15,6 @@ function Clients() {
   const [resultsPerPage, setResultsPerPage] = useState(5);
   const [endClient, setEndClient] = useState(startClient + resultsPerPage);
   const [loading, setLoading] = useState(true);
-  const GET_URL = 'http://localhost:3001/clients';
 
   useEffect(() => {
     if (!(validateLoginLocalStorage() || logged)) navigate('/');
@@ -26,7 +27,7 @@ function Clients() {
   useEffect(() => { setStartClient(0); setEndClient(resultsPerPage); }, [clients]);
 
   async function fetchData() {
-    const payload = await fetchApi.get(GET_URL);
+    const payload = await fetchApi.get(REACT_APP_CLIENTS_BASE_URL);
 
     setClients(payload);
     setLoading(false);
@@ -77,7 +78,15 @@ function Clients() {
         {
           clients
             .slice(startClient, endClient)
-            .map((client) => <Client client={ client } key={ client._id } />)
+            .map((client) => {
+              return (
+                <Client
+                  client={ client }
+                  fetchData={ fetchData }
+                  key={ client._id }
+                />
+              );
+            })
         }
       </section>
       <section id='clients-buttons'>

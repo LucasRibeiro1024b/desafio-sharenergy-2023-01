@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { fetchApi } from '../utils';
 
+const { REACT_APP_CLIENTS_BASE_URL } = process.env;
+
 function ModalCreateClient({ toggleModal, fetchData }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -8,11 +10,10 @@ function ModalCreateClient({ toggleModal, fetchData }) {
   const [cpf, setCpf] = useState('');
   const [address, setAddress] = useState('');
   const [invalidData, setInvalidData] = useState(false);
-  const POST_URL = 'http://localhost:3001/clients/';
 
   async function handleClick() {
     const data = { name, email, phoneNumber, cpf, address };
-    const result = await fetchApi.post(POST_URL, data);
+    const result = await fetchApi.post(REACT_APP_CLIENTS_BASE_URL, data);
 
     if (result) {
       setInvalidData(false);
