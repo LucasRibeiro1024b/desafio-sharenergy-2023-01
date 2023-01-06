@@ -5,7 +5,7 @@ import useSWR from 'swr'
 import { Avatar,Divider,List, Skeleton, Space } from "antd";
 import qs from 'qs'
 import Usuarios from "../../../Interfaces/Usuarios";
-import servico from "../../../services/pegarUsuarios/index"
+import servico from "../../../services/Usuarios/index"
 import S from "../../Container/index"
 
 

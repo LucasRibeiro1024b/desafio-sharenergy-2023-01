@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Navigate, Outlet } from "react-router-dom";
-import pegarToken from "../services/pegarToken";
+import pegarToken from "../services/Token";
 interface IRotasPrivadas {
   estaAutenticado :string ,
 }

@@ -1,5 +1,5 @@
 import {Router,Request, Response } from 'express'
-import buscarTodos from '../Domain/Services/BuscarUsuarios';
+import buscarTodos from '../Domain/Services/buscarUsuarios';
 
 const routerUsuarios = Router()
 
