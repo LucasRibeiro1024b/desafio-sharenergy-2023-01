@@ -30,7 +30,21 @@ async function post(url, data) {
   }
 }
 
+async function deleteOne(url) {
+  try {
+    const response = await fetch(url, { method: 'DELETE' });
+
+    if (response.status === 204) return true;
+    return false;
+
+  } catch (error) {
+    console.error(error);
+    return false
+  }
+}
+
 export default {
   get,
   post,
+  deleteOne,
 };
