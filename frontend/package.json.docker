@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "serve": "^14.1.2"
+  },
+  "scripts": {
+    "serve": "serve -s build"
+  }
+}
