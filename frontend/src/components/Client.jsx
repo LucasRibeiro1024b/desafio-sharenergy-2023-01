@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import ModalUpdateClient from './ModalUpdateClient';
 import { fetchApi } from '../utils';
+import { Context } from '../contexts/Context';
+
 const { REACT_APP_CLIENTS_BASE_URL } = process.env;
 
-function Client({ client, fetchData }) {
+function Client({ client, fetchData, toggleModal }) {
+  const {
+    setClientToUpdateName,
+    setClientToUpdateEmail,
+    setClientToUpdatePhoneNumber,
+    setClientToUpdateCpf,
+    setClientToUpdateAddress,
+    setClientToUpdateId,
+  } = useContext(Context);
+
   const { name, email, phoneNumber, address, cpf, _id } = client;
 
   async function handleDelete() {
@@ -11,6 +23,16 @@ function Client({ client, fetchData }) {
 
       if (result) fetchData();
     }
+  }
+
+  function handleUpdate() {
+    setClientToUpdateName(name);
+    setClientToUpdateEmail(email);
+    setClientToUpdatePhoneNumber(phoneNumber);
+    setClientToUpdateCpf(cpf);
+    setClientToUpdateAddress(address);
+    setClientToUpdateId(_id);
+    toggleModal('clients-modal-update');
   }
 
   return (
@@ -23,7 +45,7 @@ function Client({ client, fetchData }) {
         <p>Endereço: { address } </p>
       </div>
       <div className="client-buttons">
-        <button type="button">Atualizar</button>
+        <button type="button" onClick={ handleUpdate }>Atualizar</button>
         <button type="button" onClick={ handleDelete }>Excluir</button>
       </div>
     </div>
