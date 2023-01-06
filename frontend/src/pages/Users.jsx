@@ -23,14 +23,14 @@ function Users() {
     if (!(validateLoginLocalStorage() || logged)) navigate('/');    
 
     setShowUsers(false);
-    setUsers([ ...users, ...mockUsers() ]);
+    //  setUsers([ ...users, ...mockUsers() ]);
 
     async function fetchData() {
       const payload = await fetchApi.get(BASE_URL);
       setUsers([...users, ...payload.results]);
     }
 
-    //  fetchData();
+    fetchData();
   }, []);
 
   useEffect(() => { setEndUser(startUser + resultsPerPage); }, [resultsPerPage]);

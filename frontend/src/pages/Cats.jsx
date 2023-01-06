@@ -9,8 +9,8 @@ function Cats() {
   const { logged } = useContext(Context);
   const navigate = useNavigate();
   const [status, setStatus] = useState('100');
-  //  const BASE_URL = `https://http.cat/${status}`;
-  const BASE_URL = `${process.env.PUBLIC_URL}/100.jpg`;
+  const BASE_URL = `https://http.cat/${status}`;
+  //  const BASE_URL = `${process.env.PUBLIC_URL}/100.jpg`;
 
   useEffect(() => {
     if (!(validateLoginLocalStorage() || logged)) navigate('/');
