@@ -1,5 +1,5 @@
 export interface Cliente {
-  id      : string
+  id      ?: string
   nome    : string
   email   : string
   telefone : string
@@ -10,7 +10,7 @@ export interface Cliente {
 }
 
 export interface Endereco {
-  id :string
+  id ?:string
   rua ?:string
   bairro?:string
   cidade?:string

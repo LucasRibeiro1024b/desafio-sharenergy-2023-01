@@ -1,5 +1,5 @@
 import {Router,Request, Response } from 'express'
-import buscarGato from '../Domain/Services/buscarGatos';
+import buscarGato from '../Domain/Services/ServicesExternos/ServiceGatos/buscarGatos';
 
 const routerGatos = Router();
 

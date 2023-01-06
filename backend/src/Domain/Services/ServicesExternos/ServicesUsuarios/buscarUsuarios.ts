@@ -1,5 +1,5 @@
-import Usuario from "../Interfaces/Usuario"
-import api from "./config"
+import Usuario from "../../../Interfaces/Usuario"
+import api from "../config"
 const query = `?page=${3}&results=${1}&seed=abc`
 
 

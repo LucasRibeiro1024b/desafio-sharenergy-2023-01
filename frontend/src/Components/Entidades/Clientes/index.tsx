@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
 import { ICliente, IDadosTabela } from "../../../Interfaces/Cliente";
-import Usuarios from "../../../Interfaces/Usuarios";
 import Tabela from "../../Tabela/Index";
-import { colunasTabela } from "./lista/colunas";
+import  ColunasTabela  from "./lista/index";
 
 
 function ListaClientes(){
@@ -15,7 +14,7 @@ const [linhaTabela , setLinhaTabela] = useState<IDadosTabela<any>>({
     setLinhaTabela({cliente: value, visivel : visivel})
   }
 
-  return <><Tabela dados={[]} colunas={colunasTabela({pegarDadosLinha,linhaTabela}) }/></>
+  return <><Tabela dados={[]} colunas={ColunasTabela({pegarDadosLinha,linhaTabela}) }/></>
 }
 
 

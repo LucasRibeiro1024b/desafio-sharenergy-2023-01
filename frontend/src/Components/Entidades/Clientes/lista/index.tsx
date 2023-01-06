@@ -1,18 +1,17 @@
 import { Button } from "antd";
 import { ColumnType } from "antd/es/table";
 import { Avatar} from 'antd';
-import { IDadosTabela } from "../../../../Interfaces/Cliente";
-import Usuarios from "../../../../Interfaces/Usuarios";
+import { ICliente, IDadosTabela } from "../../../../Interfaces/Cliente";
 
 interface Colunas {
-  pegarDadosLinha : ( value : Usuarios, visivel : boolean) => void | any,
-  linhaTabela ?: IDadosTabela<Usuarios>
+  pegarDadosLinha : ( value : ICliente, visivel : boolean) => void | any,
+  linhaTabela ?: IDadosTabela<ICliente>
 }
 
 
-const  colunasTabela = ({pegarDadosLinha, linhaTabela} : Colunas)=>{
+const  ColunasTabela = ({pegarDadosLinha, linhaTabela} : Colunas)=>{
 
-  const colunas : ColumnType<Usuarios> | any = [
+  const colunas : ColumnType<ICliente> | any = [
     {
       title: 'Nome Usuario',
       dataIndex: 'name',
@@ -75,4 +74,4 @@ const  colunasTabela = ({pegarDadosLinha, linhaTabela} : Colunas)=>{
 }
 
 
-export default colunasTabela
+export default ColunasTabela

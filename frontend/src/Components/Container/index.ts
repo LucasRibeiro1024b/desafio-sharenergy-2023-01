@@ -40,7 +40,15 @@ justify-content:center;
 margin-top:50px;
 `
 
+const ContainerMenu = styled.div`
+display:flex;
+flex-direction : row;
+width : 100%;
+align-items: center;
+justify-content: space-around;
+`
+
 
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default {Container, ContainerBloco, ContainerImagem, ContainerButton}
+export default {Container, ContainerBloco, ContainerImagem, ContainerButton, ContainerMenu}

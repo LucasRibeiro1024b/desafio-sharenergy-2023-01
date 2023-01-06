@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Checkbox, Form, Input, Space } from "antd";
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
@@ -6,18 +7,17 @@ import Botao from "../../../Button";
 import Titulo from "../../../Titulo";
 import S from "../../../Container/index"
 import servico from "../../../../services/login/login";
-
+import { useNavigate } from "react-router-dom";
 
 function LoginForm () {
-    const [form]= Form.useForm<IUser>()
-
+  const navigate = useNavigate();
+  const [form]= Form.useForm<IUser>()
 
   function handleClick (){
     form.validateFields().then(async ()=>{
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const login : IUser = form.getFieldsValue();
-       // eslint-disable-next-line @typescript-eslint/no-unused-vars
        const resposta =  await servico.logar({nome: login.nome, senha: login.senha})
+       navigate("/usuarios")
     }).catch(err =>{
       console.log(err)
     })
