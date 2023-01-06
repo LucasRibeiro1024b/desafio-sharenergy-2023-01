@@ -18,7 +18,7 @@ function ModalCreateClient({ toggleModal, fetchData }) {
     if (result) {
       setInvalidData(false);
       fetchData();
-      toggleModal();
+      toggleModal('clients-modal-create');
       setName('');
       setEmail('');
       setPhoneNumber('');
@@ -90,7 +90,11 @@ function ModalCreateClient({ toggleModal, fetchData }) {
         </div>
         <div id="clients-modal-create-content-buttons">
           <button onClick={ handleClick }>Adicionar</button>
-          <button onClick={ () => toggleModal() }>Cancelar</button>
+          <button
+            onClick={ () => toggleModal('clients-modal-create') }
+          >
+            Cancelar
+          </button>
         </div>
       </div>
     </section>
