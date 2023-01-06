@@ -1,8 +1,13 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Navbar, Client, ModalCreateClient } from '../components';
 import { Context } from '../contexts/Context';
 import { validateLoginLocalStorage, fetchApi } from '../utils';
+import {
+  Navbar,
+  Client,
+  ModalCreateClient,
+  ModalUpdateClient,
+} from '../components';
 import '../styles/Clients.css';
 
 const { REACT_APP_CLIENTS_BASE_URL } = process.env;
@@ -47,8 +52,8 @@ function Clients() {
     }
   }
 
-  function toggleModal() {
-    const modal = document.getElementById('clients-modal-create');
+  function toggleModal(modalId) {
+    const modal = document.getElementById(modalId);
 
     if (modal.style.display === 'none') modal.style.display = 'block';
     else modal.style.display = 'none';
@@ -59,8 +64,19 @@ function Clients() {
       <Navbar />
       <h1>Clientes</h1>
       <br />
-      <ModalCreateClient toggleModal={ toggleModal } fetchData={ fetchData }/>
-      <button onClick={ () => toggleModal() }>Adicionar cliente</button>
+      <ModalCreateClient
+        toggleModal={ toggleModal }
+        fetchData={ fetchData }
+      />
+      <ModalUpdateClient
+        toggleModal={ toggleModal }
+        fetchData={ fetchData }
+      />
+      <button
+        onClick={ () => toggleModal('clients-modal-create') }
+      >
+        Adicionar cliente
+      </button>
       <section id='clients-pagination-filter'>
         <p>Clientes por página:&nbsp;</p>
         <select
@@ -84,6 +100,7 @@ function Clients() {
                   client={ client }
                   fetchData={ fetchData }
                   key={ client._id }
+                  toggleModal={ toggleModal }
                 />
               );
             })
