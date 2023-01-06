@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const HomepageContainer = styled.div`
+export const HomepageContainer = styled.main`
     text-align: center;
 
     form{
