@@ -18,7 +18,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "serve": "react-scripts build && serve -s build"
+    "serve": "react-scripts build && serve -s build",
+    "docker:up": "chmod +x ./dockerFrontendUp.sh && ./dockerFrontendUp.sh",
+    "docker:down": "chmod +x ./dockerFrontendDown.sh && ./dockerFrontendDown.sh"
   },
   "eslintConfig": {
     "extends": [
