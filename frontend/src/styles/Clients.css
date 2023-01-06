@@ -114,8 +114,61 @@
   justify-content: space-around !important;
 }
 
+#clients-modal-update {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+#clients-modal-update-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fefefe;
+  margin-top: 10%;
+  margin-left: 25%;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  border: 1px solid #000000;
+  width: 45%;
+}
+
+#clients-modal-update-content div {
+  display: flex;
+  flex-flow: row nowrap;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#clients-modal-update-content div p {
+  min-width: 71px;
+}
+
+#clients-modal-update-content div input {
+  width: 400px;
+}
+
+#clients-modal-update-content-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around !important;
+}
+
 @media only screen and (max-width: 876px) {
   #clients-modal-create-content div input {
+    min-width: 100px;
+  }
+
+  #clients-modal-update-content div input {
     min-width: 100px;
   }
 }
