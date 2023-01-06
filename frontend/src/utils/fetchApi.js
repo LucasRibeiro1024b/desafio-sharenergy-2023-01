@@ -43,8 +43,30 @@ async function deleteOne(url) {
   }
 }
 
+async function updateOne(url, data) {
+  const payload = JSON.stringify(data);
+  const myHeader = new Headers();
+
+  myHeader.append('Content-Type', 'application/json');
+
+  try {
+    const response = await fetch(
+      url,
+      { method: 'PUT', body: payload, headers: myHeader },
+    );
+
+    if (response.status === 204) return true;
+    return false;
+
+  } catch (error) {
+    console.error(error);
+    return false
+  }
+}
+
 export default {
   get,
   post,
   deleteOne,
+  updateOne,
 };
