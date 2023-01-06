@@ -6,8 +6,6 @@ COPY package*.json ./
 
 RUN npm install
 
-COPY .env.docker .env
-
 COPY . .
 
 RUN npm run build
@@ -22,7 +20,5 @@ COPY --from=builder /usr/src/app/build ./build
 COPY --from=builder /usr/src/app/package.json.docker package.json
 
 RUN npm install
-
-EXPOSE 3000
 
 CMD [ "npm", "run", "serve" ]
