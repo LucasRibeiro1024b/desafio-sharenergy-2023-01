@@ -3,11 +3,6 @@ import styled from "styled-components"
 export const LoginPageContainer = styled.div`
     text-align: center;
 
-    h1{
-        font-size: 2.3vw;
-        padding: 2vw;
-    }
-
     form{
         display: flex;
         flex-direction: column;
@@ -19,7 +14,7 @@ export const LoginPageContainer = styled.div`
         }
 
         input{
-            font-family: 'Prosto One';
+            font-family: 'Gothic A1';
             font-size: 1.2vw;
             text-align: center;
             width: 20vw;

@@ -9,11 +9,19 @@ export const GlobalStyle = createGlobalStyle`
 
     body{
         background-color: var(--antique-white);
-        font-family: 'Prosto One';
+        font-family: 'Gothic A1';
     }
 
     h1{
         font-family: 'Viga';
+        font-size: 2.3vw;
+        padding: 1vw;
+        margin-bottom: 1vw;
+    }
+
+    h2{
+        font-family: 'Viga';
+        font-size: 2vw;
     }
 
     *{

@@ -7,7 +7,4 @@ export const HeaderContainer = styled.header`
     width: 100%;
     height: 100px;
 
-    h1{
-        font-size: 2vw;
-    }
 `

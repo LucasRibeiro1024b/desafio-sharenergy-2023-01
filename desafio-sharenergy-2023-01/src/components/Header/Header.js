@@ -4,7 +4,7 @@ const Header=()=>{
     return(
         <div>
             <HeaderContainer>
-                <h1>Challenge Sharenergy 2023-01</h1>
+                <h2>Challenge Sharenergy 2023-01</h2>
             </HeaderContainer>
         </div>
     )

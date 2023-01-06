@@ -3,7 +3,7 @@ import { FooterContainer } from "./style"
 const Footer=()=>{
     return(
         <FooterContainer>
-            <h1>Footer</h1>
+            <h2>Footer</h2>
         </FooterContainer>
     )
 }
