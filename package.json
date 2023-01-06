@@ -4,7 +4,9 @@
     "docker:network:down": "chmod +x ./dockerNetworkDown.sh && ./dockerNetworkDown.sh",
     "docker:backend:mongo:up": "cd ./backend && npm run docker:up && cd ..",
     "docker:backend:mongo:down": "cd ./backend && npm run docker:down && cd ..",
-    "docker:up": "npm run docker:network:up && npm run docker:backend:mongo:up",
-    "docker:down": "npm run docker:backend:mongo:down && npm run docker:network:down"
+    "docker:frontend:up": "cd ./frontend && npm run docker:up && cd ..",
+    "docker:frontend:down": "cd ./frontend && npm run docker:down && cd ..",
+    "docker:up": "npm run docker:network:up && npm run docker:backend:mongo:up && npm run docker:frontend:up",
+    "docker:down": "npm run docker:frontend:down && npm run docker:backend:mongo:down && npm run docker:network:down"
   }
 }
