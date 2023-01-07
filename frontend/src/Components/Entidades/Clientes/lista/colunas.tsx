@@ -1,6 +1,5 @@
 import { Button } from "antd";
 import { ColumnType } from "antd/es/table";
-import { Avatar} from 'antd';
 import { ICliente, IDadosTabela } from "../../../../Interfaces/Cliente";
 
 interface Colunas {
@@ -14,10 +13,9 @@ const  ColunasTabela = ({pegarDadosLinha, linhaTabela} : Colunas)=>{
   const colunas : ColumnType<ICliente> | any = [
     {
       title: 'Nome Usuario',
-      dataIndex: 'name',
+      dataIndex: 'nome',
       width: '25%',
-      key :"name",
-      sorter : true,
+      key :"nome",
       align: 'center'
     },
     {
@@ -25,37 +23,22 @@ const  ColunasTabela = ({pegarDadosLinha, linhaTabela} : Colunas)=>{
       dataIndex: 'email',
       width: '25%',
       key :"email",
-      sorter : true,
       align: 'center'
     },
     {
-      title: 'Login',
-      dataIndex: 'login',
+      title: 'Telefone',
+      dataIndex: 'telefone',
       width: '25%',
-      key :"login",
-      sorter : true,
+      key :"telefone",
       align: 'center'
     },
     {
-      title: 'Idade',
-      dataIndex: 'age',
+      title: 'CPF',
+      dataIndex: 'cpf',
       width: '25%',
-      key :"age",
-      sorter : true,
+      key :"cpf",
       align: 'center'
     },
-    {
-      title: 'Foto',
-      dataIndex: 'photo',
-      width: '25%',
-      key :"photo",
-      sorter : true,
-      align: 'center',
-      render: (value : any, record : any) =>{
-        <Avatar src={value}/>
-      }
-    },
-
     {
       title: 'Ação',
       width: '25%',

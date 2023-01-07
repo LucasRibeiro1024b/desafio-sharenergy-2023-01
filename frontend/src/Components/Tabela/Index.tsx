@@ -25,6 +25,7 @@ const col=colunas.map(col =>{
   <Table
     rowKey={"id"}
     columns={col}
+    bordered
     dataSource={dados ? dados : []}
     onChange={onChange}
     style={{ minHeight: 400}}

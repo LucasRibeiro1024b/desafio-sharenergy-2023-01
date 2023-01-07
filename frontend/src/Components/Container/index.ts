@@ -9,6 +9,7 @@ const Container = styled.div`
   justify-content: center;
   //align-items : center;
   background-color :white;
+  padding :20px;
   width : 100%;
   height : 100%;
 `
