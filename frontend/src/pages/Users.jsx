@@ -116,7 +116,7 @@ function Users() {
           </select> 
           <input
             type="text"
-            onChange={ ({ target }) => setFilterUsers(target.value) }
+            onChange={ ({ target }) => setFilterUsers((target.value).toLowerCase()) }
             value={ filterUsers }
           />
         </div>
