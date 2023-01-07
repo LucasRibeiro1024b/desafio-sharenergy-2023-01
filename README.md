@@ -1,7 +1,7 @@
 ## Desafio para o processo seletivo SHARENERGY 2023/01
 <br>
 
-[Vídeo explicativo no Youtube](www.youtube.com)
+[Vídeo explicativo no Youtube](https://youtu.be/zHxWdugUtZU)
 <br><br>
 
 ## Stacks utilizadas<br><br>
