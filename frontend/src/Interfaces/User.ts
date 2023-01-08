@@ -3,4 +3,3 @@ export default interface IUser {
   senha: string;
   checked?: boolean;
 }
-

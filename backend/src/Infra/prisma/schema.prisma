@@ -12,11 +12,11 @@ datasource db {
 
 model Cliente {
   id       String  @id @default(auto()) @map("_id") @db.ObjectId
-  nome     String   @unique
-  email    String    @unique
+  nome     String
+  email    String
   telefone String
   endereco  Endereco?
-  cpf       String    @unique
+  cpf       String   
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 }
@@ -26,7 +26,7 @@ model Endereco {
   rua String
   bairro String
   cidade String
-  cliente Cliente @relation(fields: [clienteId], references: [id])
+  cliente Cliente @relation(fields: [clienteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   clienteId String @unique @db.ObjectId
 }
 

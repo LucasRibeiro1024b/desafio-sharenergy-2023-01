@@ -1,13 +1,12 @@
+import BuscarDog from '../Components/Entidades/Dogs';
+import LayoutGeral from '../Components/Layout';
 
-import BuscarDog from "../Components/Entidades/Dogs";
-import LayoutGeral from "../Components/Layout";
-
-function Dogs () {
+function Dogs() {
   return (
     <LayoutGeral header="block">
-      <BuscarDog/>
+      <BuscarDog />
     </LayoutGeral>
-  )
+  );
 }
 
 export default Dogs;

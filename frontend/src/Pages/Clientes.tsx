@@ -1,12 +1,12 @@
-import ListaClientes from "../Components/Entidades/Clientes";
-import LayoutGeral from "../Components/Layout";
+import ListaClientes from '../Components/Entidades/Clientes';
+import LayoutGeral from '../Components/Layout';
 
-function Clientes () {
+function Clientes() {
   return (
     <LayoutGeral header="block">
-      <ListaClientes/>
+      <ListaClientes />
     </LayoutGeral>
-  )
+  );
 }
 
 export default Clientes;

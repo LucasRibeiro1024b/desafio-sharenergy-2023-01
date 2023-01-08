@@ -1,23 +1,26 @@
-/* eslint-disable import/no-anonymous-default-export */
-import { ICliente } from "../../Interfaces/Cliente";
-import api from "../axiosConfig";
+import { ICliente } from '../../Interfaces/Cliente';
+import IPaginacao from '../../Interfaces/Paginacao';
+import api from '../axiosConfig';
 
-interface Paginacao{
-  page : number
-  resultado : number
-}
+const buscar = async (paginacao?: IPaginacao) => {
+  const resultado = await api.get('clientes', {
+    params: paginacao
+  });
+  return resultado.data;
+};
 
-const buscar = async(statusCode ?: Paginacao) =>{
-  const resultado = await  api.get("clientes", {
-    params : statusCode
-  })
-  return resultado.data
-}
+const salvar = async (dados: ICliente) => {
+  const resultado = await api.post('clientes', dados);
+  return resultado.data;
+};
 
-const salvar = async(dados: ICliente) =>{
-  const resultado = await  api.post("clientes", dados)
-  return resultado.data
-}
+const deletar = async (id: string) => {
+  console.log({id})
+  const resultado = await api.delete(`clientes/:id`,{data :{ id : id}});
+  console.log({resultado})
+  return resultado.data;
+};
 
 
-export default {buscar,salvar}
+
+export default { buscar, salvar, deletar };

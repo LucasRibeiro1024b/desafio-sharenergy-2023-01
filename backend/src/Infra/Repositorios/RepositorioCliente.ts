@@ -51,18 +51,25 @@ class ClienteRepository implements Repository<Cliente> {
   async findMany(query?: IPaginacao | undefined): Promise<Retorno<any>> {
     await this.prisma.$connect()
     const total = await this.prisma.cliente.count()
-    const pagina = query && (query.skip - 1 as number) * total
+    const skip = query &&  (query?.skip == 0 ? query?.skip +1 : query?.skip -1 ) * query.take
+
     const clientes = await this.prisma.cliente.findMany({
       include: {
         endereco: true,
       },
-      skip: pagina,
-      take: query?.take ? query?.take : 5,
+      skip : Number(skip),
+      take: query?.take ,
+      orderBy: {
+        nome : 'desc'
+      },
     })
-
-    const retorno = {
+    const retorno : Retorno<any>= {
       dados: clientes,
-      total
+      paginacao :{
+        total,
+        skip: Number(query?.skip),
+        take : Number(query?.take)
+      }
     }
 
     this.desconectar()
@@ -79,8 +86,21 @@ class ClienteRepository implements Repository<Cliente> {
     throw new Error('Method not implemented.');
   }
 
-  async delete(id: string): Promise<boolean> {
-    throw new Error('Method not implemented.');
+  async delete(id: string): Promise<Retorno<any>> {
+    await this.prisma.$connect()
+   const resultado =  await this.prisma.cliente.delete({
+    where : {
+      id
+    }
+   }).catch(err =>
+    err
+   )
+   await this.desconectar()
+   return {
+    id,
+    erros : resultado,
+    mensagem :"Cliente excluído com sucesso"
+   }
   }
 
 

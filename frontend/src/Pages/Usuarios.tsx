@@ -1,12 +1,12 @@
-import ListaUsuarios from "../Components/Entidades/Usuarios";
-import LayoutGeral from "../Components/Layout";
+import ListaUsuarios from '../Components/Entidades/Usuarios';
+import LayoutGeral from '../Components/Layout';
 
-function Usuarios () {
+function Usuarios() {
   return (
     <LayoutGeral header="block">
-      <ListaUsuarios/>
+      <ListaUsuarios />
     </LayoutGeral>
-  )
+  );
 }
 
 export default Usuarios;

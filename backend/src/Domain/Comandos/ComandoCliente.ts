@@ -44,8 +44,9 @@ async function comandoClienteCadastrar(cliente: Cliente): Promise<Retorno<Client
 }
 
 async function comandoClienteDelete(id: string) {
-
-
+  const repositorio = new ClienteRepository()
+  const clientes = repositorio.delete(id)
+  return clientes
 }
 
 async function comandoClienteBuscar(query: IPaginacao): Promise<Retorno<Cliente>> {

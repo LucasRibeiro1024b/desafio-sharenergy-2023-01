@@ -1,9 +1,10 @@
 import Erros from "./Erros"
+import IPaginacao from "./Paginacao"
 
 interface Retorno<T> {
   dados ?: T[]
   erros ?: Erros[] | Erros
-  total ?: number
+  paginacao ?: IPaginacao
   mensagem ?: string
   id ?:  string
 }

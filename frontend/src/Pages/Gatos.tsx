@@ -1,12 +1,12 @@
-import BuscaGatos from "../Components/Entidades/Gatos";
-import LayoutGeral from "../Components/Layout";
+import BuscaGatos from '../Components/Entidades/Gatos';
+import LayoutGeral from '../Components/Layout';
 
-function Gatos () {
+function Gatos() {
   return (
     <LayoutGeral header="block">
-      <BuscaGatos/>
+      <BuscaGatos />
     </LayoutGeral>
-  )
+  );
 }
 
 export default Gatos;
