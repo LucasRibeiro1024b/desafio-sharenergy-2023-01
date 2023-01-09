@@ -1,5 +1,4 @@
 import CardUser from '../../components/CardUser/CardUser'
-import Footer from '../../components/Footer/Footer'
 import Header from '../../components/Header/Header'
 import { CardsContainer, HomepageContainer, FormContainer } from './style'
 import search from '../../images/search.png'
@@ -11,14 +10,13 @@ deve haver uma search para buscar usuários por nome, email ou username; */
 
 const Homepage=()=>{
     return(
-        <div>
-           <HomepageContainer>
+        <HomepageContainer>
             <Header/>
             <h1>List of Users</h1>
                 <FormContainer>
                     <form>
                         <img src={search} alt= "Magnifying glass icon."/>
-                        <input name='search' placeholder='Search Users'></input>
+                        <input id="search" placeholder='Search Users'></input>
                     </form>
                 </FormContainer>
 
@@ -34,9 +32,7 @@ const Homepage=()=>{
                     <CardUser/>
                     <CardUser/>                                        
                 </CardsContainer>
-            <Footer/>
-            </HomepageContainer>
-        </div>
+        </HomepageContainer>
     )
 }
 

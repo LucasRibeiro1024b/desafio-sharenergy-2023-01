@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const HomepageContainer = styled.main`
+export const HomepageContainer = styled.div`
     text-align: center;
 
     form{
@@ -16,8 +16,8 @@ export const HomepageContainer = styled.main`
     font-size: 16px;
 
     img{
-        width: 24px;
-        height: 24px;
+        max-width: 24px;
+        min-height: 24px;
         margin-right: 10px;
     }
 

@@ -1,6 +1,10 @@
 import styled from "styled-components"
 
-export const LoginPageContainer = styled.main`
+export const LoginPageContainer = styled.div`
+    text-align: center;
+`
+
+export const LoginContainer = styled.main`
     text-align: center;
 
     form{
