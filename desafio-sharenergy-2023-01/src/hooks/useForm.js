@@ -1,9 +1,9 @@
 import { useState } from "react"
 
-export const useForm=(initialState)=>{
+const useForm=(initialState)=>{
     const [form, setForm] = useState(initialState)
 
-    const onChange=(e)=>{
+    const onChangeInputs=(e)=>{
         const { name, value } = e.target
         setForm({...form, [name]: value})
     }
@@ -12,5 +12,7 @@ export const useForm=(initialState)=>{
         setForm(initialState)
     }
 
-    return [form, onChange, clearInputs]
+    return [form, onChangeInputs, clearInputs, setForm]
 }
+
+export default useForm
