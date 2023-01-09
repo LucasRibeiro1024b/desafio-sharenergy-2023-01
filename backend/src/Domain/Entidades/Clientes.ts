@@ -9,7 +9,7 @@ class Clientes implements Cliente {
   telefone!: string;
   endereco?: Endereco | undefined;
   cpf!: string;
-  erro !: Erros;
+  erro: Array<Erros> = [];
 
   constructor({ cpf, email, nome, telefone, endereco }: Cliente) {
     this.ValidarNome(nome)
@@ -21,24 +21,24 @@ class Clientes implements Cliente {
 
 
   private async ValidarNome(nome: string) {
-    if (nome && nome?.length > 0 || nome && nome != null) {
+    if (nome && nome != null) {
       this.nome = nome
     }
-    /*    this.erro ={
-          campo: "nome",
-          mensagem: "Campo invalido"
-        }
-        return this.erro */
+
+    this.erro.push({
+      campo: "nome",
+      mensagem: "Campo invalido"
+    })
   }
 
   private async ValidarTelefone(telefone: string) {
-    if (telefone && telefone.length > 0 || telefone != null) {
+    if (telefone && telefone != null) {
       this.telefone = telefone
     }
-    /* this.erro={
+    this.erro.push({
       campo: 'telefone',
       mensagem: "Campo invalido"
-    } */
+    })
   }
 
   private async ValidarEmail(email: string) {
@@ -46,42 +46,32 @@ class Clientes implements Cliente {
     if (regex.test(email)) {
       this.email = email
     }
-    /*     this.erro.push({
-          campo: email,
-          mensagem: "Campo invalido"
-        }) */
-    return this.erro
+    this.erro.push({
+      campo: "email",
+      mensagem: "Campo invalido"
+    })
   }
 
   private async ValidarCPF(cpf: string) {
-    if (cpf.length > 0 || cpf != null) {
+    if (cpf && cpf != null) {
       this.cpf = cpf
     }
-    /*     this.erro={
-          campo: 'cpf',
-          mensagem: "Campo invalido"
-        }
-        return this.erro */
+    this.erro.push({
+      campo: 'cpf',
+      mensagem: "Campo invalido"
+    })
   }
 
   private async ValidarEndereco(endereco?: Endereco) {
     if (endereco) {
-      if (endereco.bairro && endereco.bairro.length > 0 && endereco.cidade && endereco.cidade.length > 0 && endereco.rua && endereco.rua.length > 0) {
-        this.endereco = {
-          bairro: endereco?.bairro,
-          cidade: endereco?.cidade,
-          rua: endereco?.rua
-        }
+      this.endereco = {
+        bairro: endereco?.bairro,
+        cidade: endereco?.cidade,
+        rua: endereco?.rua
       }
-      /*       [endereco].map(campo=>{
-            this.erro.push({
-              campo : campo as string,
-              mensagem :"Campo invalido"
-            })}) */
-      return this.erro
     }
-
   }
+
 }
 
 

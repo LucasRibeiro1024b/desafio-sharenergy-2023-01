@@ -14,7 +14,6 @@ class ClienteRepository implements Repository<Retorno<Cliente>> {
 
   //#region TODO: Criar um cliente
   async criar(data: Cliente) {
-    console.log(data)
     await this.prisma.$connect()
     const cliente = await this.prisma.cliente.create({
       data: {
@@ -25,9 +24,9 @@ class ClienteRepository implements Repository<Retorno<Cliente>> {
         endereco: {
           create:
           {
-            bairro: data.endereco?.bairro as string,
-            cidade: data.endereco?.cidade as string,
-            rua: data.endereco?.rua as string,
+            bairro: data.endereco?.bairro as string || '',
+            cidade: data.endereco?.cidade as string || "",
+            rua: data.endereco?.rua as string || "",
           },
 
         }

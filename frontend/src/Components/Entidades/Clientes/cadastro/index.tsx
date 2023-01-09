@@ -1,10 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /*eslint-disable-next-file*/
 import { Form, Input } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useContext, useEffect } from 'react';
 import { ICliente } from '../../../../Interfaces/Cliente';
 import Modal from '../../../Modal';
 import servico from '../../../../services/Clientes/index';
+import ContextoCliente from '../../../../services/Clientes/contexto/ContextoCliente';
 
 interface IFormCadastro {
   dados: ICliente;
@@ -21,8 +23,9 @@ interface Inputs {
 
 function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro) {
   const [form] = useForm<ICliente>();
-
+  const {atualizarDados, clientes} = useContext(ContextoCliente)
   const inicialRender = useCallback(() => {
+  if(form)
   if(dados){
       form.setFieldsValue({...dados,
         endereco :{
@@ -30,7 +33,6 @@ function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro
           cidade : dados?.endereco?.cidade,
           rua : dados?.endereco?.rua
         }
-
       });
   }
     form.resetFields();
@@ -38,10 +40,11 @@ function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro
 
   useEffect(() => {
     inicialRender();
+    atualizarDados();
   }, [inicialRender]);
 
-
-useEffect(() =>{
+  console.log({clientes})
+ useEffect(() =>{
     form.setFieldsValue({...dados,
       endereco :{
         bairro : dados?.endereco?.bairro,
@@ -56,10 +59,17 @@ useEffect(() =>{
     form.validateFields().then(async () => {
       const dados : ICliente = form.getFieldsValue();
       const resultado = await servico.salvar(dados);
-      if(resultado){
-        fecharModal()
+      console.log(resultado)
+      if(resultado.comando.id){
+        atualizarDados()
+        limparForm()
       }
     });
+  }
+
+  function limparForm (){
+    setVisivel(false)
+     form.resetFields()
   }
 
   return (
@@ -74,7 +84,7 @@ useEffect(() =>{
         layout={'vertical'}
         name ={"formulario-cliente"}
       >
-        <Form.Item name="nome" label="Nome :" rules={[{ required: true }]}>
+        <Form.Item name="nome" label="Nome :" /* rules={[{ required: true }]} */>
           <Input />
         </Form.Item>
         <Form.Item name={['email']} label="Email :" rules={[{ type: 'email' }]}>

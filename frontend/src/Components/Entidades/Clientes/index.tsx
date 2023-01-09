@@ -44,7 +44,6 @@ function ListaClientes() {
     mutate
   } = useSWR(`clientes${qs.stringify(page)}`, async () => await servicos.buscar(page));
 
-  console.log(tableParams)
    useEffect(() => {
     setTableParams({
       pagination: {
@@ -59,14 +58,13 @@ function ListaClientes() {
   }, [dados, mutate]);
 
   function handleTableChange(current : number, pageSize : number) {
-    console.log(current, pageSize)
     setPage({
       skip: Number(current) === 0 ? 1 :  Number(current),
       take: Number(pageSize) === 0 ? 10 :  Number(pageSize)
     });
    mutate();
   }
-  console.log({page})
+
   function pegarDadosLinha(value: ICliente, visivel: boolean) {
     setLinhaTabela({ cliente: value, visivel: visivel });
     setVisivel(true);

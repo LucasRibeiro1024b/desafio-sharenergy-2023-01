@@ -16,6 +16,7 @@ routerClientes.get("/clientes", async (req: Request, res: Response) => {
 
 routerClientes.post("/clientes", async (req: Request, res: Response) => {
   const cliente: Cliente = req.body;
+  console.log(cliente)
   const comando = await servico.comandoClienteCadastrar(cliente)
   res.send({ comando })
 })

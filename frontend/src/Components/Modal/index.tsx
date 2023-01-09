@@ -10,6 +10,7 @@ interface IPageLogin {
 function Modal({ children, handleOk, visivel, handleCancel, title }: IPageLogin) {
   return (
     <ModalMod
+      forceRender
       title={title}
       onOk={handleOk}
       open={visivel}
