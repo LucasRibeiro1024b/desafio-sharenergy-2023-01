@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /*eslint-disable-next-file*/
-import { Form, Input } from 'antd';
+import { Alert, Form, Input, message } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import { useCallback, useContext, useEffect } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { ICliente } from '../../../../Interfaces/Cliente';
 import Modal from '../../../Modal';
 import servico from '../../../../services/Clientes/index';
@@ -21,11 +22,19 @@ interface Inputs {
   cpf ?:string
 }
 
+interface Erros {
+  campo : string
+  mensagem : string
+}
+
 function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro) {
   const [form] = useForm<ICliente>();
-  const {atualizarDados, clientes} = useContext(ContextoCliente)
+  const [messageApi, contextHolder] = message.useMessage()
+  const {atualizarDados} = useContext(ContextoCliente)
+  const [erros , setErros] = useState<Erros[]>()
+
   const inicialRender = useCallback(() => {
-  if(form)
+  if(form){
   if(dados){
       form.setFieldsValue({...dados,
         endereco :{
@@ -35,6 +44,7 @@ function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro
         }
       });
   }
+}
     form.resetFields();
   }, [dados, form]);
 
@@ -43,8 +53,7 @@ function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro
     atualizarDados();
   }, [inicialRender]);
 
-  console.log({clientes})
- useEffect(() =>{
+  useEffect(() =>{
     form.setFieldsValue({...dados,
       endereco :{
         bairro : dados?.endereco?.bairro,
@@ -57,12 +66,16 @@ function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro
 
   function salvarDados() {
     form.validateFields().then(async () => {
-      const dados : ICliente = form.getFieldsValue();
-      const resultado = await servico.salvar(dados);
-      console.log(resultado)
+      const cliente : ICliente = await form.getFieldsValue(true);
+      const resultado = await servico.salvar({...cliente});
       if(resultado.comando.id){
         atualizarDados()
         limparForm()
+        success(resultado.comando.mensagem)
+      }
+       if(resultado.comando.erros.length){
+        setErros(resultado.comando.erros)
+       error(resultado.comando.mensagem)
       }
     });
   }
@@ -72,47 +85,81 @@ function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro
      form.resetFields()
   }
 
+  const success = (mensagem : string) => {
+    messageApi.open({
+      type: 'success',
+      content: mensagem,
+    });
+  };
+
+  const error = (mensagem : string) => {
+    messageApi.open({
+      type: 'error',
+      content: mensagem,
+    });
+  };
+
   return (
+    <>
     <Modal
       title={<h2 style={{ marginBottom: '20px' }}>Cadastro de clientes:</h2>}
       handleOk={salvarDados}
       visivel={visivel}
       handleCancel={fecharModal}
     >
+    <>
       <Form<ICliente>
         form={form}
         layout={'vertical'}
         name ={"formulario-cliente"}
       >
-        <Form.Item name="nome" label="Nome :" /* rules={[{ required: true }]} */>
+        <Form.Item
+          name="nome"
+          label="Nome:"
+          rules={[{required: true , message: "Campo obrigatório"}]}
+          >
           <Input />
         </Form.Item>
-        <Form.Item name={['email']} label="Email :" rules={[{ type: 'email' }]}>
+        <Form.Item
+          name={['email']}
+          label="Email:"
+          rules={[{required: true, message: "Campo obrigatório" }]}>
           <Input />
         </Form.Item>
-        <Form.Item name={'telefone'} label="Telefone :">
+        <Form.Item
+          name={'telefone'}
+          label="Telefone:"
+          rules={[{required: true, message: "Campo obrigatório"}]}
+          >
           <Input
             name='telefone'
-            maxLength={15}
+            maxLength={11}
           />
         </Form.Item>
-        <Form.Item name={['cpf']} label="CPF :">
+        <Form.Item
+          name={['cpf']}
+          label="CPF:"
+          rules={[{required: true, message: "Campo obrigatório"}]}
+          >
           <Input
            name='cpf'
-           maxLength={15}
+           maxLength={11}
           />
         </Form.Item>
-        <Form.Item name={['endereco','cidade']} label="Cidade :">
+        <Form.Item name={['endereco','cidade']} label="Cidade:">
           <Input />
         </Form.Item>
-        <Form.Item name={['endereco','bairro']} label="Bairro :">
+        <Form.Item name={['endereco','bairro']} label="Bairro:">
           <Input />
         </Form.Item>
-        <Form.Item name={['endereco','rua']} label="Rua :">
+        <Form.Item name={['endereco','rua']} label="Rua:">
           <Input />
         </Form.Item>
       </Form>
+      </>
     </Modal>
+    {contextHolder}
+  </>
   );
 }
 

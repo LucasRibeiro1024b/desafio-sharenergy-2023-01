@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
-import { Button, TablePaginationConfig } from 'antd';
+import { Button, TablePaginationConfig, message } from 'antd';
 import useSWR from 'swr';
 import qs from 'qs';
 import { ICliente, IDadosTabela } from '../../../Interfaces/Cliente';
@@ -14,7 +14,6 @@ import TableParams from '../../../Interfaces/Tabela';
 import IPaginacao from '../../../Interfaces/Paginacao';
 import servico from '../../../services/Clientes'
 import ShowDeleteConfirm from '../../Modal/ModalAviso';
-
 
 
 function ListaClientes() {
@@ -37,7 +36,7 @@ function ListaClientes() {
 
   const [visivelModalDelete, setVisivelModalDelete] = useState<boolean>(false)
   const [idUser , setIdUser] = useState<string>()
-
+  const [messageApi, contextHolder] = message.useMessage()
   const {
     data: dados,
     isLoading,
@@ -80,6 +79,9 @@ function ListaClientes() {
 
  async function abrirModalDelete(){
     const deletar = await servico.deletar(idUser as string)
+    if(deletar.comando.id){
+      success(deletar?.comando?.mensagem)
+    }
     setVisivelModalDelete(false)
     mutate()
   }
@@ -100,6 +102,12 @@ function ListaClientes() {
     })
   }
 
+  const success = (mensagem : string) => {
+    messageApi.open({
+      type: 'success',
+      content: mensagem,
+    });
+  };
 
   return (
     <S.Container>
@@ -129,6 +137,7 @@ function ListaClientes() {
         onOk ={abrirModalDelete}
         onCancel={fecharModalDelete}
       />
+      {contextHolder}
     </S.Container>
   );
 }

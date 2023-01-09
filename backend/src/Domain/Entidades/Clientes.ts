@@ -21,8 +21,8 @@ class Clientes implements Cliente {
 
 
   private async ValidarNome(nome: string) {
-    if (nome && nome != null) {
-      this.nome = nome
+    if (nome) {
+     return this.nome = nome
     }
 
     this.erro.push({
@@ -32,8 +32,8 @@ class Clientes implements Cliente {
   }
 
   private async ValidarTelefone(telefone: string) {
-    if (telefone && telefone != null) {
-      this.telefone = telefone
+    if (telefone) {
+      return this.telefone = telefone
     }
     this.erro.push({
       campo: 'telefone',
@@ -42,9 +42,9 @@ class Clientes implements Cliente {
   }
 
   private async ValidarEmail(email: string) {
-    const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i
-    if (regex.test(email)) {
-      this.email = email
+    const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]/i
+    if (regex.test(email) === true) {
+      return this.email = email
     }
     this.erro.push({
       campo: "email",
@@ -53,8 +53,9 @@ class Clientes implements Cliente {
   }
 
   private async ValidarCPF(cpf: string) {
-    if (cpf && cpf != null) {
-      this.cpf = cpf
+    const newCpf =  cpf.replace(/[.-]/g, '')
+    if (newCpf) {
+      return this.cpf = newCpf
     }
     this.erro.push({
       campo: 'cpf',
@@ -64,7 +65,7 @@ class Clientes implements Cliente {
 
   private async ValidarEndereco(endereco?: Endereco) {
     if (endereco) {
-      this.endereco = {
+    return  this.endereco = {
         bairro: endereco?.bairro,
         cidade: endereco?.cidade,
         rua: endereco?.rua

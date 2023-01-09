@@ -8,8 +8,9 @@ import Retorno from "../Interfaces/Retorno";
 
 async function comandoClienteCadastrar(cliente: Cliente): Promise<Retorno<Cliente>> {
   const repositorio = new ClienteRepository()
-
   let retorno: Retorno<Cliente>;
+
+  if(!cliente.id){
   const validarCliente = new Clientes({
     cpf: cliente.cpf,
     email: cliente.email,
@@ -18,13 +19,13 @@ async function comandoClienteCadastrar(cliente: Cliente): Promise<Retorno<Client
     endereco: cliente.endereco
   })
 
-  if (!validarCliente.erro) {
+  if (!validarCliente.erro.length) {
     const salvar = await repositorio.criar({
-      cpf: cliente.cpf,
-      email: cliente.email,
-      nome: cliente.nome,
-      telefone: cliente.telefone,
-      endereco: cliente.endereco
+      cpf: validarCliente.cpf,
+      email: validarCliente.email,
+      nome: validarCliente.nome,
+      telefone: validarCliente.telefone,
+      endereco: validarCliente.endereco
     })
 
     retorno = {
@@ -41,6 +42,8 @@ async function comandoClienteCadastrar(cliente: Cliente): Promise<Retorno<Client
     mensagem: "Erro ao realizar cadastro",
   }
   return retorno
+  }
+return await comandoClienteEditar(cliente.id, cliente)
 }
 
 async function comandoClienteDelete(id: string) {
@@ -57,6 +60,7 @@ async function comandoClienteBuscar(query: IPaginacao): Promise<Retorno<Cliente>
 
 
 async function comandoClienteEditar(id: string , data : Cliente) : Promise<Retorno<Cliente>>{
+
   const repositorio = new ClienteRepository()
   let retorno: Retorno<Cliente>;
 
@@ -67,9 +71,8 @@ async function comandoClienteEditar(id: string , data : Cliente) : Promise<Retor
     telefone: data.telefone,
     endereco: data.endereco
   })
-  if (!validarCliente.erro) {
+  if (!validarCliente.erro.length) {
    const resposta =  await repositorio.editar(id, validarCliente)
-
     return  resposta
   }
 

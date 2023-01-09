@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
+
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import pegarToken from '../../../services/Token';
@@ -11,10 +13,11 @@ function PageLogin(): ReactJSXElement {
   const user = () => pegarToken();
 
   useEffect(() => {
-    if (user().valueOf()) {
+    if (user() === true) {
       navigate('/usuarios');
     }
   }, [navigate]);
+
 
   return (
     <S.Container>

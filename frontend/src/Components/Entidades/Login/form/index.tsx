@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Checkbox, Form, Input, Space } from 'antd';
+import { Checkbox, Form, Input, message, Space } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import IUser from '../../../../Interfaces/User';
 import Botao from '../../../Button';
@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 function LoginForm() {
   const navigate = useNavigate();
   const [form] = Form.useForm<IUser>();
-
+  const [messageApi, contextHolder] = message.useMessage()
   function handleClick() {
     form
       .validateFields()
@@ -25,6 +25,12 @@ function LoginForm() {
         console.log(err);
       });
   }
+  const error = (mensagem : string) => {
+    messageApi.open({
+      type: 'error',
+      content: mensagem,
+    });
+  };
 
   return (
     <S.ContainerBloco>
@@ -71,6 +77,7 @@ function LoginForm() {
           <Botao handleClick={handleClick} textoBotao="Enviar" />
         </Space>
       </Form>
+      {contextHolder}
     </S.ContainerBloco>
   );
 }

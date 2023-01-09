@@ -32,7 +32,6 @@ class ClienteRepository implements Repository<Retorno<Cliente>> {
         }
       }
     })
-
     const returnUser = await this.prisma.cliente.findUnique({
       where: {
         id: cliente.id,
