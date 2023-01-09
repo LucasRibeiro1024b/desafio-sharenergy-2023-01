@@ -20,12 +20,12 @@ const ContainerBloco = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 430px;
+  height:500px;
 `;
 const ContainerImagem = styled.div`
   display: flex;
-  width: 250px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
   margin-top: 50px;
   justify-content: center;
   align-items: center;
@@ -48,5 +48,21 @@ const ContainerMenu = styled.div`
   justify-content: space-around;
 `;
 
+
+const ContainerPaginacao= styled.div`
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height:50px;
+`;
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default { Container, ContainerBloco, ContainerImagem, ContainerButton, ContainerMenu };
+export default { Container,
+                ContainerBloco,
+                ContainerImagem,
+                ContainerButton,
+                ContainerMenu,
+                ContainerPaginacao };

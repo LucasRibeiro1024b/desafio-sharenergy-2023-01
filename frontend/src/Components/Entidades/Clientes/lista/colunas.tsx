@@ -1,7 +1,7 @@
 import { Button, Space } from 'antd';
 import { ColumnType } from 'antd/es/table';
 import { ICliente, IDadosTabela } from '../../../../Interfaces/Cliente';
-
+import mascaras from "../../../../libs/funcoes"
 interface Colunas {
   pegarDadosLinha: (value: ICliente, visivel: boolean) => void | any;
   deletarDadosLinha: (value: ICliente, visivel: boolean) => void | any;
@@ -29,14 +29,20 @@ const ColunasTabela = ({ pegarDadosLinha, linhaTabela, deletarDadosLinha }: Colu
       dataIndex: 'telefone',
       width: '25%',
       key: 'telefone',
-      align: 'center'
+      align: 'center',
+      render :(value: any) =>{
+        return  mascaras.maskPhoneDDI(value)
+      }
     },
     {
       title: 'CPF',
       dataIndex: 'cpf',
       width: '25%',
       key: 'cpf',
-      align: 'center'
+      align: 'center',
+      render :(value: any) =>{
+      return  mascaras.maskCPF(value)
+      }
     },
     {
       title: 'Ação',

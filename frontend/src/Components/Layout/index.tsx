@@ -16,7 +16,7 @@ function LayoutGeral({ children, header }: ILayoutGeral) {
       </Header>
       <Content style={{ padding: '50px 50px' }}>{children}</Content>
       <Footer style={{ textAlign: 'center', alignItems: 'end' }}>
-        ©2023 Created by Rafael Carlos De Souza
+        <>© {2023} Created by Rafael Carlos De Souza</>
       </Footer>
     </Layout>
   );

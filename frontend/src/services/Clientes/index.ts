@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { ICliente } from '../../Interfaces/Cliente';
 import IPaginacao from '../../Interfaces/Paginacao';
 import api from '../axiosConfig';
@@ -15,9 +16,7 @@ const salvar = async (dados: ICliente) => {
 };
 
 const deletar = async (id: string) => {
-  console.log({id})
   const resultado = await api.delete(`clientes/:id`,{data :{ id : id}});
-  console.log({resultado})
   return resultado.data;
 };
 

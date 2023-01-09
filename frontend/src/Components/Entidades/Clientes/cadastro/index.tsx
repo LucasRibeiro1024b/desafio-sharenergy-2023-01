@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/*eslint-disable-next-file*/
 import { Form, Input } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 import { useCallback, useEffect } from 'react';
@@ -10,40 +10,47 @@ interface IFormCadastro {
   dados: ICliente;
   visivel: boolean;
   setVisivel: any;
+  fecharModal : () => void
 }
 
-function FormCadastro({ dados, visivel, setVisivel }: IFormCadastro) {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+interface Inputs {
+  telefone ?: string
+  cpf ?:string
+}
+
+function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro) {
   const [form] = useForm<ICliente>();
 
   const inicialRender = useCallback(() => {
   if(dados){
-    if (form) {
       form.setFieldsValue({...dados,
-        endereco: {
-          bairro : dados?.endereco?.bairro
+        endereco :{
+          bairro : dados?.endereco?.bairro,
+          cidade : dados?.endereco?.cidade,
+          rua : dados?.endereco?.rua
         }
+
       });
-    }
   }
     form.resetFields();
   }, [dados, form]);
 
-  console.log(dados)
   useEffect(() => {
     inicialRender();
   }, [inicialRender]);
 
 
-  useEffect(() =>{
-    form.setFieldsValue({
-      ...dados,
+useEffect(() =>{
+    form.setFieldsValue({...dados,
       endereco :{
-         bairro : dados?.endereco?.bairro,
-         cidade : dados?.endereco?.cidade,
-         rua : dados?.endereco?.rua
+        bairro : dados?.endereco?.bairro,
+        cidade : dados?.endereco?.cidade,
+        rua : dados?.endereco?.rua
       }
+
     })
-  }, [ dados])
+  }, [dados, form])
 
   function salvarDados() {
     form.validateFields().then(async () => {
@@ -53,12 +60,6 @@ function FormCadastro({ dados, visivel, setVisivel }: IFormCadastro) {
         fecharModal()
       }
     });
-  }
-
-
-  function fecharModal() {
-    setVisivel(false);
-    form.resetFields();
   }
 
   return (
@@ -71,35 +72,33 @@ function FormCadastro({ dados, visivel, setVisivel }: IFormCadastro) {
       <Form<ICliente>
         form={form}
         layout={'vertical'}
-/*          initialValues={{
-          nome: dados?.nome,
-          email: dados?.email,
-          cpf: dados?.cpf,
-          telefone: dados?.telefone,
-          rua : dados?.endereco?.rua,
-          cidade : dados?.endereco?.cidade,
-          bairro : dados?.endereco?.bairro
-        }} */
+        name ={"formulario-cliente"}
       >
         <Form.Item name="nome" label="Nome :" rules={[{ required: true }]}>
           <Input />
         </Form.Item>
-        <Form.Item name={'email'} label="Email :" rules={[{ type: 'email' }]}>
+        <Form.Item name={['email']} label="Email :" rules={[{ type: 'email' }]}>
           <Input />
         </Form.Item>
         <Form.Item name={'telefone'} label="Telefone :">
-          <Input />
+          <Input
+            name='telefone'
+            maxLength={15}
+          />
         </Form.Item>
         <Form.Item name={['cpf']} label="CPF :">
+          <Input
+           name='cpf'
+           maxLength={15}
+          />
+        </Form.Item>
+        <Form.Item name={['endereco','cidade']} label="Cidade :">
           <Input />
         </Form.Item>
-        <Form.Item name={['cidade']} label="Cidade :">
+        <Form.Item name={['endereco','bairro']} label="Bairro :">
           <Input />
         </Form.Item>
-        <Form.Item name={['bairro']} label="Bairro :">
-          <Input />
-        </Form.Item>
-        <Form.Item name={['rua']} label="Rua :">
+        <Form.Item name={['endereco','rua']} label="Rua :">
           <Input />
         </Form.Item>
       </Form>
