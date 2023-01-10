@@ -1,14 +1,14 @@
 import { Card } from "./style"
 
-const CardUser=()=>{
+const CardUser=({user})=>{
     return(
         <div>
             <Card>
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCbsKfeACuDPFlpJsa4fLdRVIGXP2q3Ogwfw&usqp=CAU" alt="User photo."/>
-                <p>Giovana Inez Vieira</p>
-                <p>gioivieira@gmail.com</p>
-                <p>gioivieira</p>
-                <p>23</p>
+                <img src={user.picture.large} alt="User photo."/>
+                <p>{user.name.first} {user.name.last}</p>
+                <p>{user.email}</p>
+                <p>{user.login.username}</p>
+                <p>{user.registered.age}</p>
             </Card>
         </div>
     )
