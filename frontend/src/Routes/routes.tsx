@@ -7,13 +7,15 @@ import Gatos from '../Pages/Gatos';
 import Home from '../Pages/Home';
 import NaoExiste from '../Pages/NaoExiste';
 import Usuarios from '../Pages/Usuarios';
-import pegarToken from '../services/Token';
+import services from '../services/Token';
 import RotasPrivadas from './rotaPrivada';
 
 function Rotas() {
-  const user = () => pegarToken();
+  const session = () => services.pegarSession();
+  const local = () => services.pegarStorage();
   useEffect(() => {
-    user();
+    session();
+    local();
   }, []);
   return (
     <BrowserRouter>

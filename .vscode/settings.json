@@ -4,6 +4,7 @@
     "imask",
     "Notificacao",
     "paginacao",
+    "Sessao",
     "visivel"
   ],
   "dotenv.enableAutocloaking": false

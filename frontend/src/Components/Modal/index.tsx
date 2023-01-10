@@ -15,7 +15,7 @@ function Modal({ children, handleOk, visivel, handleCancel, title }: IPageLogin)
       onOk={handleOk}
       open={visivel}
       onCancel={handleCancel}
-      destroyOnClose
+      destroyOnClose={true}
       getContainer={false}
     >
       {children}

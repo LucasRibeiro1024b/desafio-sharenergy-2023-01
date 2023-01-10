@@ -6,6 +6,7 @@ function MenuHeader() {
 
   function logout() {
     localStorage.clear();
+    sessionStorage.clear();
     navigate('/');
   }
 

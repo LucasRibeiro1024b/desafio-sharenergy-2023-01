@@ -17,14 +17,23 @@ function LoginForm() {
     form
       .validateFields()
       .then(async () => {
-        const login: IUser = form.getFieldsValue();
-        const resposta = await servico.logar({ nome: login.nome, senha: login.senha });
-        navigate('/usuarios');
+        const login : IUser = form.getFieldsValue(true);
+        const resposta = await servico.logar({
+          nome : login.nome,
+          senha : login.senha,
+          checked : login.checked !== undefined ? true : false
+        });
+      if(!resposta.erro){
+          return navigate('/usuarios')
+        }else{
+          return error(resposta.erro)
+        }
       })
       .catch(err => {
         console.log(err);
       });
-  }
+
+    }
   const error = (mensagem : string) => {
     messageApi.open({
       type: 'error',
@@ -72,7 +81,7 @@ function LoginForm() {
         </Form.Item>
         <Space direction="vertical">
           <Form.Item name="checked" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox name="checked" defaultChecked={true}>Remember me</Checkbox>
           </Form.Item>
           <Botao handleClick={handleClick} textoBotao="Enviar" />
         </Space>

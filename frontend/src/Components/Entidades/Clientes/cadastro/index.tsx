@@ -14,6 +14,7 @@ interface IFormCadastro {
   visivel: boolean;
   setVisivel: any;
   fecharModal : () => void
+  mutate :() => void
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -27,15 +28,16 @@ interface Erros {
   mensagem : string
 }
 
-function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro) {
+function FormCadastro({ dados, visivel, setVisivel, fecharModal, mutate  }: IFormCadastro) {
   const [form] = useForm<ICliente>();
   const [messageApi, contextHolder] = message.useMessage()
-  const {atualizarDados} = useContext(ContextoCliente)
+  const {atualizarDados, clientes} = useContext(ContextoCliente)
   const [erros , setErros] = useState<Erros[]>()
 
   const inicialRender = useCallback(() => {
   if(form){
-  if(dados){
+    atualizarDados()
+    if(dados){
       form.setFieldsValue({...dados,
         endereco :{
           bairro : dados?.endereco?.bairro,
@@ -43,17 +45,17 @@ function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro
           rua : dados?.endereco?.rua
         }
       });
+   }
   }
-}
-    form.resetFields();
-  }, [dados, form]);
+   form.resetFields();
+}, [dados, form]);
 
   useEffect(() => {
     inicialRender();
     atualizarDados();
   }, [inicialRender]);
 
-  useEffect(() =>{
+   useEffect(() =>{
     form.setFieldsValue({...dados,
       endereco :{
         bairro : dados?.endereco?.bairro,
@@ -72,8 +74,9 @@ function FormCadastro({ dados, visivel, setVisivel, fecharModal }: IFormCadastro
         atualizarDados()
         limparForm()
         success(resultado.comando.mensagem)
+        mutate()
       }
-       if(resultado.comando.erros.length){
+       if(resultado.comando.erros?.length){
         setErros(resultado.comando.erros)
        error(resultado.comando.mensagem)
       }

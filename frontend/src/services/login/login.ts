@@ -5,11 +5,18 @@ import api from '../axiosConfig';
 interface IDadosLogin {
   nome: string;
   senha: string;
+  checked ?: boolean
 }
 const logar = async (dados: IDadosLogin) => {
-  const resultado = await api.post('http://localhost:3001/api/login', dados);
+  const resultado = await api.post('login', dados);
+  if(resultado.data.erro){
+    return resultado.data
+  }
+  if(resultado.data.checked === false){
+  sessionStorage.setItem('user', JSON.stringify(resultado.data))
+   return resultado.data;
+  }
   localStorage.setItem('user', JSON.stringify(resultado.data));
-  console.log(resultado)
   return resultado.data;
 };
 

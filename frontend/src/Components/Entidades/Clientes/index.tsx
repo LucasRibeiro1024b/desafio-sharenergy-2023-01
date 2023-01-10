@@ -53,8 +53,7 @@ function ListaClientes() {
         defaultPageSize :10
       }
     });
-    mutate();
-  }, [dados, mutate]);
+  }, [dados]);
 
   function handleTableChange(current : number, pageSize : number) {
     setPage({
@@ -100,6 +99,7 @@ function ListaClientes() {
       cliente: null,
       visivel
     })
+    mutate()
   }
 
   const success = (mensagem : string) => {
@@ -126,6 +126,7 @@ function ListaClientes() {
          visivel={visivel}
          setVisivel={setVisivel}
          fecharModal={fecharModal}
+         mutate={mutate}
         />
       <ShowDeleteConfirm
         key={'modal delete'}

@@ -9,8 +9,8 @@ routerLogin.get("/", async (req : Request, res : Response)=>{
 })
 
  routerLogin.post("/login",UsuarioLogin, async (req : Request, res : Response, next)=>{
-  const { nome , senha} = req.body;
-  res.send({ nome , senha}).status(201)
+  const { nome , senha, checked} = req.body;
+  res.send({nome, checked}).status(201)
 })
 
 

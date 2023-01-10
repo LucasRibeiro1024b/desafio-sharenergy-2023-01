@@ -112,7 +112,14 @@ class ClienteRepository implements Repository<Retorno<Cliente>> {
         cpf: data.cpf,
         email : data.email,
         nome: data.nome,
-        telefone : data.telefone
+        telefone : data.telefone,
+        endereco :{
+          update :{
+            bairro : data.endereco?.bairro || '',
+            cidade : data.endereco?.cidade || '',
+            rua : data.endereco?.rua || ''
+          }
+        }
       },
 
     }).catch(

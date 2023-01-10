@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { ICliente } from "../../../Interfaces/Cliente";
 import servico from "../index"
 
 
 interface IContextoCliente {
-  clientes ?: Array<ICliente>
+  clientes ?: ICliente[]
   atualizarDados : () => void
 }
 
@@ -23,20 +23,20 @@ const ContextoCliente = createContext<IContextoCliente>(defaultValueCliente)
 
 
 function ClienteProvider ({ children }: IClienteProvider) {
-  const [clientes, setClientes] = useState<Array<ICliente> | undefined>([])
+  const [clientes, setClientes] = useState<ICliente[] | undefined>()
 
-  function atualizarDados(){
-    pegarDados()
+ async function atualizarDados(){
+   await  pegarDados()
   }
 
  async function pegarDados(){
    const busca = await servico.buscar()
-   if(busca?.comando.dados) setClientes(busca?.comando.dados)
+    setClientes(busca.comando.dados)
   }
 
   useEffect(() => {
     pegarDados();
-  });
+  },[clientes]);
 
 
   return (

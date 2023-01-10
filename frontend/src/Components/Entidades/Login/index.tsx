@@ -4,19 +4,23 @@ import { ReactJSXElement } from '@emotion/react/types/jsx-namespace';
 
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import pegarToken from '../../../services/Token';
+import services from '../../../services/Token';
 import S from '../../Container/index';
 import LoginForm from './form';
 
 function PageLogin(): ReactJSXElement {
   const navigate = useNavigate();
-  const user = () => pegarToken();
+  const session = () =>{ return services.pegarSession()};
+  const local = () =>{ return services.pegarStorage()};
 
   useEffect(() => {
-    if (user() === true) {
-      navigate('/usuarios');
+    if(session()){
+      return navigate('/usuarios');
     }
-  }, [navigate]);
+    if(local()){
+      return navigate('/usuarios');
+    }
+  }, [session,local]);
 
 
   return (
