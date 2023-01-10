@@ -3,51 +3,61 @@ import styled from 'styled-components'
 export const HomepageContainer = styled.div`
     text-align: center;
 
-    form{
-    display: flex;
-    align-items: center;
-    background-color: white;
-    height: 56px;
-    width: 328px;
-    padding: 19px 48px 19px 16px;
-    border-radius: 2px;
-    border: solid 1px var(--greyish);
-    margin-bottom: 20px;
-    font-size: 16px;
-
-    img{
-        max-width: 24px;
-        min-height: 24px;
-        margin-right: 10px;
-    }
-
-    input{
-        font-family: 'Gothic A1';
-        border: 0;
-        font-size: 16px;
-        height: 51px;
-        width: 400px;
-        :focus{
-            box-shadow: 0 0 0 0;
-            outline: 0;
-        }
-    }
+    h4{
+        font-size: 1.5vw;
     }
 `
 
 export const FormContainer = styled.div`
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-    
+    input{
+        font-family: 'Gothic A1';
+        border: 0;
+        font-size: 16px;
+        height: 2vw;
+        width: 20vw;
+        padding-left: 1vw;
+        margin-bottom: 1.4vw;
+        :focus{
+            box-shadow: 0 0 0 0;
+            outline: 0;
+        }
+    }    
 `
 
 export const CardsContainer = styled.div`    
     display: grid;
-    margin-left: 2vw;
-    gap: 2vw;
+    gap: 0.4vw;
+    align-content: center;
+    align-items:center;
+    justify-items: center;
     text-align: center;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     text-align: center;
+`
+
+export const PaginationContainer = styled.div`
+    display: flex;
+    margin: auto;
+    justify-content: center;
+    background-color: var(--antique-white);
+
+    button{
+        width: 3vw;
+        height: 2vw;
+        margin: 1vw 0vw 2vw 0.5vw;
+        font-size: 1vw;
+        font-weight: bold;
+        background-color: var(--dark-orange);
+        border-radius: 15px 20px 15px 20px;
+        border: solid 2px var(--burly-wood);
+        text-align: center;
+
+        :hover{
+            transform: scale(1.2);
+            transition: all 0.5s;
+        }
+    }
+
+
 `
