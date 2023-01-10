@@ -37,8 +37,8 @@ siga os seguintes comandos :
 ```sh
 git clone https://github.com/RafaelCss/desafio-sharenergy-2023-01.git
 cd desafio-sharenergy-2023-01
-para da start no backend : cd backend npm run dev
-para da start no frontend : cd .. cd frontend npm run start
+para da start no backend : cd backend / npm run dev
+para da start no frontend : cd ..  / cd frontend  / npm run start
 ```
 
 * Para haver conexão com banco de dados, você deve entra no diretório backend e no arquivo .env nesta variável : **DATABASE_URL** adicione a sua string de conexão do MongoDbAtlas
