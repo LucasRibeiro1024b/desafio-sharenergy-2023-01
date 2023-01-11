@@ -1,0 +1,68 @@
+.contain {
+    background: url(../../../Assets/bglogin.gif) no-repeat center;
+    background-size: 100vw 99.5vh;
+    min-width: 98vw;
+    min-height: 99.5vh;
+    border: 1px solid rgb(255, 136, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contain-content {
+    background: rgba(255, 255, 255, 0.603);
+    height: 90vh;
+    width: 40vw;
+    border-radius: 20px;
+    border: 3px groove rgb(0, 140, 255);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+@media (max-width: 800px) {
+    .contain-content {
+        width: 50vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .contain-content {
+        width: 70vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .contain-content {
+        width: 80vw;
+    }
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.titleLogin {
+    font-size: 30px;
+    font-weight: bolder;
+    letter-spacing: 1.5;
+    font-family: Playfair;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+}
+
+.between {
+    height: 25%;
+    justify-content: space-between;
+}
+
+.mb-25 {
+    margin-bottom: 25px;
+}
