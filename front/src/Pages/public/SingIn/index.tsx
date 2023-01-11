@@ -50,7 +50,7 @@ const Login: React.FC = () => {
         <div className="contain">
             <div className="contain-content">
                 <div className="center">
-                    <p className="titleLogin">Login</p>
+                    <p className="title-login">Login</p>
                     <img alt="user" src={userImg} className="avatar" />
                 </div>
                 <div className="center between">

@@ -21,21 +21,35 @@
     flex-direction: column;
 }
 
-@media (max-width: 800px) {
+
+@media (max-width: 1000px) {
     .contain-content {
         width: 50vw;
     }
 }
 
-@media (max-width: 600px) {
+
+@media (max-width: 900px) {
+    .contain-content {
+        width: 60vw;
+    }
+}
+
+@media (max-width: 800px) {
     .contain-content {
         width: 70vw;
     }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 600px) {
     .contain-content {
         width: 80vw;
+    }
+}
+
+@media (max-width: 400px) {
+    .contain-content {
+        width: 90vw;
     }
 }
 
@@ -46,7 +60,7 @@
     flex-direction: column;
 }
 
-.titleLogin {
+.title-login {
     font-size: 30px;
     font-weight: bolder;
     letter-spacing: 1.5;

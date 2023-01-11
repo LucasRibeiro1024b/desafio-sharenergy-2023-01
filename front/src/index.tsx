@@ -7,6 +7,8 @@ import AuthProvider from "./Services/Context/Auth";
 import reportWebVitals from "./reportWebVitals";
 import SharenergyRoutes from "./Routes";
 
+/* global document, HTMLElement */
+
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );

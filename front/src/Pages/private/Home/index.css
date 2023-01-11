@@ -1,0 +1,31 @@
+.contain-home {
+    background: url(../../../Assets/bubbles.gif);
+    background-size: 100vw 99.5vh;
+    min-width: 98vw;
+    min-height: 99.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.contain-cards {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.title-name {
+    font-family: Playfair;
+}
+
+.contain-skeleton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.skeleton-item {
+    margin: 0 20px 20px 20px;
+}
