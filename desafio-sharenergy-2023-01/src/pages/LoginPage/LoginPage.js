@@ -11,7 +11,7 @@ username e password após o primeiro acesso; */
 
 const LoginPage=()=>{
 
-    const [form, onChangeInputs, clearInputs, setForm] = useForm({
+    const [form, onChangeInputs] = useForm({
         user: "",
         password: ""
     })
@@ -23,14 +23,14 @@ const LoginPage=()=>{
         e.preventDefault()
 
         if(form.user !== "desafiosharenergy" && form.password !== "sh@r3n3rgy"){
-            setWrongData("Incorrect username and password.")
-        } if(form.user === "desafiosharenergy" && form.password === "sh@r3n3rgy" && remember === false){
-            goToHomepage(navigate)
+            setWrongData("Incorrect login information.")
         } if(form.user === "desafiosharenergy" && form.password === "sh@r3n3rgy" && remember === true){
             goToHomepage(navigate)
-            localStorage.setItem("user", form.user)
-            localStorage.setItem("password", form.password)
-        } 
+            localStorage.setItem("remember", "remember")
+        } if(form.user === "desafiosharenergy" && form.password === "sh@r3n3rgy" && remember === false){
+            goToHomepage(navigate)
+            localStorage.setItem("remember", "notRemember")
+        }
     }
 
     const rememberMe=(e)=>{

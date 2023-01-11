@@ -4,7 +4,7 @@ const CardUser=({user})=>{
     return(
         <div>
             <Card>
-                <img src={user.picture.large} alt="User photo."/>
+                <img src={user.picture.large} alt={`User ${user.login.username}.`}/>
                 <p>{user.name.first} {user.name.last}</p>
                 <p>{user.email}</p>
                 <p>{user.login.username}</p>

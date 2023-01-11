@@ -1,5 +1,5 @@
 import styled from "styled-components"
 
-export const ClientsLisPageContainer = styled.div`
+export const ClientsListPageContainer = styled.div`
     text-align: center;
 `

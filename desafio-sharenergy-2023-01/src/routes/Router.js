@@ -9,8 +9,8 @@ export const Router=()=>{
     return(
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<LoginPage/>}></Route>
-                <Route path="/home" element={<Homepage/>}></Route>
+                <Route path="/" element={localStorage.getItem("remember") === "remember" ? <Homepage/> : <LoginPage/>}></Route>
+                <Route path="/home" element={<Homepage/>}></Route>               
                 <Route path="/random-dog" element={<RandomDogPage/>}></Route>
                 <Route path="/status-code" element={<StatusCodePage/>}></Route>
                 <Route path="/clients" element={<ClientsListPage/>}></Route>
