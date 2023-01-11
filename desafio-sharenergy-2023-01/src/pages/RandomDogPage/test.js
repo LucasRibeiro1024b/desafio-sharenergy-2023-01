@@ -1,12 +1,13 @@
-import axios from 'axios'
+/* import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
 import { DogCard, RandomDogPageContainer } from './style'
 
-//Em uma terceira página, deve haver um botão de refresh que, ao ser clicado, deve retornar uma imagem aleatória da api Random Dog; 
+ Em uma terceira página, deve haver um botão de refresh que, ao ser clicado, deve retornar uma imagem aleatória da api Random Dog; 
 
 const RandomDogPage=()=>{
 
+     const [dataRandomDogs, errorRandomDogs, isLoadingRandomDogs, reload, setReload] = useRequestData("https://random.dog/woof.json") 
     const [randomDogs, setRandomDogs] = useState(undefined)
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(undefined)
@@ -39,7 +40,7 @@ const RandomDogPage=()=>{
                     {!isLoading && randomDogs &&
                     <DogCard>
                         <img src={randomDogs.url} alt="Random dog pic."></img>
-                        <button onClick={()=> getRandomDogs()}><img src='https://cdn-icons-png.flaticon.com/512/159/159075.png' alt='Refresh icon.'/></button>
+                        <button onClick={()=> getRandomDogs()}>Refresh</button>
                     </DogCard>}
 
             </RandomDogPageContainer>
@@ -47,4 +48,4 @@ const RandomDogPage=()=>{
     )
 }
 
-export default RandomDogPage 
+export default RandomDogPage */
