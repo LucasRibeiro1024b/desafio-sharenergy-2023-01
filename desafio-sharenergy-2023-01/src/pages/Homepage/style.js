@@ -40,13 +40,12 @@ export const PaginationContainer = styled.div`
     display: flex;
     margin: auto;
     justify-content: center;
-    background-color: var(--antique-white);
 
     button{
         width: 3vw;
         height: 2vw;
-        margin: 1vw 0vw 2vw 0.5vw;
         font-size: 1vw;
+        margin: 1.5vw 0.3vw;
         font-weight: bold;
         background-color: var(--dark-orange);
         border-radius: 15px 20px 15px 20px;
@@ -57,7 +56,11 @@ export const PaginationContainer = styled.div`
             transform: scale(1.2);
             transition: all 0.5s;
         }
-    }
-
-
+        :active {
+            color: var(--antique-white);
+        }
+        :focus{
+            color: var(--antique-white);
+        }
+    }    
 `

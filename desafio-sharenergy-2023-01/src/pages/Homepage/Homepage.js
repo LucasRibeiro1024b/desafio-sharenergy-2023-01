@@ -1,6 +1,6 @@
 import CardUser from '../../components/CardUser/CardUser'
 import Header from '../../components/Header/Header'
-import { CardsContainer, HomepageContainer, FormContainer, PaginationContainer } from './style'
+import { CardsContainer, HomepageContainer, FormContainer, PaginationContainer} from './style'
 import useRequestData from '../../hooks/useRequestData'
 import useForm from '../../hooks/useForm'
 import { useState } from 'react'
@@ -46,7 +46,6 @@ const Homepage=()=>{
                 </CardsContainer>
 
                 <PaginationContainer>
-                    {page === 1 ? null : <button onClick={() => setPage(page -1)}>⇐</button>}
                     <button onClick={() => setPage(1)}>1</button>
                     <button onClick={() => setPage(2)}>2</button>
                     <button onClick={() => setPage(3)}>3</button>
@@ -56,9 +55,9 @@ const Homepage=()=>{
                     <button onClick={() => setPage(7)}>7</button>
                     <button onClick={() => setPage(8)}>8</button>
                     <button onClick={() => setPage(9)}>9</button>
-                    <button onClick={() => setPage(10)}>10</button>
-                    {page === 10 ? null : <button onClick={() => setPage(page +1)}>⇒</button>}
-                </PaginationContainer>
+                    <button onClick={() => setPage(10)}>10</button>                
+                </PaginationContainer>    
+
         </HomepageContainer>
     )
 }

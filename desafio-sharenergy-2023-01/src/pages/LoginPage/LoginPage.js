@@ -3,7 +3,7 @@ import Header from '../../components/Header/Header'
 import { LoginContainer, LoginPageContainer, RememberFormContainer } from './style'
 import useForm from '../../hooks/useForm'
 import { goToHomepage } from '../../routes/coordinator'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 /*O usuário deve ser capaz de se autenticar utilizando o username desafiosharenergy e password sh@r3n3rgy, também, 
 deve existir a possibilidade do usuário utilizar o remember me para realizar logins automáticos, sem a necessidade de digitar 
@@ -36,6 +36,10 @@ const LoginPage=()=>{
     const rememberMe=(e)=>{
         setRemember(e.target.checked)
     }
+
+    useEffect(()=>{
+        
+    }, [])
 
     return(
         <LoginPageContainer>
