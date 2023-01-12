@@ -28,6 +28,18 @@ const RandomDogPage=()=>{
         getRandomDogs()
     }, [])
 
+    if(randomDogs){
+        console.log(randomDogs.url.includes(".mp4"))
+    }
+
+    const conditionalReturn=()=>{
+        if(randomDogs && randomDogs.url.includes(".mp4")){
+            return <video src={randomDogs.url} alt="Random dog video." controls/>
+        } if(randomDogs && !randomDogs.url.includes(".mp4")){
+            return <img src={randomDogs.url} alt="Random dog pic."/>
+        }
+    }
+
     return(
         <>
             <Header/>
@@ -38,7 +50,7 @@ const RandomDogPage=()=>{
                     {!isLoading && error && <h4>Error: {error}</h4>}                
                     {!isLoading && randomDogs &&
                     <DogCard>
-                        <img src={randomDogs.url} alt="Random dog pic."></img>
+                        {conditionalReturn()}
                         <button onClick={()=> getRandomDogs()}><img src='https://cdn-icons-png.flaticon.com/512/159/159075.png' alt='Refresh icon.'/></button>
                     </DogCard>}
 

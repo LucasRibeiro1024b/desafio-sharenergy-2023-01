@@ -46,6 +46,7 @@ const Homepage=()=>{
                 </CardsContainer>
 
                 <PaginationContainer>
+                    {page === 1 ? null : <button onClick={() => setPage(page -1)}>⇐</button>}
                     <button onClick={() => setPage(1)}>1</button>
                     <button onClick={() => setPage(2)}>2</button>
                     <button onClick={() => setPage(3)}>3</button>
@@ -55,7 +56,8 @@ const Homepage=()=>{
                     <button onClick={() => setPage(7)}>7</button>
                     <button onClick={() => setPage(8)}>8</button>
                     <button onClick={() => setPage(9)}>9</button>
-                    <button onClick={() => setPage(10)}>10</button>                
+                    <button onClick={() => setPage(10)}>10</button>
+                    {page === 10 ? null : <button onClick={() => setPage(page +1)}>⇒</button>}                
                 </PaginationContainer>    
 
         </HomepageContainer>

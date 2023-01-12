@@ -18,14 +18,26 @@ const StatusCodePage=()=>{
     424, 425, 426, 428, 429, 431, 444, 449, 450, 499, 500, 501, 502, 503, 504, 505,
     506, 507, 509, 510]
 
+    const imageSelection=()=>{      
+        const isStatusValid = validStatusCodes.filter((status)=>{
+            return status == form.statusCode
+        })
+
+        if(isStatusValid.length === 0){
+            return <img src='https://cdn.neemo.com.br/uploads/settings_webdelivery/logo/2496/not-found-image-15383864787lu.jpg' alt='Not found.'/>
+        } if(isStatusValid.length === 1){
+            return <img src={`https://http.cat/${isStatusValid[0]}`} alt='HTTP Cats API pic.'/>
+        }       
+     }
+
     return(
         <>
             <Header/>
             <StatusCodePageContainer>
                     <h1>Status Code</h1>
-                    <label htmlFor="statusCode">Choose Status Code</label>
-                    <input id="statusCode" name="statusCode" value={form.statusCode} onChange={onChangeInputs}/>
-                    <img src={`https://http.cat/${form.statusCode}`} alt="HTTP Cat API pic."></img>
+                    <label htmlFor="statusCode">Type a Status Code</label>
+                    <input id="statusCode" name="statusCode" value={form.statusCode} onChange={onChangeInputs}/>                    
+                    {imageSelection()}
             </StatusCodePageContainer>
         </>
     )

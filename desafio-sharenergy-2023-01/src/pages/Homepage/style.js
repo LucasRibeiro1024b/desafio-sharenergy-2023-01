@@ -12,7 +12,8 @@ export const FormContainer = styled.div`
     input{
         font-family: 'Gothic A1';
         border: 0;
-        font-size: 16px;
+        font-size: 1vw;
+        font-weight: bold;
         height: 2vw;
         width: 20vw;
         padding-left: 1vw;
@@ -55,12 +56,6 @@ export const PaginationContainer = styled.div`
         :hover{
             transform: scale(1.2);
             transition: all 0.5s;
-        }
-        :active {
-            color: var(--antique-white);
-        }
-        :focus{
-            color: var(--antique-white);
         }
     }    
 `

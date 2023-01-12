@@ -26,9 +26,14 @@ export const DogCard = styled.div`
     background-color: var(--antique-white);
     
     img{
-        width: 30vw;
+        width: 35vw;
         height: 60vh;
         border-radius: 10%;        
+    }
+
+    video{
+        width: 35vw;
+        height: 60vh;
     }
 
     button{
