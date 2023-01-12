@@ -23,8 +23,8 @@ export const StatusCodePageContainer = styled.div`
         border: 0;
         font-size: 1vw;
         font-weight: bold;
-        height: 2vw;
-        width: 10vw;
+        height: 2.3vw;
+        width: 11vw;
         padding-left: 1vw;
         margin-bottom: 1.4vw;
         :focus{

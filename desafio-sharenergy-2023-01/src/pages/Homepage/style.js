@@ -14,7 +14,7 @@ export const FormContainer = styled.div`
         border: 0;
         font-size: 1vw;
         font-weight: bold;
-        height: 2vw;
+        height: 2.3vw;
         width: 20vw;
         padding-left: 1vw;
         margin-bottom: 1.4vw;

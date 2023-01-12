@@ -25,7 +25,7 @@ const Homepage=()=>{
     || user.login.username.toLowerCase().includes(form.search.toLowerCase())
     )
     .map((user, index)=>{         
-        return <CardUser class="item" key={index} user={user}/>         
+        return <CardUser key={index} user={user}/>         
     }) 
 
     return(
