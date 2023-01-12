@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
             paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
             transition: theme.transitions.create("width"),
             width: "100%",
-            [theme.breakpoints.up("xl")]: {
+            [theme.breakpoints.up("sm")]: {
                 width: "6ch",
                 "&:focus": {
                     width: "20ch",
