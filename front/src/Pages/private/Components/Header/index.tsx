@@ -10,6 +10,7 @@ import {
     makeStyles,
 } from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -125,24 +126,27 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
                     <div>
                         <ul>
                             <li>
-                                <a href="#User" className={classes.navigationA}>
+                                <Link to="/" className={classes.navigationA}>
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#User" className={classes.navigationA}>
+                                <Link
+                                    to="/status"
+                                    className={classes.navigationA}
+                                >
                                     Status
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#User" className={classes.navigationA}>
+                                <Link to="/" className={classes.navigationA}>
                                     Pic
-                                </a>
+                                </Link>
                             </li>
                             <li>
-                                <a href="#User" className={classes.navigationA}>
+                                <Link to="/" className={classes.navigationA}>
                                     Config
-                                </a>
+                                </Link>
                             </li>
                         </ul>
                     </div>

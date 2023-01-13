@@ -16,3 +16,8 @@ code {
     font-family: Playfair;
     src: url(../public/fonts/PlayfairDisplay.ttf);
 }
+
+@font-face {
+    font-family: GreatVibes;
+    src: url(../public/fonts/GreatVibes.ttf);
+}

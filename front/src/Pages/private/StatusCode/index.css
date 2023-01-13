@@ -1,0 +1,55 @@
+.contain-status {
+    background: url(../../../Assets/bgstatus.gif);
+    min-width: 98vw;
+    min-height: 99.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    position: relative;
+    background-attachment: fixed;
+	background-position: center center;
+}
+
+.title-name {
+    font-family: Playfair;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 3;
+}
+
+.contain-select {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.950);
+    border-radius: 40px;
+    padding: 20px 50px;
+    border: 1px solid #000;
+    margin-bottom: 50px;
+}
+
+.text-select {
+    font-family: GreatVibes;
+    letter-spacing: 2;
+    font-size: 27px;
+}
+
+.title-img {
+    font-family: GreatVibes;
+    color: #f00;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+.img-cat {
+    margin: 30px 0;
+}
+
+.img-not-found {
+    background: #000;
+    width: 300px;
+    height: 300px;
+    padding: 50px;
+}

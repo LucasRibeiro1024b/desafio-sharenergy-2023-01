@@ -54,6 +54,7 @@ const useStyles = makeStyles({
     },
     media: {
         height: 140,
+        backgroundPosition: "cover",
     },
 });
 
