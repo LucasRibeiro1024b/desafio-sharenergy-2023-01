@@ -147,6 +147,7 @@ const Home: React.FC = () => {
                     Math.round(data.results.length / numberContentUsers)
                 );
                 refreshUsers(data.results);
+                isRequested = false;
             });
         }
     }, []);

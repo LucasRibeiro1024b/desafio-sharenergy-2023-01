@@ -1,5 +1,8 @@
 .contain-status {
     background: url(../../../Assets/bgstatus.gif);
+    background-attachment: fixed;
+	background-position: center center;
+    background-size: contain;
     min-width: 98vw;
     min-height: 99.5vh;
     display: flex;
@@ -7,8 +10,6 @@
     align-items: center;
     margin-top: 100px;
     position: relative;
-    background-attachment: fixed;
-	background-position: center center;
 }
 
 .title-name {

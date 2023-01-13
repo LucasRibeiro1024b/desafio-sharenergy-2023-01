@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router";
 import Login from "../../Pages/public/SingIn";
 
 const PublicRoutes: React.FC = () => (
-    <Routes>
+    <Routes location="/">
         <Route path="/" element={<Login />} />
     </Routes>
 );

@@ -1,0 +1,24 @@
+.contain-picture {
+    background: url(../../../Assets/bgstatus.gif);
+    background-attachment: fixed;
+	background-position: center center;
+    background-size: contain;
+    min-width: 98vw;
+    min-height: 99.5vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    position: relative;
+}
+
+.picture-dog {
+    width: 90vw;
+    height: 90vh;
+    border-image: space;
+    margin: 50px 0;
+    padding: 2vw;
+    background: rgba(255, 255, 255, 0.815);
+    border: 8px double #000;
+    border-radius: 50px;
+}

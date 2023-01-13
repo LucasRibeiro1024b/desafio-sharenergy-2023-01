@@ -82,7 +82,8 @@ const StatusCode: React.FC = () => {
                 className={`img-cat ${
                     statusAux !== "" && valided ? "" : "img-not-found"
                 }`}
-                alt="cat"
+                alt="gatinho"
+                loading="eager"
             />
         </div>
     );
