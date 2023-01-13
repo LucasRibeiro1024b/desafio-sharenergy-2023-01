@@ -12,6 +12,15 @@ export class ClientDatabase extends BaseDatabase{
     public async createClient(item: Client){
         await super.create(item)
     }
+
+    public async getClient(id: string){
+        const result = super.getUser(id)
+        return result
+    }
+
+    public async deleteClient(id: string){
+        await super.deleteUser(id)
+    }
 }
 
 export default ClientDatabase

@@ -5,7 +5,8 @@ const printError=(err: any)=> {console.log(err.sqlMessage || err.message)}
 const createTable= async ()=>{ 
     await BaseDatabase.connection.raw(`
         CREATE TABLE Clients (
-            cpf BIGINT(12) PRIMARY KEY,
+            id VARCHAR(100) PRIMARY KEY,
+            cpf BIGINT(12) UNIQUE NOT NULL,
             name VARCHAR(255) NOT NULL,
             email VARCHAR(100) NOT NULL,
             phone_number BIGINT(14) NOT NULL,

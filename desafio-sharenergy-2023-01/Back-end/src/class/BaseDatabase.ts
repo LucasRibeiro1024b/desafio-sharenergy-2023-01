@@ -18,13 +18,22 @@ export abstract class BaseDatabase {
 
     abstract TABLE_NAME: string;
 
-    protected async getAll() {
+    protected async getAll(){
         const result = await BaseDatabase.connection(this.TABLE_NAME).select("*")
         return result
     }
 
-    protected async create(item: any) {
+    protected async create(item: any){
         await BaseDatabase.connection(this.TABLE_NAME).insert(item)
+    }
+
+    protected async getUser(id: string){
+        const result = await BaseDatabase.connection(this.TABLE_NAME).select("*").whereILike("id", id)
+        return result
+    }
+
+    protected async deleteUser(id: string){
+        await BaseDatabase.connection(this.TABLE_NAME).whereILike("id", id).del()
     }
 }
 
