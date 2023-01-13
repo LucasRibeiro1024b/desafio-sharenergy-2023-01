@@ -1,18 +1,23 @@
 import { Request, Response } from "express"
 import ClientDatabase from "../class/ClientDatabase"
 import { Client } from "../class/Client"
+import { isCpfValid } from "../validations/cpfValidation"
 
 const createClient = async (req: Request, res: Response) =>{
     let errorCode = 400
-    const {cpf, fullName, email, phoneNumber, zipCode, street, houseNumber, district} = req.body
+    const {cpf, fullName, email, phoneNumber, zipCode, street, houseNumber, neighbourhood} = req.body
 
     try{
-        if(!cpf && !fullName && !email && !phoneNumber && !zipCode && !street && !houseNumber && !district){
+
+        if(!cpf && !fullName && !email && !phoneNumber && !zipCode && !street && !houseNumber && !neighbourhood){
             errorCode= 422
-            throw new Error("It is necessary to inform the following parameters to complete the request: cpf, fullName, email, phoneNumber, zipCode, street, houseNumber and district.")            
-        } if(!cpf){
+            throw new Error("It is necessary to inform the following parameters to complete the request: cpf, fullName, email, phoneNumber, zipCode, street, houseNumber and neighbourhood.")            
+        }if(!cpf){
             errorCode= 422
             throw new Error("Cpf required.")            
+        }if(isCpfValid(cpf) === false){
+            errorCode= 422
+            throw new Error("Invalid cpf.")
         }if(!fullName){
             errorCode= 422
             throw new Error("Full name required.")            
@@ -31,7 +36,7 @@ const createClient = async (req: Request, res: Response) =>{
         }if(!houseNumber){
             errorCode= 422
             throw new Error("House number required.")
-        }if(!district){
+        }if(!neighbourhood){
             errorCode= 422
             throw new Error("Name of the district required.")
         }
@@ -55,7 +60,7 @@ const createClient = async (req: Request, res: Response) =>{
             Number(zipCode),
             street,
             Number(houseNumber),
-            district
+            neighbourhood
         )
 
         clientDB.createClient(client)

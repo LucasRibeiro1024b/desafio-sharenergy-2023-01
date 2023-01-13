@@ -21,6 +21,10 @@ export class ClientDatabase extends BaseDatabase{
     public async deleteClient(id: string){
         await super.deleteUser(id)
     }
+
+    public async editClient(id: string, column: string, newInfo: any){
+        await super.editUser(id, column, newInfo)
+    }
 }
 
 export default ClientDatabase

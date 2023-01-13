@@ -35,6 +35,10 @@ export abstract class BaseDatabase {
     protected async deleteUser(id: string){
         await BaseDatabase.connection(this.TABLE_NAME).whereILike("id", id).del()
     }
+
+    protected async editUser(id: string, column: string, newInfo: any){
+        await BaseDatabase.connection(this.TABLE_NAME).whereLike("id", id).update(column, newInfo)
+    }
 }
 
 export default BaseDatabase
