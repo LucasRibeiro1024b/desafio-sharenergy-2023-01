@@ -9,13 +9,17 @@ import {
     Theme,
     makeStyles,
 } from "@material-ui/core/styles";
-import SearchIcon from "@material-ui/icons/Search";
+import { Search, Home, Feedback, Pets, PersonAdd } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             flexGrow: 1,
+        },
+        containItemHeader: {
+            display: "flex",
+            justifyContent: "space-between",
         },
         menuButton: {
             marginRight: theme.spacing(2),
@@ -27,26 +31,34 @@ const useStyles = makeStyles((theme: Theme) =>
                 display: "block",
             },
         },
+        titleTow: {
+            flexGrow: 1,
+        },
         search: {
             position: "relative",
-            right: "45%",
             borderRadius: theme.shape.borderRadius,
             backgroundColor: alpha(theme.palette.common.white, 0.15),
             "&:hover": {
                 backgroundColor: alpha(theme.palette.common.white, 0.25),
             },
             marginLeft: 0,
-            width: "100%",
+            width: "auto",
+            alignSelf: "center",
+            right: "40%",
             [theme.breakpoints.up("xs")]: {
+                position: "relative",
                 right: 0,
-                width: 200,
             },
             [theme.breakpoints.up("sm")]: {
-                marginLeft: theme.spacing(1),
-                width: "auto",
-                right: "35%",
+                position: "relative",
+                right: "3%",
             },
             [theme.breakpoints.up("md")]: {
+                position: "relative",
+                right: "30%",
+            },
+            [theme.breakpoints.up("lg")]: {
+                position: "relative",
                 right: "40%",
             },
         },
@@ -66,17 +78,26 @@ const useStyles = makeStyles((theme: Theme) =>
             padding: theme.spacing(1, 1, 1, 0),
             paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
             transition: theme.transitions.create("width"),
-            width: "100%",
-            [theme.breakpoints.up("sm")]: {
-                width: "6ch",
-                "&:focus": {
-                    width: "20ch",
-                },
+            width: "6ch",
+            "&:focus": {
+                width: "20ch",
             },
+        },
+        containIcons: {
+            listStyle: "none",
+        },
+        containIcon: {
+            display: "flex",
+            alignItems: "center",
         },
         navigationA: {
             color: "#fff",
             textDecorator: "none",
+            textDecorationLine: "none",
+        },
+        navigationIcon: {
+            position: "relative",
+            top: 5,
         },
     })
 );
@@ -93,19 +114,30 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
     return (
         <div className="contain-header">
             <AppBar position="fixed">
-                <Toolbar>
-                    <Typography
-                        id="User"
-                        className={classes.title}
-                        variant="h6"
-                        noWrap
-                    >
-                        Sharenergy challenge
-                    </Typography>
+                <Toolbar className={classes.containItemHeader}>
+                    {!input ? (
+                        <Typography
+                            id="User"
+                            className={classes.titleTow}
+                            variant="h6"
+                            noWrap
+                        >
+                            Sharenergy challenge
+                        </Typography>
+                    ) : (
+                        <Typography
+                            id="User"
+                            className={classes.title}
+                            variant="h6"
+                            noWrap
+                        >
+                            Sharenergy challenge
+                        </Typography>
+                    )}
                     {input && (
                         <div className={classes.search}>
                             <div className={classes.searchIcon}>
-                                <SearchIcon />
+                                <Search />
                             </div>
                             <InputBase
                                 placeholder="Search…"
@@ -118,37 +150,47 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
                                     setSearch !== undefined &&
                                     setSearch(e.target.value)
                                 }
-                                fullWidth
                                 inputProps={{ "aria-label": "search" }}
                             />
                         </div>
                     )}
                     <div>
-                        <ul>
-                            <li>
+                        <ul className={classes.containIcons}>
+                            <li className={classes.containIcon}>
                                 <Link to="/" className={classes.navigationA}>
+                                    <Home className={classes.navigationIcon} />{" "}
                                     Home
                                 </Link>
                             </li>
-                            <li>
+                            <li className={classes.containIcon}>
                                 <Link
                                     to="/status"
                                     className={classes.navigationA}
                                 >
+                                    <Feedback
+                                        className={classes.navigationIcon}
+                                    />{" "}
                                     Status
                                 </Link>
                             </li>
-                            <li>
+                            <li className={classes.containIcon}>
                                 <Link
                                     to="/picture"
                                     className={classes.navigationA}
                                 >
-                                    Pic
+                                    <Pets className={classes.navigationIcon} />{" "}
+                                    Foto
                                 </Link>
                             </li>
-                            <li>
-                                <Link to="/users" className={classes.navigationA}>
-                                    Config
+                            <li className={classes.containIcon}>
+                                <Link
+                                    to="/users"
+                                    className={classes.navigationA}
+                                >
+                                    <PersonAdd
+                                        className={classes.navigationIcon}
+                                    />{" "}
+                                    Usuário
                                 </Link>
                             </li>
                         </ul>
