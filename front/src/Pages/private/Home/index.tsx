@@ -11,6 +11,7 @@ import Skeleton from "@material-ui/lab/Skeleton";
 import Pagination from "@material-ui/lab/Pagination";
 
 import Header from "../Components/Header";
+import Footer from "../../components/Footer";
 import { fakeUsers } from "../../../Services/API";
 import { pagCount } from "../../../Utils";
 import "./index.css";
@@ -172,48 +173,51 @@ const Home: React.FC = () => {
     };
 
     return (
-        <div className="contain-home">
-            <Header search={search} setSearch={setSearch} input />
-            <h2 className="title-name">Usuários</h2>
-            <div className="contain-cards">
-                {search.length === 0 ? (
-                    usersPag.length > 1 ? (
-                        usersPag.map((value, index) => (
-                            <Cards value={value} index={index} />
-                        ))
-                    ) : (
-                        <div className="contain-skeleton">
-                            <p>Aguarde...</p>
-                            <div className="contain-cards">
-                                {pagCount.map(value => (
-                                    <Skeleton
-                                        className="skeleton-item"
-                                        variant="rect"
-                                        width={250}
-                                        height={300}
-                                        key={value.id}
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                    )
-                ) : (
-                    fakeUsersData.length > 1 &&
-                    fakeUsersData.map(
-                        (value, index) =>
-                            value.name.first.includes(search) ||
-                            value.login.username.includes(search) ||
-                            (value.email.includes(search) && (
+        <div>
+            <div className="contain-home">
+                <Header search={search} setSearch={setSearch} input />
+                <h2 className="title-name">Usuários</h2>
+                <div className="contain-cards">
+                    {search.length === 0 ? (
+                        usersPag.length > 1 ? (
+                            usersPag.map((value, index) => (
                                 <Cards value={value} index={index} />
                             ))
-                    )
-                )}
+                        ) : (
+                            <div className="contain-skeleton">
+                                <p>Aguarde...</p>
+                                <div className="contain-cards">
+                                    {pagCount.map(value => (
+                                        <Skeleton
+                                            className="skeleton-item"
+                                            variant="rect"
+                                            width={250}
+                                            height={300}
+                                            key={value.id}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
+                        )
+                    ) : (
+                        fakeUsersData.length > 1 &&
+                        fakeUsersData.map(
+                            (value, index) =>
+                                value.name.first.includes(search) ||
+                                value.login.username.includes(search) ||
+                                (value.email.includes(search) && (
+                                    <Cards value={value} index={index} />
+                                ))
+                        )
+                    )}
+                </div>
+                <Pagination
+                    count={search.length === 0 ? numberPag : 1}
+                    onChange={handleChange}
+                    color="primary"
+                />
             </div>
-            <Pagination
-                count={search.length === 0 ? numberPag : 1}
-                onChange={handleChange}
-                color="primary"
-            />
+            <Footer colorWhite={false} />
         </div>
     );
 };

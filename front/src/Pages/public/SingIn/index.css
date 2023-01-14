@@ -1,12 +1,12 @@
 .contain {
     background: url(../../../Assets/bglogin.gif) no-repeat center;
-    background-size: 100vw 99.5vh;
+    background-size: cover;
     min-width: 98vw;
     min-height: 99.5vh;
-    border: 1px solid rgb(255, 136, 0);
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-direction: column;
 }
 
 .contain-content {
@@ -19,6 +19,7 @@
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
+    margin: 50px 0;
 }
 
 

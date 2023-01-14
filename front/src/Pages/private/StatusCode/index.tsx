@@ -8,6 +8,7 @@ import {
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 
 import Header from "../Components/Header";
+import Footer from "../../components/Footer";
 import { statusCode } from "../../../Utils";
 import "./index.css";
 
@@ -37,54 +38,61 @@ const StatusCode: React.FC = () => {
     const classes = useStyles();
 
     return (
-        <div className="contain-status">
-            <Header input={false} />
-            <h2 className="title-name">Status</h2>
-            <div className="contain-select">
-                <span className="text-select">
-                    Selecione um código de status
-                </span>
-                <FormControl className={classes.formControl}>
-                    <InputLabel htmlFor="select-status">Status</InputLabel>
-                    <NativeSelect
-                        value={status}
-                        onChange={handleChange}
-                        inputProps={{
-                            name: "Status",
-                            id: "select-status",
-                        }}
-                    >
-                        <option aria-label="None" value="" />
-                        {statusCode.map((value, index) => (
-                            <option
-                                key={index}
-                                value={`${value.status}-${String(value.valid)}`}
-                            >
-                                {value.status}
-                            </option>
-                        ))}
-                    </NativeSelect>
-                    <FormHelperText>
+        <div>
+            <div className="contain-status">
+                <Header input={false} />
+                <h2 className="title-name">Status</h2>
+                <div className="contain-select">
+                    <span className="text-select">
                         Selecione um código de status
-                    </FormHelperText>
-                </FormControl>
+                    </span>
+                    <FormControl className={classes.formControl}>
+                        <InputLabel htmlFor="select-status">Status</InputLabel>
+                        <NativeSelect
+                            value={status}
+                            onChange={handleChange}
+                            inputProps={{
+                                name: "Status",
+                                id: "select-status",
+                            }}
+                        >
+                            <option aria-label="None" value="" />
+                            {statusCode.map((value, index) => (
+                                <option
+                                    key={index}
+                                    value={`${value.status}-${String(
+                                        value.valid
+                                    )}`}
+                                >
+                                    {value.status}
+                                </option>
+                            ))}
+                        </NativeSelect>
+                        <FormHelperText>
+                            Selecione um código de status
+                        </FormHelperText>
+                    </FormControl>
+                </div>
+                {statusAux === "" ||
+                    (!valided && (
+                        <span className="title-img">
+                            Imagem não encontrada...
+                        </span>
+                    ))}
+                <img
+                    src={
+                        statusAux !== "" && valided
+                            ? `https://http.cat/${statusAux}`
+                            : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkLz64cmdQUXREhNMIBou2g0nrhblWc0h8g&usqp=CAU"
+                    }
+                    className={`img-cat ${
+                        statusAux !== "" && valided ? "" : "img-not-found"
+                    }`}
+                    alt="gatinho"
+                    loading="eager"
+                />
             </div>
-            {statusAux === "" ||
-                (!valided && (
-                    <span className="title-img">Imagem não encontrada...</span>
-                ))}
-            <img
-                src={
-                    statusAux !== "" && valided
-                        ? `https://http.cat/${statusAux}`
-                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRGkLz64cmdQUXREhNMIBou2g0nrhblWc0h8g&usqp=CAU"
-                }
-                className={`img-cat ${
-                    statusAux !== "" && valided ? "" : "img-not-found"
-                }`}
-                alt="gatinho"
-                loading="eager"
-            />
+            <Footer colorWhite={false} />
         </div>
     );
 };

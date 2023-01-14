@@ -4,6 +4,7 @@ import { Fab } from "@material-ui/core";
 import { Refresh } from "@material-ui/icons";
 
 import Header from "../Components/Header";
+import Footer from "../../components/Footer";
 import { dogs } from "../../../Services/API";
 import "./index.css";
 
@@ -35,39 +36,43 @@ const PictureDog: React.FC = () => {
                 setAllDogs(data);
                 getIndexPicture();
             });
+            isRequested = false;
         }
     }, []);
 
     const classes = useStyles();
 
     return (
-        <div className="contain-picture">
-            <Header input={false} />
-            <h2 className="title-name">Doguinhos</h2>
-            <div className="contain-select">
-                <span className="title-img">
-                    Clique para mostrar outro doguinho
-                </span>
-                <Fab
-                    variant="extended"
-                    color="primary"
-                    aria-label="add"
-                    className={classes.margin}
-                    onClick={() => getIndexPicture()}
-                >
-                    <Refresh className={classes.extendedIcon} />
-                    Exibir outra imagem
-                </Fab>
+        <div>
+            <div className="contain-picture">
+                <Header input={false} />
+                <h2 className="title-name">Doguinhos</h2>
+                <div className="contain-select">
+                    <span className="title-img">
+                        Clique para mostrar outro doguinho
+                    </span>
+                    <Fab
+                        variant="extended"
+                        color="primary"
+                        aria-label="add"
+                        className={classes.margin}
+                        onClick={() => getIndexPicture()}
+                    >
+                        <Refresh className={classes.extendedIcon} />
+                        Exibir outra imagem
+                    </Fab>
+                </div>
+                {allDogs.length > 1 && (
+                    <img
+                        src={`https://random.dog/${allDogs[indexPicture]}`}
+                        alt="cachorrinho"
+                        loading="eager"
+                        onError={() => getIndexPicture()}
+                        className="picture-dog"
+                    />
+                )}
             </div>
-            {allDogs.length > 1 && (
-                <img
-                    src={`https://random.dog/${allDogs[indexPicture]}`}
-                    alt="cachorrinho"
-                    loading="eager"
-                    onError={() => getIndexPicture()}
-                    className="picture-dog"
-                />
-            )}
+            <Footer colorWhite={false} />
         </div>
     );
 };

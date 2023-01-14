@@ -1,0 +1,29 @@
+.contain-footer {
+    height: 10vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* position: fixed;
+    bottom: 0; */
+}
+
+.bg-white {
+    background: #fff;
+    border: 1px #000 solid;
+}
+
+.bg-black {
+    background: #000;
+    border: 1px #fff solid;
+}
+
+.text-footer {
+    font-family: Playfair;
+    font-size: 30px;
+    font-style: italic;
+}
+
+.text-white {
+    color: #fff;
+}
