@@ -147,7 +147,7 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/" className={classes.navigationA}>
+                                <Link to="/users" className={classes.navigationA}>
                                     Config
                                 </Link>
                             </li>
