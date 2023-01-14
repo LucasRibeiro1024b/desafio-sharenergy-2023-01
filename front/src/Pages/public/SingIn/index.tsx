@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import {
-    Grid,
-    TextField,
+    /* Grid,
+    TextField, */
     InputAdornment,
     FormControl,
     Input,
@@ -15,6 +15,7 @@ import {
 import { AccountCircle, VisibilityOff, Visibility } from "@material-ui/icons";
 import { green } from "@material-ui/core/colors";
 import { CheckboxProps } from "@material-ui/core/Checkbox";
+import { createStyles, makeStyles } from "@material-ui/core/styles";
 
 import "./index.css";
 import userImg from "../../../Assets/user.png";
@@ -27,8 +28,18 @@ const GreenCheckbox = withStyles({
             color: green[600],
         },
     },
-    checked: {},
 })((props: CheckboxProps) => <Checkbox color="default" {...props} />);
+
+const useStyles = makeStyles(() =>
+    createStyles({
+        label: {
+            fontFamily: "GreatVibes",
+            fontWeight: "bolder",
+            fontSize: 22,
+            letterSpacing: 2,
+        },
+    })
+);
 
 interface IDataLogin {
     username: string;
@@ -40,11 +51,13 @@ const Login: React.FC = () => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [data, setData] = useState<IDataLogin>({} as IDataLogin);
 
-    const {setLogined} = useContext(AuthContext)
+    const { setLogined } = useContext(AuthContext);
 
     const sendData: Function = () => {
-        setLogined(true)
+        setLogined(true);
     };
+
+    const classes = useStyles();
 
     return (
         <div className="contain">
@@ -55,7 +68,7 @@ const Login: React.FC = () => {
                 </div>
                 <div className="center between">
                     <div>
-                        <Grid
+                        {/* <Grid
                             container
                             spacing={2}
                             alignContent="center"
@@ -77,10 +90,43 @@ const Login: React.FC = () => {
                                     }
                                 />
                             </Grid>
-                        </Grid>
+                        </Grid> */}
+                        <FormControl>
+                            <InputLabel
+                                htmlFor="standard-adornment-username"
+                                className={classes.label}
+                            >
+                                Username
+                            </InputLabel>
+                            <Input
+                                id="standard-adornment-username"
+                                defaultValue={data.username}
+                                onChange={value =>
+                                    setData({
+                                        ...data,
+                                        username: value.target.value,
+                                    })
+                                }
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <IconButton
+                                            onClick={() =>
+                                                setShowPassword(!showPassword)
+                                            }
+                                            aria-label="toggle username"
+                                        >
+                                            <AccountCircle />
+                                        </IconButton>
+                                    </InputAdornment>
+                                }
+                            />
+                        </FormControl>
                     </div>
                     <FormControl>
-                        <InputLabel htmlFor="standard-adornment-password">
+                        <InputLabel
+                            htmlFor="standard-adornment-password"
+                            className={classes.label}
+                        >
                             Password
                         </InputLabel>
                         <Input
