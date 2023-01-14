@@ -11,25 +11,18 @@ atualizar um cliente e deletar clientes. O cadastro deve possuir nome, email, te
 
 const ClientsListPage=()=>{
 
-    const [dataClients, errorClients, isLoadingClients] = useRequestData("https://desafio-sharenergy-2023-01-jsk4.onrender.com/clients")
+    const [dataClients, errorClients, isLoadingClients, reload, setReload] = useRequestData("https://desafio-sharenergy-2023-01-hol7.onrender.com/clients")
     const navigate = useNavigate()
 
-
-
     const deleteClient=(id)=>{
-        const body = {
-            "clientId": id
-        }
-        console.log(body)
-        axios.delete("https://desafio-sharenergy-2023-01-jsk4.onrender.com/clients/delete", body)
+        axios.delete(`https://desafio-sharenergy-2023-01-hol7.onrender.com/clients/delete/${id}`)
         .then((response)=>{
-            alert("Client successfully deleted!")
+            setReload(!reload)
         })
         .catch((err)=>{
             alert(err.response.data)
         })
     }
-
 
     const clientsList = dataClients && dataClients.map((client)=>{
         return <CardClient key={client.id} client={client} deleteClient={deleteClient}/>
