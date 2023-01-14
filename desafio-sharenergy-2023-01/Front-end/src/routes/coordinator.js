@@ -17,3 +17,15 @@ export const goToRandomDogPage=(navigator)=>{
 export const goToStatusCodePage=(navigator)=>{
     navigator("/status-code")
 }
+
+export const goToCreateClientPage=(navigator)=>{
+    navigator("/create-client")
+}
+
+export const goToEditClientPage=(navigator, id)=>{
+    navigator(`/edit-client/${id}`)
+}
+
+export const goToEditClientDetailsPage=(navigator, id)=>{
+    navigator(`/client-details/${id}`)
+}

@@ -2,7 +2,8 @@ import Header from '../../components/Header/Header'
 import { ClientsContainer, ClientsListPageContainer, CreateClientButton } from './style'
 import useRequestData from '../../hooks/useRequestData'
 import CardClient from '../../components/CardClient/CardClient'
-import { useState } from 'react'
+import {goToCreateClientPage} from '../../routes/coordinator'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 /* Em uma quarta página, deve haver uma lista de clientes, através da qual o usuário deve ser capaz de cadastrar novos clientes, visualizar informações de um cliente específico, 
@@ -11,23 +12,28 @@ atualizar um cliente e deletar clientes. O cadastro deve possuir nome, email, te
 const ClientsListPage=()=>{
 
     const [dataClients, errorClients, isLoadingClients] = useRequestData("https://desafio-sharenergy-2023-01-jsk4.onrender.com/clients")
-    const [error, setError] = useState(undefined)
+    const navigate = useNavigate()
+
+
+
+    const deleteClient=(id)=>{
+        const body = {
+            "clientId": id
+        }
+        console.log(body)
+        axios.delete("https://desafio-sharenergy-2023-01-jsk4.onrender.com/clients/delete", body)
+        .then((response)=>{
+            alert("Client successfully deleted!")
+        })
+        .catch((err)=>{
+            alert(err.response.data)
+        })
+    }
+
 
     const clientsList = dataClients && dataClients.map((client)=>{
-        return <CardClient key={client.id} client={client}/>
+        return <CardClient key={client.id} client={client} deleteClient={deleteClient}/>
     })
-
-    /* const body = {
-        "name": form.name,
-        "planet": form.planet,
-        "date": form.date,
-        "description": form.description,
-        "durationInDays": form.duration
-    } */
-
-    /* const createClient=()=>{
-        axios.post("https://desafio-sharenergy-2023-01-jsk4.onrender.com/clients", body)
-    } */
 
     return(
         <>
@@ -42,7 +48,7 @@ const ClientsListPage=()=>{
                     {!isLoadingClients && dataClients && clientsList}
                 </ClientsContainer>
 
-                <CreateClientButton>Create New Client</CreateClientButton>
+                <CreateClientButton onClick={()=> goToCreateClientPage(navigate)}>Create New Client</CreateClientButton>
           
         </ClientsListPageContainer>
         </>
