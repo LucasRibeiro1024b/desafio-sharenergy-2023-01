@@ -24,7 +24,6 @@ const deleteClient = async (req: Request, res: Response)=>{
         clientDB.deleteClient(clientId)
 
         res.status(200).end()
-
     }catch(err: any){
         res.status(errorCode).send(err.message)
     }

@@ -43,8 +43,7 @@ const editClient = async (req: Request, res: Response)=>{
             await clientDB.editClient(clientId, "neighbourhood", neighbourhood)      
         }
 
-        res.status(200).end()
-        
+        res.status(200).end()        
     }catch(err: any){
         res.status(errorCode).send(err.message)
     }

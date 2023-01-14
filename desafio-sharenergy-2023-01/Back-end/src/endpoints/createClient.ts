@@ -8,7 +8,6 @@ const createClient = async (req: Request, res: Response) =>{
     const {cpf, fullName, email, phoneNumber, zipCode, street, houseNumber, neighbourhood} = req.body
 
     try{
-
         if(!cpf && !fullName && !email && !phoneNumber && !zipCode && !street && !houseNumber && !neighbourhood){
             errorCode= 422
             throw new Error("It is necessary to inform the following parameters to complete the request: cpf, fullName, email, phoneNumber, zipCode, street, houseNumber and neighbourhood.")            
@@ -66,7 +65,6 @@ const createClient = async (req: Request, res: Response) =>{
         clientDB.createClient(client)
 
         res.status(201).end()
-
     }catch(err: any){
         res.status(errorCode).send(err.message)
     }
