@@ -18,5 +18,5 @@ app.post("/clients", createClient)
 app.patch("/clients/:clientId", editClient)
 
 //Delete Client
-app.delete("/clients/delete", deleteClient)
+app.delete("/clients/delete/:clientId", deleteClient)
 

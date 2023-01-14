@@ -3,7 +3,7 @@ import ClientDatabase from "../class/ClientDatabase"
 
 const deleteClient = async (req: Request, res: Response)=>{
     let errorCode = 400
-    const {clientId} = req.body
+    const clientId = req.params.clientId
 
     try{
         if(!clientId){
