@@ -34,7 +34,6 @@ export const CardsContainer = styled.div`
     text-align: center;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    text-align: center;
 `
 
 export const PaginationContainer = styled.div`
