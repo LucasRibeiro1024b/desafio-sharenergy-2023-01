@@ -10,3 +10,36 @@
     margin-top: 110px;
     position: relative;
 }
+
+.contain-add-user {
+    align-self: flex-start;
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 255, 0, 0.582);
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 1px solid #fff;
+}
+
+.contain-add-user:hover {
+    background: rgb(34, 250, 34);
+}
+
+.contain-add-user:hover .text-add-user {
+    color: rgb(153, 153, 153);
+}
+
+.text-add-user {
+    font-family: GreatVibes;
+    font-size: 30px;
+    font-weight: bolder;
+    letter-spacing: 2;
+    color: darkgray;
+    margin-left: 5px;
+    position: relative;
+    top: 4px;
+}

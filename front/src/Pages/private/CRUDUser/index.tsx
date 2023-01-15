@@ -1,5 +1,10 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useState } from "react";
+import {
+    makeStyles,
+    Theme,
+    createStyles,
+    withStyles,
+} from "@material-ui/core/styles";
 import {
     Paper,
     Table,
@@ -9,8 +14,25 @@ import {
     TableHead,
     TablePagination,
     TableRow,
+    Modal,
+    TextField,
+    Input,
+    InputLabel,
+    IconButton,
+    InputAdornment,
+    FormControl,
+    Button,
 } from "@material-ui/core";
-import { Edit, Delete } from "@material-ui/icons";
+import {
+    Edit,
+    Delete,
+    AddCircle,
+    /* Visibility,
+    VisibilityOff, */
+    Save,
+    Cancel,
+} from "@material-ui/icons";
+import { green, red } from "@material-ui/core/colors";
 
 import Header from "../Components/Header";
 import Footer from "../../components/Footer";
@@ -26,8 +48,8 @@ interface Column {
 }
 
 const columns: Column[] = [
-    { id: "name", label: "Nome", minWidth: 170 },
-    { id: "email", label: "E-mail", minWidth: 100 },
+    { id: "name", label: "Nome", minWidth: 170, align: "center" },
+    { id: "email", label: "E-mail", minWidth: 100, align: "center" },
     {
         id: "phone",
         label: "phone",
@@ -91,31 +113,151 @@ const rows = [
     createData("user15", "user15", "210147125", "alameda", "8515767"),
 ];
 
-const useStyles = makeStyles({
-    root: {
-        width: "99%",
-        borderRadius: 10,
-        paddingTop: 10,
-        border: "3px solid darkgray",
-    },
-    container: {
-        maxHeight: 440,
-    },
-    containActions: {
-        cursor: "pointer",
-    },
-    textActions: {
-        position: "relative",
-        bottom: 7,
-    },
-});
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            width: "99%",
+            borderRadius: 10,
+            paddingTop: 10,
+            border: "3px solid darkgray",
+        },
+        container: {
+            maxHeight: 440,
+        },
+        containRowsColumns: {
+            borderLeft: "1px solid #e9e8e8",
+        },
+        containActions: {
+            cursor: "pointer",
+        },
+        textActions: {
+            position: "relative",
+            bottom: 7,
+        },
+        modal: {
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+        },
+        paper: {
+            backgroundColor: theme.palette.background.paper,
+            border: "2px solid #000",
+            boxShadow: theme.shadows[5],
+            padding: theme.spacing(2, 4, 3),
+            borderRadius: 10,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+        },
+        containIconSave: {
+            color: "#fff",
+        },
+    })
+);
 
 /* global HTMLInputElement */
 
-const CRUDUser: React.FC = () => {
+const ColorGreen = withStyles((theme: Theme) => ({
+    root: {
+        color: theme.palette.getContrastText(green[500]),
+        backgroundColor: green[500],
+        "&:hover": {
+            backgroundColor: green[700],
+        },
+    },
+}))(Button);
+
+const ColorRed = withStyles((theme: Theme) => ({
+    root: {
+        color: theme.palette.getContrastText(red[500]),
+        backgroundColor: red[500],
+        "&:hover": {
+            backgroundColor: red[700],
+        },
+    },
+}))(Button);
+
+interface IProps {
+    edit: boolean;
+    handleClose(): void;
+}
+
+const ModalAddUser: React.FC<IProps> = ({ edit, handleClose }) => {
     const classes = useStyles();
-    const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
+    return (
+        <div className={classes.paper}>
+            <h3 id="simple-modal-title">
+                {edit ? "Editar" : "Adicionar"} usuário
+            </h3>
+            <div id="simple-modal-description">
+                <div>
+                    <TextField id="standard-basic" label="Nome" />
+                    <TextField id="standard-basic" label="Email" />
+                </div>
+                <div>
+                    <TextField id="standard-basic" label="Telefone" />
+                    <TextField id="standard-basic" label="Endereço" />
+                </div>
+                <div>
+                    <TextField id="standard-basic" label="CPF" />
+                    {/* <TextField id="standard-basic" label="Standard" /> */}
+                    <FormControl>
+                        <InputLabel htmlFor="standard-adornment-password">
+                            Password
+                        </InputLabel>
+                        <Input
+                            id="standard-adornment-password"
+                            /* type={values.showPassword ? 'text' : 'password'}
+            value={values.password}
+            onChange={handleChange('password')} */
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        /* onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword} */
+                                    >
+                                        {/* {values.showPassword ? <Visibility /> : <VisibilityOff />} */}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+                </div>
+                <div>
+                    <ColorGreen
+                        variant="contained"
+                        color="primary"
+                        startIcon={
+                            <Save
+                                color="inherit"
+                                className={classes.containIconSave}
+                            />
+                        }
+                    >
+                        <span className={classes.containIconSave}>Salvar</span>
+                    </ColorGreen>
+                    <ColorRed
+                        variant="contained"
+                        color="primary"
+                        startIcon={<Cancel />}
+                        onClick={handleClose}
+                    >
+                        Cancelar
+                    </ColorRed>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const CRUDUser: React.FC = () => {
+    const [page, setPage] = useState<number>(0);
+    const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+    const [open, setOpen] = useState<boolean>(false);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -128,11 +270,35 @@ const CRUDUser: React.FC = () => {
         setPage(0);
     };
 
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const classes = useStyles();
+
     return (
         <div>
             <div className="contain-crud">
                 <Header input={false} />
                 <h2 className="title-name">Listagem de usuários</h2>
+                {/* eslint-disable-next-line */}
+                <div className="contain-add-user" onClick={handleOpen}>
+                    <AddCircle color="action" fontSize="large" />
+                    <span className="text-add-user">Adicionar usuário</span>
+                </div>
+                <Modal
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="simple-modal-title"
+                    aria-describedby="simple-modal-description"
+                    className={classes.modal}
+                >
+                    <ModalAddUser edit handleClose={handleClose} />
+                </Modal>
                 <Paper className={classes.root}>
                     <TableContainer className={classes.container}>
                         <Table stickyHeader aria-label="sticky table">
@@ -145,6 +311,9 @@ const CRUDUser: React.FC = () => {
                                             style={{
                                                 minWidth: column.minWidth,
                                             }}
+                                            className={
+                                                classes.containRowsColumns
+                                            }
                                         >
                                             {column.label}
                                         </TableCell>
@@ -170,6 +339,9 @@ const CRUDUser: React.FC = () => {
                                                     <TableCell
                                                         key={column.id}
                                                         align={column.align}
+                                                        className={
+                                                            classes.containRowsColumns
+                                                        }
                                                     >
                                                         {column.id ===
                                                         "actions" ? (
