@@ -4,6 +4,7 @@ import * as cors from 'cors'
 import * as logger from 'morgan'
 
 import { conectBdToServer } from './config/db'
+import { userRouter } from './routes/user'
 
 export const app = express()
 
@@ -13,5 +14,5 @@ app.use(logger('dev'))
 
 conectBdToServer();
 
-/* app.use('/user', userRouter) */
-app.use('/', (req, res) => res.send('API NG challenge Ramiro Mares de Oliveira'))
+app.use('/user', userRouter)
+app.use('/', (req, res) => res.send('Sharenergy NG challenge Ramiro Mares de Oliveira'))

@@ -1,9 +1,13 @@
 version: '3'
 services:
-  db:
-    mongodb:
-      image: "mongo:5.0.12"
-      container_name: "typeorm-mongodb"
-      ports:
-        - "27017:27017"
+  mongodb:
+    image: "mongo:5.0.12"
+    container_name: "typeorm-mongodb"
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ramiro
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+      MONGO_INITDB_ROOT_DB: Sharenergy
+    ports:
+      - "27017:27017"
 

@@ -4,11 +4,12 @@ import { User } from "./entity/User"
 
 export const AppDataSource = new DataSource({
     type: "mongodb",
-    host: "db",
+    host: "localhost",
     port: 27017,
+    database: "Sharenergy",
     username: "ramiro",
     password: "123456",
-    database: "Sharenergy",
+    useUnifiedTopology: true,
     synchronize: true,
     logging: false,
     entities: [User],
