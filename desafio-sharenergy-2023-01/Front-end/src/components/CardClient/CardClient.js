@@ -6,6 +6,11 @@ const CardClient=({client, deleteClient})=>{
 
     const navigate = useNavigate()
 
+    const edit=(id)=>{
+        localStorage.setItem("id", id)
+        goToEditClientPage(navigate, id)
+    }
+
     return(
         <div>
             <Card>
@@ -14,7 +19,7 @@ const CardClient=({client, deleteClient})=>{
                 <p>{client.phone_number}</p>
                 <ButtonsContainer>
                     <button>Details</button>
-                    <button onClick={()=>goToEditClientPage(navigate, client.id)}>Edit</button>
+                    <button onClick={()=>edit(client.id)}>Edit</button>
                     <button onClick={()=>deleteClient(client.id)}><img src="https://cdn-icons-png.flaticon.com/512/2919/2919590.png" alt="Delete X pic."/></button>
                 </ButtonsContainer>
             </Card>

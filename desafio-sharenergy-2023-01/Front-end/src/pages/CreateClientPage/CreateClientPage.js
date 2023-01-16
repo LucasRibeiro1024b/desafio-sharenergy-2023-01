@@ -4,6 +4,7 @@ import useForm from '../../hooks/useForm'
 import axios from "axios"
 
 const CreateClientPage=()=>{
+
     const [form, onChangeInputs, clearInputs] = useForm({
         cpf: "",
         fullName: "",
@@ -28,13 +29,13 @@ const CreateClientPage=()=>{
 
     const createClient=(e)=>{
         e.preventDefault()
-        axios.post("https://desafio-sharenergy-2023-01-jsk4.onrender.com/clients", body)
+        axios.post("https://desafio-sharenergy-2023-01-hol7.onrender.com/clients", body)
         .then((response)=>{
             alert("Client created successfully!")
         })
         .catch((err)=>{
             console.log(err)
-            alert(err.response.data)
+            alert(err)
         })
         clearInputs()
     }

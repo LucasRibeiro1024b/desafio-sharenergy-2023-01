@@ -4,10 +4,10 @@ import useForm from "../../hooks/useForm"
 import axios from "axios"
 
 
-const EditClientPage=({dataClients, errorClients, isLoadingClients, reload, setReload})=>{    
+const EditClientPage=()=>{    
 
+    let id = localStorage.getItem("id")
     const [form, onChangeInputs, clearInputs] = useForm({
-        cpf: "",
         fullName: "",
         email: "",
         phoneNumber: "",
@@ -16,7 +16,6 @@ const EditClientPage=({dataClients, errorClients, isLoadingClients, reload, setR
         houseNumber: "",
         neighbourhood: ""
     })
-
     const body = {
         "fullName": form.fullName,
         "email": form.email,
@@ -25,13 +24,12 @@ const EditClientPage=({dataClients, errorClients, isLoadingClients, reload, setR
         "street": form.street,
         "houseNumber": form.houseNumber,
         "neighbourhood": form.neighbourhood
-    } 
+    }
 
     const editClient=(id)=>{
         axios.patch(`https://desafio-sharenergy-2023-01-hol7.onrender.com/clients/${id}`, body)
         .then((response)=>{
             alert("Client edited successfully!")
-            setReload(!reload)
         })
         .catch((err)=>{
             alert(err.response.data)
@@ -44,8 +42,7 @@ const EditClientPage=({dataClients, errorClients, isLoadingClients, reload, setR
         <Header/>
         <EditClientContainer>
             <h1>Edit Client</h1>
-            <form onSubmit={editClient}>
-            <input name="cpf" value={form.cpf} onChange={onChangeInputs} placeholder="Cpf"/>
+            <form onSubmit={()=>editClient(id)}>
             <input name="fullName" value={form.fullName} onChange={onChangeInputs} placeholder="Full Name"/>
             <input name="email" value={form.email} onChange={onChangeInputs} placeholder="E-mail"/>
             <input name="phoneNumber" type="number" value={form.phoneNumber} onChange={onChangeInputs} placeholder="Phone Number"/>
