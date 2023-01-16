@@ -6,16 +6,14 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import useRequestData from '../../hooks/useRequestData'
 
-/* Em uma quarta página, deve haver uma lista de clientes, através da qual o usuário deve ser capaz de cadastrar novos clientes, visualizar informações de um cliente específico, 
-atualizar um cliente e deletar clientes. O cadastro deve possuir nome, email, telefone, endereço e cpf. */
 
 const ClientsListPage=()=>{
 
-    const [dataClients, errorClients, isLoadingClients, reload, setReload] = useRequestData("https://desafio-sharenergy-2023-01-hol7.onrender.com/clients")
+    const [dataClients, errorClients, isLoadingClients, reload, setReload] = useRequestData("https://desafio-sharenergy-2023-01-cn2n.onrender.com/clients")
     const navigate = useNavigate()
 
     const deleteClient=(id)=>{
-        axios.delete(`https://desafio-sharenergy-2023-01-hol7.onrender.com/clients/delete/${id}`)
+        axios.delete(`https://desafio-sharenergy-2023-01-cn2n.onrender.com/clients/delete/${id}`)
         .then((response)=>{
             setReload(!reload)
         })

@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom"
-import { goToEditClientPage } from "../../routes/coordinator"
+import { goToClientDetailsPage, goToEditClientPage } from "../../routes/coordinator"
 import { ButtonsContainer, Card } from "./style"
 
 const CardClient=({client, deleteClient})=>{
@@ -11,6 +11,10 @@ const CardClient=({client, deleteClient})=>{
         goToEditClientPage(navigate, id)
     }
 
+    const details=(id)=>{
+        localStorage.setItem("id", id)
+        goToClientDetailsPage(navigate, id)
+    }
     return(
         <div>
             <Card>
@@ -18,7 +22,7 @@ const CardClient=({client, deleteClient})=>{
                 <p>{client.email}</p>
                 <p>{client.phone_number}</p>
                 <ButtonsContainer>
-                    <button>Details</button>
+                    <button onClick={()=>details(client.id)}>Details</button>
                     <button onClick={()=>edit(client.id)}>Edit</button>
                     <button onClick={()=>deleteClient(client.id)}><img src="https://cdn-icons-png.flaticon.com/512/2919/2919590.png" alt="Delete X pic."/></button>
                 </ButtonsContainer>

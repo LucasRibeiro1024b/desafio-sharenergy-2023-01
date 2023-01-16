@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
 import { DogCard, RandomDogPageContainer } from './style'
 
-//Em uma terceira página, deve haver um botão de refresh que, ao ser clicado, deve retornar uma imagem aleatória da api Random Dog; 
 
 const RandomDogPage=()=>{
 
@@ -27,10 +26,6 @@ const RandomDogPage=()=>{
     useEffect(()=>{
         getRandomDogs()
     }, [])
-
-    if(randomDogs){
-        console.log(randomDogs.url.includes(".mp4"))
-    }
 
     const conditionalReturn=()=>{
         if(randomDogs && randomDogs.url.includes(".mp4")){

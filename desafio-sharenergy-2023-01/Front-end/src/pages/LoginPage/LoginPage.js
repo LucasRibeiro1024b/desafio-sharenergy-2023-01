@@ -1,13 +1,9 @@
 import { useNavigate } from 'react-router-dom'
-import Header from '../../components/Header/Header'
 import { LoginContainer, LoginPageContainer, RememberFormContainer } from './style'
 import useForm from '../../hooks/useForm'
 import { goToHomepage } from '../../routes/coordinator'
 import { useState, useEffect } from 'react'
 
-/*O usuário deve ser capaz de se autenticar utilizando o username desafiosharenergy e password sh@r3n3rgy, também, 
-deve existir a possibilidade do usuário utilizar o remember me para realizar logins automáticos, sem a necessidade de digitar 
-username e password após o primeiro acesso; */
 
 const LoginPage=()=>{
 
@@ -43,7 +39,9 @@ const LoginPage=()=>{
 
     return(
         <LoginPageContainer>
-            <Header/>
+            <header>
+                <h2>Challenge Sharenergy 2023-01</h2>
+            </header>
                 <LoginContainer>
                     <h1>Login</h1>
                     <form onSubmit={onSubmit}>
@@ -59,8 +57,8 @@ const LoginPage=()=>{
                     </form>
                 </LoginContainer>
                         <RememberFormContainer>
-                                <input type='checkbox' checked={remember} onChange={rememberMe} name="remember" id="remember"></input>
-                                <p>Remember me</p>
+                            <input type='checkbox' checked={remember} onChange={rememberMe} name="remember" id="remember"></input>
+                            <p>Remember me</p>
                         </RememberFormContainer>
         </LoginPageContainer>
     )

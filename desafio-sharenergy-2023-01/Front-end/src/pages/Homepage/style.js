@@ -6,6 +6,26 @@ export const HomepageContainer = styled.div`
     h4{
         font-size: 1.5vw;
     }
+
+    @media screen and (max-width: 500px) {
+        h1{
+            font-size: 6vw;
+            margin: 5vw 0;
+        }
+        h4{
+            font-size: 5vw;
+        }
+    }
+    @media screen and (min-width: 501px) and (max-width: 1000px) {
+        h1{
+            font-size: 4.5vw;
+            margin: 4vw 0;
+        }
+        h4{
+            font-size: 4vw;
+        }
+    }
+
 `
 
 export const FormContainer = styled.div`
@@ -22,7 +42,24 @@ export const FormContainer = styled.div`
             box-shadow: 0 0 0 0;
             outline: 0;
         }
-    }    
+    }
+
+    @media screen and (max-width: 500px) {
+        input{
+            font-size: 4vw;
+            height: 4vh;
+            width: 50vw;
+            margin-bottom: 6vw;
+        }
+    }
+    @media screen and (min-width: 501px) and (max-width: 1000px) {
+        input{
+            font-size: 3vw;            
+            height: 4vh;
+            width: 55vw;
+            margin-bottom: 6vw;
+        } 
+    }
 `
 
 export const CardsContainer = styled.div`    
@@ -34,6 +71,20 @@ export const CardsContainer = styled.div`
     text-align: center;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    @media screen and (max-width: 500px) {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 3vw;
+    }
+    @media screen and (min-width: 501px) and (max-width: 1000px) {
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;           
+    }
+    @media screen and (min-width: 1001px) and (max-width: 1700px){
+        grid-template-rows: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr; 
+    }
 `
 
 export const PaginationContainer = styled.div`
@@ -55,6 +106,30 @@ export const PaginationContainer = styled.div`
         :hover{
             transform: scale(1.2);
             transition: all 0.5s;
+            color: var(--peach-puff);
         }
-    }    
+        :focus{
+            color: var(--peach-puff);
+        }
+        :active{
+            color: var(--peach-puff);
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        margin: 3vw 0;
+        button{
+            width: 6vw;
+            height: 5vw;
+            font-size: 3vw;
+        }
+    }
+    @media screen and (min-width: 501px) and (max-width: 1000px) {
+        margin: 2vw 0;
+        button{
+            width: 5vw;
+            height: 4vw;
+            font-size: 2.5vw;
+        }
+    }
 `

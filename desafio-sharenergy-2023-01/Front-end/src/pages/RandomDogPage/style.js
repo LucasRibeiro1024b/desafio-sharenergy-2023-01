@@ -14,6 +14,34 @@ export const RandomDogPageContainer = styled.div`
         margin-bottom: 1vw;
     }
 
+    @media screen and (max-width: 500px) {
+        h1{
+            font-size: 5vw;
+            margin: 5vw 0;
+        }
+        h4{
+            font-size: 5vw;
+        }
+    }
+    @media screen and (min-width: 501px) and (max-width: 1000px) {
+        h1{
+            font-size: 4vw;
+            margin: 3vw 0;
+        } 
+        h4{
+            font-size: 4vw;
+        }        
+    }
+    @media screen and (min-width: 1001px) and (max-width: 1700px){
+        h1{
+            font-size: 3vw;
+            margin: 3vw 0;
+        }
+        h4{
+            font-size: 3vw;
+        }
+    }
+
 `
 
 export const DogCard = styled.div`
@@ -27,13 +55,13 @@ export const DogCard = styled.div`
     
     img{
         width: 35vw;
-        height: 60vh;
+        height: 50vh;
         border-radius: 10%;        
     }
 
     video{
         width: 35vw;
-        height: 60vh;
+        height: 50vh;
     }
 
     button{
@@ -58,6 +86,67 @@ export const DogCard = styled.div`
         img{
             width: 2vw;
             height: 3.8vh;
+        }
+    }
+
+    @media screen and (max-width: 500px) {
+        img{
+            width: 80vw;
+            height: 50vh;       
+        }
+        video{
+            width: 80vw;
+            height: 50vh;
+        }
+        button{
+            margin-top: 3vw;
+            width: 11vw;
+            height: 6vh;
+
+            img{
+                width: 8vw;
+                height: 4vh;
+            }
+        }
+    }
+    @media screen and (min-width: 501px) and (max-width: 1000px) {
+        img{
+            width: 60vw;
+            height: 60vh;       
+        }
+        video{
+            width: 60vw;
+            height: 60vh;
+        }
+        button{
+            margin-top: 2vw;
+            width: 9vw;
+            height: 7vh;
+
+            img{
+                width: 6vw;
+                height: 5vh;
+            }
+        }       
+    }
+    @media screen and (min-width: 1001px) and (max-width: 1700px){
+        img{
+            width: 65vw;
+            height: 55vh;       
+        }
+        video{
+            width: 65vw;
+            height: 55vh;
+        }
+        button{
+            margin-top: 3vw;
+            width: 7vw;
+            height: 8vh;
+
+            img{
+                width: 5vw;
+                height: 5vh;
+            }
         }
     }
 `

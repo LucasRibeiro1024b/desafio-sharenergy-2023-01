@@ -2,8 +2,12 @@ import Header from "../../components/Header/Header"
 import { CreateClientContainer } from "./style"
 import useForm from '../../hooks/useForm'
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
+import { returnPage } from '../../routes/coordinator'
 
 const CreateClientPage=()=>{
+
+    const navigate = useNavigate()
 
     const [form, onChangeInputs, clearInputs] = useForm({
         cpf: "",
@@ -29,7 +33,7 @@ const CreateClientPage=()=>{
 
     const createClient=(e)=>{
         e.preventDefault()
-        axios.post("https://desafio-sharenergy-2023-01-hol7.onrender.com/clients", body)
+        axios.post("https://desafio-sharenergy-2023-01-cn2n.onrender.com/clients", body)
         .then((response)=>{
             alert("Client created successfully!")
         })
@@ -55,6 +59,7 @@ const CreateClientPage=()=>{
             <input name="houseNumber" value={form.houseNumber} onChange={onChangeInputs} placeholder="House Number"/>
             <input name="neighbourhood" value={form.neighbourhood} onChange={onChangeInputs} placeholder="Neighbourhood"/>
             <button>Create</button>
+            <button type="button" onClick={()=>returnPage(navigate)}>Return</button>
             </form>
         </CreateClientContainer> 
         </>

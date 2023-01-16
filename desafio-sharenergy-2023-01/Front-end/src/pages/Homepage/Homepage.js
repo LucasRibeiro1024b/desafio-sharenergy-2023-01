@@ -5,10 +5,6 @@ import useRequestData from '../../hooks/useRequestData'
 import useForm from '../../hooks/useForm'
 import { useState } from 'react'
 
-/* Após o Login, a página principal deve conter uma listagem de usuários gerada a partir da api Random User Generator, 
-a lista deve conter a foto do usuário, nome completo, email, username e idade. Além disso, os requests devem ser páginados, porém, 
-é de critério do participante do desafio a quantidade de resultados a serem exibidos por página e variações para o mesmo. Também, 
-deve haver uma search para buscar usuários por nome, email ou username; */
 
 const Homepage=()=>{
     const [page, setPage] = useState(1)

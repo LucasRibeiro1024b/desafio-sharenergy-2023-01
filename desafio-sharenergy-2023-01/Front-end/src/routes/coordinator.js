@@ -26,6 +26,10 @@ export const goToEditClientPage=(navigator, id)=>{
     navigator(`/edit-client/${id}`)
 }
 
-export const goToEditClientDetailsPage=(navigator, id)=>{
+export const goToClientDetailsPage=(navigator, id)=>{
     navigator(`/client-details/${id}`)
+}
+
+export const returnPage=(navigator)=>{
+    navigator(-1)
 }
