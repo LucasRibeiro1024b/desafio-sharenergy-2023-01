@@ -2,12 +2,13 @@ import { Entity, Column, ObjectID, ObjectIdColumn } from "typeorm"
 
 @Entity()
 export class User {
-    constructor(name: string, email: string, phone: string, adress: string, cpf: string) {
+    constructor(name: string, email: string, phone: string, adress: string, cpf: string, password: string) {
         this.name = name
         this.email = email
         this.phone = phone
         this.adress = adress
         this.cpf = cpf
+        this.password = password
     }
 
     @ObjectIdColumn()
@@ -27,5 +28,8 @@ export class User {
 
     @Column()
     cpf: string
+
+    @Column()
+    password: string
 
 }
