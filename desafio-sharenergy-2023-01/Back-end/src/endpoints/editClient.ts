@@ -32,7 +32,7 @@ const editClient = async (req: Request, res: Response)=>{
         }if(email){        
             await clientDB.editClient(clientId, "email", email)         
         }if(phoneNumber){ 
-            await clientDB.editClient(clientId, "phone_number", Number(phoneNumber))                   
+            await clientDB.editClient(clientId, "phone_number", phoneNumber)                   
         }if(zipCode){            
             await clientDB.editClient(clientId, "zip_code", Number(zipCode))   
         }if(street){            

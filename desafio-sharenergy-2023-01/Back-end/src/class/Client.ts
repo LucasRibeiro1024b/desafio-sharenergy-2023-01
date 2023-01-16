@@ -1,10 +1,10 @@
 export class Client {
     constructor(
         private id: string,
-        private cpf: number, 
+        private cpf: string, 
         private full_name: string, 
         private email: string, 
-        private phone_number: number, 
+        private phone_number: string, 
         private zip_code: number, 
         private street: string, 
         private house_number: number, 

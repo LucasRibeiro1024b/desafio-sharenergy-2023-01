@@ -52,10 +52,10 @@ const createClient = async (req: Request, res: Response) =>{
         
         const client = new Client(
             Date.now().toString(),
-            Number(cpf),
+            cpf,
             fullName,
             email,
-            Number(phoneNumber),
+            phoneNumber,
             Number(zipCode),
             street,
             Number(houseNumber),
