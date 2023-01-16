@@ -10,6 +10,6 @@ userRouter.get("/", async (req, res) => {
     const response = await userCtrl.recoverAllUsers()
     res.json(response)
   }catch{
-    res.statusCode = 404
+    res.status(404).json({message: "Something is wrong"})
 }
 })

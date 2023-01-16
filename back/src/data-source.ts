@@ -1,6 +1,7 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
 import { User } from "./entity/User"
+import { UserAdmin } from "./entity/UserAdmin"
 
 export const AppDataSource = new DataSource({
     type: "mongodb",
@@ -10,7 +11,7 @@ export const AppDataSource = new DataSource({
     useUnifiedTopology: true,
     synchronize: true,
     logging: true,
-    entities: [User],
+    entities: [User, UserAdmin],
     migrations: [],
     subscribers: [],
 })
