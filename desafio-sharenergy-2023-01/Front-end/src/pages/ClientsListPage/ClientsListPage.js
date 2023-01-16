@@ -5,15 +5,16 @@ import {goToCreateClientPage} from '../../routes/coordinator'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import useRequestData from '../../hooks/useRequestData'
+import { BASE_URL_CLIENTS } from '../../constants/constants'
 
 
 const ClientsListPage=()=>{
 
-    const [dataClients, errorClients, isLoadingClients, reload, setReload] = useRequestData("https://desafio-sharenergy-2023-01-cn2n.onrender.com/clients")
+    const [dataClients, errorClients, isLoadingClients, reload, setReload] = useRequestData(`${BASE_URL_CLIENTS}`)
     const navigate = useNavigate()
 
     const deleteClient=(id)=>{
-        axios.delete(`https://desafio-sharenergy-2023-01-cn2n.onrender.com/clients/delete/${id}`)
+        axios.delete(`${BASE_URL_CLIENTS}/delete/${id}`)
         .then((response)=>{
             setReload(!reload)
         })
@@ -22,8 +23,8 @@ const ClientsListPage=()=>{
         })
     }
 
-    const clientsList = dataClients && dataClients.map((client)=>{
-        return <CardClient key={client.id} client={client} deleteClient={deleteClient}/>
+    const clientsList = dataClients && dataClients.map((client, index)=>{
+        return <CardClient key={index} client={client} deleteClient={deleteClient}/>
     })
 
     return(

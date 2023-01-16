@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Header from '../../components/Header/Header'
+import { BASE_URL_RANDOM_DOG } from '../../constants/constants'
 import { DogCard, RandomDogPageContainer } from './style'
 
 
@@ -12,7 +13,7 @@ const RandomDogPage=()=>{
 
     const getRandomDogs=()=>{
         setIsLoading(true)
-        axios.get("https://random.dog/woof.json")
+        axios.get(`${BASE_URL_RANDOM_DOG}/woof.json`)
         .then((response)=>{
             setIsLoading(false)
             setRandomDogs(response.data)

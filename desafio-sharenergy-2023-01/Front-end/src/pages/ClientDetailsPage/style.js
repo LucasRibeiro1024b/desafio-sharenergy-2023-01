@@ -143,7 +143,7 @@ export const Card = styled.div`
     }
     @media screen and (min-width: 501px) and (max-width: 1000px) {
         width: 65vw;
-        height: 40vh;
+        height: 50vh;
         p{
             font-size: 3vw;
             margin-bottom: 2vw;
@@ -161,7 +161,7 @@ export const Card = styled.div`
     }
     @media screen and (min-width: 1001px) and (max-width: 1700px){
         width: 65vw;
-        height: 40vh;
+        height: 60vh;
         p{
             font-size: 2vw;
             margin-bottom: 2vw;

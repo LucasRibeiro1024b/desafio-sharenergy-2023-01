@@ -4,14 +4,14 @@ import { CardsContainer, HomepageContainer, FormContainer, PaginationContainer} 
 import useRequestData from '../../hooks/useRequestData'
 import useForm from '../../hooks/useForm'
 import { useState } from 'react'
-
+import { BASE_URL_RANDOM_USER } from '../../constants/constants'
 
 const Homepage=()=>{
     const [page, setPage] = useState(1)
     const [form, onChangeInputs] = useForm({
         search: ""
     })
-    const [dataRandomUsers, errorRandomUsers, isLoadingRandomUsers] = useRequestData(`https://randomuser.me/api/?page=${page}&results=10&seed=abc`)
+    const [dataRandomUsers, errorRandomUsers, isLoadingRandomUsers] = useRequestData(`${BASE_URL_RANDOM_USER}/?page=${page}&results=10&seed=abc`)
 
     const randomUsers = dataRandomUsers && dataRandomUsers.results
     .filter(user => form.search === "" 

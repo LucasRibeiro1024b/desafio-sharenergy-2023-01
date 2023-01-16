@@ -5,6 +5,7 @@ import { ClientDetailsContainer, Card, ButtonsContainer } from "./style"
 import {goToEditClientPage} from '../../routes/coordinator'
 import { useNavigate } from "react-router-dom"
 import { returnPage } from "../../routes/coordinator"
+import { BASE_URL_CLIENTS } from '../../constants/constants'
 
 
 const ClientDetailsPage=()=>{
@@ -19,7 +20,7 @@ const ClientDetailsPage=()=>{
     const getClientDetails=()=>{
         setIsLoadingClientDetails(true)
         let id = localStorage.getItem("id")
-        axios.get(`https://desafio-sharenergy-2023-01-cn2n.onrender.com/clients/${id}`)
+        axios.get(`${BASE_URL_CLIENTS}/${id}`)
         .then((response)=>{
             setIsLoadingClientDetails(false)
             setDataClientDetails(response.data)
@@ -31,7 +32,7 @@ const ClientDetailsPage=()=>{
     }
 
     const deleteClient=(id)=>{
-        axios.delete(`https://desafio-sharenergy-2023-01-cn2n.onrender.com/clients/delete/${id}`)
+        axios.delete(`${BASE_URL_CLIENTS}/delete/${id}`)
         .then((response)=>{
             setReload(!reload)
         })
@@ -49,8 +50,8 @@ const ClientDetailsPage=()=>{
         goToEditClientPage(navigate, id)
     }
 
-    const clientDetails = dataClientDetails && dataClientDetails.map((client)=>{
-        return <Card>
+    const clientDetails = dataClientDetails && dataClientDetails.map((client, index)=>{
+        return <Card key={index}>
             <p>{client.full_name}</p>
             <p>{client.email}</p>
             <p>{client.phone_number}</p>

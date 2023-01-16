@@ -1,0 +1,7 @@
+export const validateEmail = (email => /[a-zA-Z0-9]+@[a-z]{3}[.a-z]?/.test(email))
+export const validateName = (name => /.{5,}/.test(name))
+export const validateStreet = (street => /.{5,}/.test(street))
+export const validateHouseNumber = (houseNumber => /.{2,}/.test(houseNumber))
+export const validateZipCode = (zipCode => /.{8,}/.test(zipCode))
+export const validatePhoneNumber = (phoneNumber => /.{11,}/.test(phoneNumber))
+export const validateNeighbourhood = (neighbourhood=> /.{5,}/.test(neighbourhood))

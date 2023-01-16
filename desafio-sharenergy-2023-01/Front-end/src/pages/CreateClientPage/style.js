@@ -7,9 +7,10 @@ export const CreateClientContainer = styled.div`
     align-items: center;
     text-align: center;
 
-    h4{
-        font-size: 1.5vw;
-    }
+    p{
+        font-size: 1vw;
+        margin: 0.6vw;
+    } 
 
     form{
         display: flex;
@@ -25,7 +26,7 @@ export const CreateClientContainer = styled.div`
         height: 2.3vw;
         width: 20vw;
         padding-left: 1vw;
-        margin-bottom: 1.4vw;
+        margin-bottom: 0.7vw;
         :focus{
             box-shadow: 0 0 0 0;
             outline: 0;
@@ -63,7 +64,10 @@ export const CreateClientContainer = styled.div`
             height: 6vw;
             font-size: 3.5vw;
         }
-        
+        p{
+            font-size: 3vw;
+            margin: 1vw;
+        }        
     }
     @media screen and (min-width: 501px) and (max-width: 1000px) {
         h1{
@@ -81,7 +85,10 @@ export const CreateClientContainer = styled.div`
             height: 4vw;
             font-size: 2.5vw;
         }
-               
+        p{
+            font-size: 2.5vw;
+            margin: 2vw;
+        }               
     }
     @media screen and (min-width: 1001px) and (max-width: 1700px){
         h1{
@@ -98,6 +105,17 @@ export const CreateClientContainer = styled.div`
             width: 9vw;
             height: 2.5vh;
             font-size: 1.5vw;
-        }        
+        }
+        p{
+            font-size: 2.5vw;
+            margin: 2vw;
+        }         
+    }
+`
+
+export const ButtonsContainer = styled.div`
+    display: flex;
+    button{
+        margin: 0 1vw;
     }
 `

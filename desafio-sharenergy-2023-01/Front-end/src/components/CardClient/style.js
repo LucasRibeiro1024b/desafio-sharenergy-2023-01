@@ -12,14 +12,14 @@ export const Card = styled.div`
     background-color: var(--peach-puff);
 
     p{
-        font-size: 0.8vw;
+        font-size: 1vw;
         font-weight: bold;
     }
 
     button{
         width: 4vw;
         height: 1.2vw;
-        font-size: 0.7vw;
+        font-size: 0.9vw;
         font-weight: bold;
         margin-left: 0.5vw;
         background-color: var(--dark-orange);
