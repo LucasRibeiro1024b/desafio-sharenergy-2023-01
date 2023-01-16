@@ -4,16 +4,16 @@ import { User } from "../entity/User";
 export class userController {
 
   async save(user: User) {
-    const userSave = await AppDataSource.manager.save(user)
+    const userSave = await AppDataSource.mongoManager.save(user)
     return userSave
   }
 
   async recoverAllUsers() {
-    const users = await AppDataSource.manager.find(User)
+    const users = await AppDataSource.mongoManager.find(User)
     return users
   }
 
-  async recoverByName(username: string) {
+  /* async recoverByName(username: string) {
     const usernameCheck = await AppDataSource.manager.findOne(User, {where: {name: username}})
     return usernameCheck
   }
@@ -39,5 +39,5 @@ export class userController {
   async recoverUserById(id: number) {
     const user = await AppDataSource.manager.findOne(User, {relations: ['account'], where: {id: id}})
     return user
-  }
+  } */
 }

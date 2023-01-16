@@ -1,4 +1,4 @@
-import { Entity, ObjectIdColumn, ObjectID, Column, PrimaryGeneratedColumn } from "typeorm"
+import { Entity, Column, ObjectID, ObjectIdColumn } from "typeorm"
 
 @Entity()
 export class User {
@@ -10,8 +10,8 @@ export class User {
         this.cpf = cpf
     }
 
-    @PrimaryGeneratedColumn()
-    id: number
+    @ObjectIdColumn()
+    id: ObjectID
 
     @Column()
     name: string

@@ -15,4 +15,4 @@ app.use(logger('dev'))
 conectBdToServer();
 
 app.use('/user', userRouter)
-app.use('/', (req, res) => res.send('Sharenergy NG challenge Ramiro Mares de Oliveira'))
+app.use('/', (req, res) => res.send('Sharenergy challenge Ramiro Mares de Oliveira'))
