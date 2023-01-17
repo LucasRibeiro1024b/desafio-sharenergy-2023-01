@@ -198,7 +198,7 @@ const ModalAddUser: React.FC<IProps> = ({
 }) => {
     const classes = useStyles();
 
-    /* 
+    /*
     const editOrRegister = () => {
         api.post("/user", value).then(({data}) => console.log(data))
         api.put("/user", value).then(({data}) => console.log(data))
@@ -225,6 +225,7 @@ const ModalAddUser: React.FC<IProps> = ({
                         onChange={e =>
                             setValue({ ...value, email: e.target.value })
                         }
+                        disabled={edit}
                         id="standard-basic"
                         label="Email"
                     />
@@ -253,6 +254,7 @@ const ModalAddUser: React.FC<IProps> = ({
                         onChange={e =>
                             setValue({ ...value, cpf: e.target.value })
                         }
+                        disabled={edit}
                         id="standard-basic"
                         label="CPF"
                     />
