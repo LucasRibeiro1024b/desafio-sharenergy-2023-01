@@ -22,6 +22,7 @@ import {
     InputAdornment,
     FormControl,
     Button,
+    Snackbar,
 } from "@material-ui/core";
 import {
     Edit,
@@ -33,13 +34,15 @@ import {
     Cancel,
 } from "@material-ui/icons";
 import { green, red } from "@material-ui/core/colors";
+import MuiAlert from "@material-ui/lab/Alert";
 
 import Header from "../Components/Header";
 import Footer from "../../components/Footer";
+import { api } from "../../../Services/API";
 import "./index.css";
 
 interface Column {
-    id: "name" | "email" | "phone" | "endereco" | "cpf" | "actions";
+    id: "name" | "email" | "phone" | "addres" | "cpf" | "actions";
     label: string;
     minWidth?: number;
     align?: "center";
@@ -57,7 +60,7 @@ const columns: Column[] = [
         align: "center",
     },
     {
-        id: "endereco",
+        id: "addres",
         label: "Endereço",
         minWidth: 170,
         align: "center",
@@ -80,8 +83,9 @@ interface Data {
     name: string;
     email: string;
     phone: string;
-    endereco: string;
+    addres: string;
     cpf: string;
+    password?: string;
     actions?: any;
 }
 
@@ -89,10 +93,10 @@ function createData(
     name: string,
     email: string,
     phone: string,
-    endereco: string,
+    addres: string,
     cpf: string
 ): Data {
-    return { name, email, phone, endereco, cpf };
+    return { name, email, phone, addres, cpf };
 }
 
 const rows = [
@@ -182,10 +186,24 @@ const ColorRed = withStyles((theme: Theme) => ({
 interface IProps {
     edit: boolean;
     handleClose(): void;
+    value: Data;
+    setValue: Function;
 }
 
-const ModalAddUser: React.FC<IProps> = ({ edit, handleClose }) => {
+const ModalAddUser: React.FC<IProps> = ({
+    edit,
+    handleClose,
+    value,
+    setValue,
+}) => {
     const classes = useStyles();
+
+    /* 
+    const editOrRegister = () => {
+        api.post("/user", value).then(({data}) => console.log(data))
+        api.put("/user", value).then(({data}) => console.log(data))
+    }
+    */
 
     return (
         <div className={classes.paper}>
@@ -194,15 +212,50 @@ const ModalAddUser: React.FC<IProps> = ({ edit, handleClose }) => {
             </h3>
             <div id="simple-modal-description">
                 <div>
-                    <TextField id="standard-basic" label="Nome" />
-                    <TextField id="standard-basic" label="Email" />
+                    <TextField
+                        defaultValue={value.name}
+                        onChange={e =>
+                            setValue({ ...value, name: e.target.value })
+                        }
+                        id="standard-basic"
+                        label="Nome"
+                    />
+                    <TextField
+                        defaultValue={value.email}
+                        onChange={e =>
+                            setValue({ ...value, email: e.target.value })
+                        }
+                        id="standard-basic"
+                        label="Email"
+                    />
                 </div>
                 <div>
-                    <TextField id="standard-basic" label="Telefone" />
-                    <TextField id="standard-basic" label="Endereço" />
+                    <TextField
+                        defaultValue={value.phone}
+                        onChange={e =>
+                            setValue({ ...value, phone: e.target.value })
+                        }
+                        id="standard-basic"
+                        label="Telefone"
+                    />
+                    <TextField
+                        defaultValue={value.addres}
+                        onChange={e =>
+                            setValue({ ...value, addres: e.target.value })
+                        }
+                        id="standard-basic"
+                        label="Endereço"
+                    />
                 </div>
                 <div>
-                    <TextField id="standard-basic" label="CPF" />
+                    <TextField
+                        defaultValue={value.cpf}
+                        onChange={e =>
+                            setValue({ ...value, cpf: e.target.value })
+                        }
+                        id="standard-basic"
+                        label="CPF"
+                    />
                     {/* <TextField id="standard-basic" label="Standard" /> */}
                     <FormControl>
                         <InputLabel htmlFor="standard-adornment-password">
@@ -210,9 +263,11 @@ const ModalAddUser: React.FC<IProps> = ({ edit, handleClose }) => {
                         </InputLabel>
                         <Input
                             id="standard-adornment-password"
-                            /* type={values.showPassword ? 'text' : 'password'}
-            value={values.password}
-            onChange={handleChange('password')} */
+                            /* type={values.showPassword ? 'text' : 'password'} */
+                            defaultValue={value.password}
+                            onChange={e =>
+                                setValue({ ...value, password: e.target.value })
+                            }
                             endAdornment={
                                 <InputAdornment position="end">
                                     <IconButton
@@ -258,6 +313,11 @@ const CRUDUser: React.FC = () => {
     const [page, setPage] = useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
     const [open, setOpen] = useState<boolean>(false);
+    const [openFeedback, setOpenFeedback] = useState<boolean>(false);
+    const [messageFeedback, setMessageFeedback] = useState<string>("");
+    const [feedbackSeverity, setFeedbackSeverity] = useState<any>();
+    const [modalData, setModalData] = useState<Data>({} as Data);
+    const [editUser, setEditUser] = useState<boolean>(false);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -270,23 +330,78 @@ const CRUDUser: React.FC = () => {
         setPage(0);
     };
 
-    const handleOpen = () => {
+    const handleOpen = (value?: Data) => {
+        if (value !== undefined) setModalData(value);
         setOpen(true);
     };
 
     const handleClose = () => {
+        setModalData({} as Data);
         setOpen(false);
+    };
+
+    const handleCloseFeedback = (
+        event?: React.SyntheticEvent,
+        reason?: string
+    ) => {
+        if (reason === "clickaway") {
+            return;
+        }
+
+        setOpenFeedback(false);
+    };
+
+    const deleteUser: Function = (cpf: string, email: string) => {
+        const sendData = { cpf, email };
+
+        api.delete("/user", { data: sendData })
+            .then(() => {
+                setFeedbackSeverity("success");
+                setMessageFeedback("Usuário excluido com sucesso!");
+            })
+            .catch(() => {
+                setFeedbackSeverity("error");
+                setMessageFeedback("Não foi possível excluir o usuário!");
+            });
     };
 
     const classes = useStyles();
 
     return (
         <div>
+            <Snackbar
+                open={openFeedback}
+                autoHideDuration={4000}
+                onClose={handleCloseFeedback}
+            >
+                <MuiAlert
+                    elevation={6}
+                    variant="filled"
+                    onClose={handleCloseFeedback}
+                    severity={feedbackSeverity}
+                >
+                    {messageFeedback}
+                </MuiAlert>
+            </Snackbar>
             <div className="contain-crud">
                 <Header input={false} />
                 <h2 className="title-crud">Listagem de usuários</h2>
                 {/* eslint-disable-next-line */}
-                <div className="contain-add-user" onClick={handleOpen}>
+                <div
+                    className="contain-add-user"
+                    onClick={() => {
+                        setEditUser(true);
+                        setModalData({
+                            name: "",
+                            email: "",
+                            phone: "",
+                            addres: "",
+                            cpf: "",
+                            password: "",
+                        });
+                        handleOpen();
+                    }}
+                >
                     <AddCircle color="action" fontSize="large" />
                     <span className="text-add-user">Adicionar usuário</span>
                 </div>
@@ -297,7 +412,12 @@ const CRUDUser: React.FC = () => {
                     aria-describedby="simple-modal-description"
                     className={classes.modal}
                 >
-                    <ModalAddUser edit handleClose={handleClose} />
+                    <ModalAddUser
+                        edit={editUser}
+                        handleClose={handleClose}
+                        value={modalData}
+                        setValue={setModalData}
+                    />
                 </Modal>
                 <Paper className={classes.root}>
                     <TableContainer className={classes.container}>
@@ -361,9 +481,16 @@ const CRUDUser: React.FC = () => {
                                                                         Editar
                                                                     </span>
                                                                 </div>
+                                                                {/* eslint-disable-next-line */}
                                                                 <div
                                                                     className={
                                                                         classes.containActions
+                                                                    }
+                                                                    onClick={() =>
+                                                                        deleteUser(
+                                                                            value.cpf,
+                                                                            value.email
+                                                                        )
                                                                     }
                                                                 >
                                                                     <Delete color="error" />
