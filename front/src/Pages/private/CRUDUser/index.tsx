@@ -284,7 +284,7 @@ const CRUDUser: React.FC = () => {
         <div>
             <div className="contain-crud">
                 <Header input={false} />
-                <h2 className="title-name">Listagem de usuários</h2>
+                <h2 className="title-crud">Listagem de usuários</h2>
                 {/* eslint-disable-next-line */}
                 <div className="contain-add-user" onClick={handleOpen}>
                     <AddCircle color="action" fontSize="large" />

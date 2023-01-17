@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -9,8 +9,17 @@ import {
     Theme,
     makeStyles,
 } from "@material-ui/core/styles";
-import { Search, Home, Feedback, Pets, PersonAdd } from "@material-ui/icons";
+import {
+    Search,
+    Home,
+    Feedback,
+    Pets,
+    PersonAdd,
+    ExitToApp,
+} from "@material-ui/icons";
 import { Link } from "react-router-dom";
+
+import { AuthContext } from "../../../../Services/Context/Auth";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -27,12 +36,9 @@ const useStyles = makeStyles((theme: Theme) =>
         title: {
             flexGrow: 1,
             display: "none",
-            [theme.breakpoints.up("sm")]: {
+            [theme.breakpoints.up("md")]: {
                 display: "block",
             },
-        },
-        titleTow: {
-            flexGrow: 1,
         },
         search: {
             position: "relative",
@@ -47,19 +53,19 @@ const useStyles = makeStyles((theme: Theme) =>
             right: "40%",
             [theme.breakpoints.up("xs")]: {
                 position: "relative",
-                right: 0,
+                right: 10,
             },
             [theme.breakpoints.up("sm")]: {
                 position: "relative",
-                right: "3%",
+                right: 0,
             },
             [theme.breakpoints.up("md")]: {
                 position: "relative",
-                right: "30%",
+                right: "10%",
             },
             [theme.breakpoints.up("lg")]: {
                 position: "relative",
-                right: "40%",
+                right: "20%",
             },
         },
         searchIcon: {
@@ -85,19 +91,55 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         containIcons: {
             listStyle: "none",
+            display: "flex",
         },
         containIcon: {
             display: "flex",
             alignItems: "center",
+            [theme.breakpoints.up("xs")]: {
+                marginRight: 9,
+                position: "relative",
+                right: 40,
+            },
+            [theme.breakpoints.up("sm")]: {
+                marginRight: 20,
+                left: 10,
+            },
+            [theme.breakpoints.up("md")]: {
+                left: 28,
+            },
+        },
+        lastContainIcon: {
+            display: "flex",
+            alignItems: "center",
+            [theme.breakpoints.up("xs")]: {
+                position: "relative",
+                right: 23,
+            },
+            [theme.breakpoints.up("sm")]: {
+                marginRight: 0,
+                left: 10,
+            },
+            [theme.breakpoints.up("md")]: {
+                left: 8,
+            },
         },
         navigationA: {
             color: "#fff",
             textDecorator: "none",
             textDecorationLine: "none",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
         },
-        navigationIcon: {
-            position: "relative",
-            top: 5,
+        LastnavigationA: {
+            textDecorator: "none",
+            textDecorationLine: "none",
+        },
+        textLogout: {
+            color: "#f00",
+            fontWeight: "bold",
         },
     })
 );
@@ -108,32 +150,31 @@ interface IProps {
     input: boolean;
 }
 
+/* global localStorage */
+
 const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
+    const { setLogined, setUserData } = useContext(AuthContext);
+
     const classes = useStyles();
+
+    const logout: Function = () => {
+        localStorage.clear();
+        setUserData({ username: "", password: "" });
+        setLogined(false);
+    };
 
     return (
         <div className="contain-header">
             <AppBar position="fixed">
                 <Toolbar className={classes.containItemHeader}>
-                    {!input ? (
-                        <Typography
-                            id="User"
-                            className={classes.titleTow}
-                            variant="h6"
-                            noWrap
-                        >
-                            Sharenergy challenge
-                        </Typography>
-                    ) : (
-                        <Typography
-                            id="User"
-                            className={classes.title}
-                            variant="h6"
-                            noWrap
-                        >
-                            Sharenergy challenge
-                        </Typography>
-                    )}
+                    <Typography
+                        id="User"
+                        className={classes.title}
+                        variant="h6"
+                        noWrap
+                    >
+                        Sharenergy challenge
+                    </Typography>
                     {input && (
                         <div className={classes.search}>
                             <div className={classes.searchIcon}>
@@ -158,8 +199,7 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
                         <ul className={classes.containIcons}>
                             <li className={classes.containIcon}>
                                 <Link to="/" className={classes.navigationA}>
-                                    <Home className={classes.navigationIcon} />{" "}
-                                    Home
+                                    <Home /> <span>Home</span>
                                 </Link>
                             </li>
                             <li className={classes.containIcon}>
@@ -167,10 +207,7 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
                                     to="/status"
                                     className={classes.navigationA}
                                 >
-                                    <Feedback
-                                        className={classes.navigationIcon}
-                                    />{" "}
-                                    Status
+                                    <Feedback /> <span>Status</span>
                                 </Link>
                             </li>
                             <li className={classes.containIcon}>
@@ -178,8 +215,7 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
                                     to="/picture"
                                     className={classes.navigationA}
                                 >
-                                    <Pets className={classes.navigationIcon} />{" "}
-                                    Foto
+                                    <Pets /> <span>Foto</span>
                                 </Link>
                             </li>
                             <li className={classes.containIcon}>
@@ -187,11 +223,20 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
                                     to="/users"
                                     className={classes.navigationA}
                                 >
-                                    <PersonAdd
-                                        className={classes.navigationIcon}
-                                    />{" "}
-                                    Usuário
+                                    <PersonAdd /> <span>Usuário</span>
                                 </Link>
+                            </li>
+                            <li className={classes.lastContainIcon}>
+                                {/* eslint-disable-next-line */}
+                                <div
+                                    className={classes.lastContainIcon}
+                                    onClick={() => logout()}
+                                >
+                                    <ExitToApp color="error" />{" "}
+                                    <span className={classes.textLogout}>
+                                        Sair
+                                    </span>
+                                </div>
                             </li>
                         </ul>
                     </div>
