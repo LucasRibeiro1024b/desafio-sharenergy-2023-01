@@ -3,8 +3,8 @@ import { UserAdmin } from "../entity/UserAdmin";
 
 export class adminController {
 
-  async save(UserAdmin: UserAdmin) {
-    const userSave = await AppDataSource.mongoManager.save(UserAdmin)
+  async save(userAdmin: UserAdmin) {
+    const userSave = await AppDataSource.mongoManager.save(userAdmin)
     return userSave
   }
 
@@ -14,7 +14,9 @@ export class adminController {
   }
 
   async recoverByUsername(username: string) {
-    const usernameCheck = await AppDataSource.mongoManager.findOne(UserAdmin, {where: {username: username}})
+    const usernameCheck = await AppDataSource.mongoManager.findOne(UserAdmin, {
+      where: {username: username}
+    })
     return usernameCheck
   }
 
