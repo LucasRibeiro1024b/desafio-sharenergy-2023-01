@@ -21,8 +21,7 @@ adminRouter.post("/login", async (req, res) => {
     if (admin.password === password && admin.username === username) {
       res.json(admin)
     }
-
-    res.status(401).json({message: "The user is not registred"})
+    else res.status(401).json({message: "The user is not registred"})
   }catch{
     res.status(404).json({message: "Something is wrong"})
 }

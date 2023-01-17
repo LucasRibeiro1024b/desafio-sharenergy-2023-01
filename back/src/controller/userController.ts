@@ -22,15 +22,30 @@ export class userController {
     return users
   }
 
-  async recoverByEmail(email: string) {
-    const usernameCheck = await AppDataSource.mongoManager.findOne(User, {where: {email: email}})
-    return usernameCheck
+  async recoverUser(email: string, cpf: string) {
+    const usernameCheckEmail = await AppDataSource.mongoManager.findOne(User, {
+      where: {email: email}
+    })
+    
+    const usernameCheckCpf = await AppDataSource.mongoManager.findOne(User, {
+      where: {cpf: cpf}
+    })
+    if (usernameCheckEmail === null && usernameCheckCpf === null) {
+      return null
+    }
+    return usernameCheckCpf === null ? usernameCheckEmail : usernameCheckCpf
   }
 
   async update(user: User, value: IDataUser) {
-    const update = await AppDataSource.mongoManager.update(User, user.id, {
-      ...value
+    const updated = await AppDataSource.mongoManager.update(User, user.id, {
+      ...value,
+      id: user.id,
     })
-    return update
+    return updated
+  }
+
+  async delete(user: User) {
+    const deleted = await AppDataSource.mongoManager.delete(User, {...user})
+    return deleted
   }
 }

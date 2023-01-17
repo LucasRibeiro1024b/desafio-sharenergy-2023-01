@@ -18,23 +18,24 @@ userRouter.post("/", async (req, res) => {
   try{
     const { name, password, email, cpf, addres, phone } = req.body
 
-    const checkIfEmailWasRegistred = await userCtrl.recoverByEmail(email)
+    const checkIfEmailWasRegistred = await userCtrl.recoverUser(email, cpf)
 
-    if (checkIfEmailWasRegistred !== undefined){
+    console.log(checkIfEmailWasRegistred)
+    if (checkIfEmailWasRegistred === null){
       const userForRegister = new User(name, email, phone, addres, cpf, password)
 
       const userRegistred = await userCtrl.save(userForRegister)
 
-      if (userRegistred !== undefined) res.json(userRegistred)
-      res.status(401).json({message: "Something is wrong"})
+      if (userRegistred !== null) res.json(userRegistred)
+      else res.status(401).json({message: "Something is wrong"})
     }
-    res.status(401).json({message: "the email is even registred in system"})
+    else res.status(401).json({message: "the email or cpf even was registred in system"})
   }catch{
     res.status(404).json({message: "Something is wrong"})
   }
 })
 
-userRouter.post("/update", async (req, res) => {
+userRouter.put("/", async (req, res) => {
   try{
     const { name, password, email, cpf, addres, phone } = req.body
 
@@ -42,16 +43,30 @@ userRouter.post("/update", async (req, res) => {
       name, password, email, cpf, addres, phone
     }
 
-    const userSelected = await userCtrl.recoverByEmail(email)
+    const userSelected = await userCtrl.recoverUser(email, cpf)
 
-    if (userSelected !== undefined) {
+    if (userSelected !== null) {
       const userUpdated = await userCtrl.update(userSelected, data)
 
       res.json(userUpdated)
-    }
-
-    res.status(401).json({message: "Sorry the user is not founded"})
+    } else res.status(401).json({message: "Sorry the user was not founded"})
   }catch{
     res.status(404).json({message: "Something is wrong"})
+  }
+})
+
+userRouter.delete("/", async (req, res) => {
+  try {
+    const { email, cpf } = req.body
+
+    const userSelected = await userCtrl.recoverUser(email, cpf)
+
+    if (userSelected !== null) {
+      const userDeleted = await userCtrl.delete(userSelected)
+
+      res.json(userDeleted)
+    } else res.status(401).json({message: "Sorry the user was not founded"})
+  } catch {
+    res.status(401).json({message: "Sorry the user was not founded"})
   }
 })
