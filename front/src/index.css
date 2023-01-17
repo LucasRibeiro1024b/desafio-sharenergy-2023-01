@@ -16,9 +16,11 @@ code {
 @font-face {
     font-family: Playfair;
     src: url(../public/fonts/PlayfairDisplay.ttf);
+  font-display: fallback;
 }
 
 @font-face {
     font-family: GreatVibes;
     src: url(../public/fonts/GreatVibes.ttf);
+    font-display: fallback;
 }
