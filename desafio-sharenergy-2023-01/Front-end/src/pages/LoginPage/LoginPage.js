@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 import { LoginContainer, LoginPageContainer, RememberFormContainer } from './style'
 import useForm from '../../hooks/useForm'
 import { goToHomepage } from '../../routes/coordinator'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 
 const LoginPage=()=>{
@@ -32,10 +32,6 @@ const LoginPage=()=>{
     const rememberMe=(e)=>{
         setRemember(e.target.checked)
     }
-
-    useEffect(()=>{
-        
-    }, [])
 
     return(
         <LoginPageContainer>
