@@ -28,8 +28,8 @@ import {
     Edit,
     Delete,
     AddCircle,
-    /* Visibility,
-    VisibilityOff, */
+    Visibility,
+    VisibilityOff,
     Save,
     Cancel,
 } from "@material-ui/icons";
@@ -143,9 +143,10 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
+            padding: 50,
         },
         paper: {
-            backgroundColor: theme.palette.background.paper,
+            backgroundColor: "#ddd",
             border: "2px solid #000",
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
@@ -154,6 +155,18 @@ const useStyles = makeStyles((theme: Theme) =>
             alignItems: "center",
             justifyContent: "center",
             flexDirection: "column",
+        },
+        modalRightContent: {
+            marginLeft: 50,
+            marginBottom: 25,
+            maxWidth: "40%",
+            minWidth: "40%",
+        },
+        containLeftContent: {
+            marginLeft: 0,
+            marginBottom: 25,
+            maxWidth: "40%",
+            minWidth: "40%",
         },
         containIconSave: {
             color: "#fff",
@@ -196,6 +209,8 @@ const ModalAddUser: React.FC<IProps> = ({
     value,
     setValue,
 }) => {
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+
     const classes = useStyles();
 
     /*
@@ -207,66 +222,70 @@ const ModalAddUser: React.FC<IProps> = ({
 
     return (
         <div className={classes.paper}>
-            <h3 id="simple-modal-title">
+            <h3 id="simple-modal-title" className="title-modal">
                 {edit ? "Editar" : "Adicionar"} usuário
             </h3>
-            <div id="simple-modal-description">
+            <div id="simple-modal-description" className="modalAllContent">
                 <div>
                     <TextField
-                        defaultValue={value.name}
+                        defaultValue={value?.name}
                         onChange={e =>
                             setValue({ ...value, name: e.target.value })
                         }
                         id="standard-basic"
                         label="Nome"
+                        className={classes.containLeftContent}
                     />
                     <TextField
-                        defaultValue={value.email}
+                        defaultValue={value?.email}
                         onChange={e =>
                             setValue({ ...value, email: e.target.value })
                         }
-                        disabled={edit}
+                        disabled={!edit}
                         id="standard-basic"
                         label="Email"
+                        className={classes.modalRightContent}
                     />
                 </div>
                 <div>
                     <TextField
-                        defaultValue={value.phone}
+                        defaultValue={value?.phone}
                         onChange={e =>
                             setValue({ ...value, phone: e.target.value })
                         }
                         id="standard-basic"
                         label="Telefone"
+                        className={classes.containLeftContent}
                     />
                     <TextField
-                        defaultValue={value.addres}
+                        defaultValue={value?.addres}
                         onChange={e =>
                             setValue({ ...value, addres: e.target.value })
                         }
                         id="standard-basic"
                         label="Endereço"
+                        className={classes.modalRightContent}
                     />
                 </div>
                 <div>
                     <TextField
-                        defaultValue={value.cpf}
+                        defaultValue={value?.cpf}
                         onChange={e =>
                             setValue({ ...value, cpf: e.target.value })
                         }
-                        disabled={edit}
+                        disabled={!edit}
                         id="standard-basic"
                         label="CPF"
+                        className={classes.containLeftContent}
                     />
-                    {/* <TextField id="standard-basic" label="Standard" /> */}
-                    <FormControl>
+                    <FormControl className={classes.modalRightContent}>
                         <InputLabel htmlFor="standard-adornment-password">
                             Password
                         </InputLabel>
                         <Input
                             id="standard-adornment-password"
-                            /* type={values.showPassword ? 'text' : 'password'} */
-                            defaultValue={value.password}
+                            type={showPassword ? "text" : "password"}
+                            defaultValue={value?.password}
                             onChange={e =>
                                 setValue({ ...value, password: e.target.value })
                             }
@@ -274,17 +293,22 @@ const ModalAddUser: React.FC<IProps> = ({
                                 <InputAdornment position="end">
                                     <IconButton
                                         aria-label="toggle password visibility"
-                                        /* onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword} */
+                                        onClick={() =>
+                                            setShowPassword(!showPassword)
+                                        }
                                     >
-                                        {/* {values.showPassword ? <Visibility /> : <VisibilityOff />} */}
+                                        {showPassword ? (
+                                            <Visibility />
+                                        ) : (
+                                            <VisibilityOff />
+                                        )}
                                     </IconButton>
                                 </InputAdornment>
                             }
                         />
                     </FormControl>
                 </div>
-                <div>
+                <div className="containButton">
                     <ColorGreen
                         variant="contained"
                         color="primary"
@@ -294,6 +318,7 @@ const ModalAddUser: React.FC<IProps> = ({
                                 className={classes.containIconSave}
                             />
                         }
+                        className={classes.containLeftContent}
                     >
                         <span className={classes.containIconSave}>Salvar</span>
                     </ColorGreen>
@@ -302,6 +327,7 @@ const ModalAddUser: React.FC<IProps> = ({
                         color="primary"
                         startIcon={<Cancel />}
                         onClick={handleClose}
+                        className={classes.modalRightContent}
                     >
                         Cancelar
                     </ColorRed>
@@ -468,10 +494,22 @@ const CRUDUser: React.FC = () => {
                                                         {column.id ===
                                                         "actions" ? (
                                                             <div>
+                                                                {/* eslint-disable-next-line */}
                                                                 <div
                                                                     className={
                                                                         classes.containActions
                                                                     }
+                                                                    onClick={() => {
+                                                                        setModalData(
+                                                                            row
+                                                                        );
+                                                                        setEditUser(
+                                                                            true
+                                                                        );
+                                                                        setOpen(
+                                                                            true
+                                                                        );
+                                                                    }}
                                                                 >
                                                                     <Edit color="action" />
                                                                     <span
