@@ -123,6 +123,11 @@ interface Data {
     actions?: any;
 }
 
+const regexPhone =
+    /^(?:+)[0-9]{2}s?(?:()[0-9]{2}(?:))s?[0-9]{4,5}(?:-)[0-9]{4}$/;
+/* eslint-disable-next-line */
+const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+
 const schema = yup.object({
     name: yup
         .string()
@@ -136,12 +141,16 @@ const schema = yup.object({
         .string()
         .required("Preencha sua senha")
         .min(5, "Sua senha deve ter no mínimo 5 dígitos"),
-    cpf: yup.string().required("Preencha com seu cpf"),
+    cpf: yup
+        .string()
+        .required("Preencha com seu cpf")
+        .matches(regexCpf, "O formato do CPF está incorreto!"),
     addres: yup.string().required("Preencha o nome da sua rua e número"),
     phone: yup
         .string()
         .required("Digite o número do seu telefone")
-        .min(11, "Digite o número de telefone igual o modelo (99) 99999-9999"),
+        .min(11, "Digite o número de telefone igual o modelo (99) 99999-9999")
+        .matches(regexPhone, "O formato de número de celular está incorreto!"),
 });
 
 interface IProps {
@@ -213,8 +222,6 @@ const ModalAddUser: React.FC<IProps> = ({
     };
 
     const editOrRegister = (value: Data) => {
-        
-
         if (edit) {
             api.put("/user", value)
                 .then(() => {
