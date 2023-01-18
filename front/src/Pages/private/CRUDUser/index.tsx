@@ -115,8 +115,7 @@ const CRUDUser: React.FC = () => {
                         setFeedbackSeverity={setFeedbackSeverity}
                         edit={editUser}
                         handleClose={handleClose}
-                        value={modalData}
-                        setValue={setModalData}
+                        values={modalData}
                         setRefresh={setRefresh}
                         setOpenFeedback={setOpenFeedback}
                     />

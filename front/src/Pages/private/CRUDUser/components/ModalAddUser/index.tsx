@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     TextField,
     Input,
@@ -14,6 +14,9 @@ import {
     createStyles,
     withStyles,
 } from "@material-ui/core/styles";
+import { useForm, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 
 import { Visibility, VisibilityOff, Save, Cancel } from "@material-ui/icons";
 import { green, red } from "@material-ui/core/colors";
@@ -40,13 +43,45 @@ const useStyles = makeStyles((theme: Theme) =>
             justifyContent: "center",
             flexDirection: "column",
         },
+        containInput: {
+            display: "flex",
+        },
+        containError: {
+            display: "flex",
+            flexDirection: "column",
+            maxWidth: "40%",
+            minWidth: "40%",
+        },
+        textError: {
+            fontSize: 12,
+            fontWeight: "bolder",
+            color: "#f00",
+        },
+        textErrorRight: {
+            marginLeft: 50,
+            fontSize: 12,
+            fontWeight: "bolder",
+            color: "#f00",
+        },
         modalRightContent: {
+            marginLeft: 50,
+            marginBottom: 25,
+            maxWidth: "100%",
+            minWidth: "100%",
+        },
+        containLeftContent: {
+            marginLeft: 0,
+            marginBottom: 25,
+            maxWidth: "100%",
+            minWidth: "100%",
+        },
+        modalRightButton: {
             marginLeft: 50,
             marginBottom: 25,
             maxWidth: "40%",
             minWidth: "40%",
         },
-        containLeftContent: {
+        containLeftButton: {
             marginLeft: 0,
             marginBottom: 25,
             maxWidth: "40%",
@@ -88,13 +123,33 @@ interface Data {
     actions?: any;
 }
 
+const schema = yup.object({
+    name: yup
+        .string()
+        .required("Preencha seu nome completo")
+        .min(5, "Seu nome completo deve possuir no mínimo 5 letras"),
+    email: yup
+        .string()
+        .email("Formato inválido de email")
+        .required("Preencha com seu email"),
+    password: yup
+        .string()
+        .required("Preencha sua senha")
+        .min(5, "Sua senha deve ter no mínimo 5 dígitos"),
+    cpf: yup.string().required("Preencha com seu cpf"),
+    addres: yup.string().required("Preencha o nome da sua rua e número"),
+    phone: yup
+        .string()
+        .required("Digite o número do seu telefone")
+        .min(11, "Digite o número de telefone igual o modelo (99) 99999-9999"),
+});
+
 interface IProps {
     setFeedbackSeverity: Function;
     setMessageFeedback: Function;
     edit: boolean;
     handleClose(): void;
-    value: Data;
-    setValue: Function;
+    values: Data;
     setRefresh: Function;
     setOpenFeedback: Function;
 }
@@ -104,47 +159,61 @@ const ModalAddUser: React.FC<IProps> = ({
     setMessageFeedback,
     edit,
     handleClose,
-    value,
-    setValue,
+    values,
     setRefresh,
     setOpenFeedback,
 }) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    const editOrRegister = () => {
-        if (
-            value === undefined ||
-            value === undefined ||
-            value === undefined ||
-            value === undefined ||
-            value === undefined ||
-            value.password === undefined
-        ) {
-            setFeedbackSeverity("error");
-            setMessageFeedback("Algum dado não foi preenchido!");
-            setOpenFeedback(true);
-            return;
-        }
+    const {
+        control,
+        handleSubmit,
+        formState: { errors },
+        setValue,
+    } = useForm<Data>({
+        resolver: yupResolver(schema),
+    });
 
-        if (
-            value.addres.length < 4 ||
-            value.cpf.length < 4 ||
-            value.email.length < 4 ||
-            value.name.length < 4 ||
-            value.phone.length < 4
-        ) {
-            setFeedbackSeverity("error");
-            setMessageFeedback("Os dados são inválidos!");
-            setOpenFeedback(true);
-            return;
-        }
+    const setDefaultValues = (valuesData: Data) => {
+        setValue("cpf", valuesData.cpf);
+        setValue("email", valuesData.email);
+        setValue("name", valuesData.name);
+        setValue("addres", valuesData.addres);
+        setValue("password", valuesData.password);
+        setValue("phone", valuesData.phone);
+    };
 
-        if (value.password?.length < 4) {
-            setFeedbackSeverity("error");
-            setMessageFeedback("Os dados são inválidos!");
-            setOpenFeedback(true);
-            return;
+    useEffect(() => setDefaultValues(values), []);
+
+    const showError: Function = (data: string) => {
+        setFeedbackSeverity("error");
+        setMessageFeedback(data);
+        setOpenFeedback(true);
+    };
+
+    const feedBackError = (data: any) => {
+        if (data.cpf) {
+            showError(data.cpf.message);
         }
+        if (data.password) {
+            showError(data.password.message);
+        }
+        if (data.name) {
+            showError(data.name.message);
+        }
+        if (data.email) {
+            showError(data.email.message);
+        }
+        if (data.addres) {
+            showError(data.addres.message);
+        }
+        if (data.phone) {
+            showError(data.phone.message);
+        }
+    };
+
+    const editOrRegister = (value: Data) => {
+        
 
         if (edit) {
             api.put("/user", value)
@@ -187,87 +256,162 @@ const ModalAddUser: React.FC<IProps> = ({
                 {edit ? "Editar" : "Adicionar"} usuário
             </h3>
             <div id="simple-modal-description" className="modalAllContent">
-                <div>
-                    <TextField
-                        defaultValue={value?.name}
-                        onChange={e =>
-                            setValue({ ...value, name: e.target.value })
-                        }
-                        id="standard-basic"
-                        label="Nome"
-                        className={classes.containLeftContent}
-                    />
-                    <TextField
-                        defaultValue={value?.email}
-                        onChange={e =>
-                            setValue({ ...value, email: e.target.value })
-                        }
-                        disabled={edit}
-                        id="standard-basic"
-                        label="Email"
-                        className={classes.modalRightContent}
-                    />
-                </div>
-                <div>
-                    <TextField
-                        defaultValue={value?.phone}
-                        onChange={e =>
-                            setValue({ ...value, phone: e.target.value })
-                        }
-                        id="standard-basic"
-                        label="Telefone"
-                        className={classes.containLeftContent}
-                    />
-                    <TextField
-                        defaultValue={value?.addres}
-                        onChange={e =>
-                            setValue({ ...value, addres: e.target.value })
-                        }
-                        id="standard-basic"
-                        label="Endereço"
-                        className={classes.modalRightContent}
-                    />
-                </div>
-                <div>
-                    <TextField
-                        defaultValue={value?.cpf}
-                        onChange={e =>
-                            setValue({ ...value, cpf: e.target.value })
-                        }
-                        disabled={edit}
-                        id="standard-basic"
-                        label="CPF"
-                        className={classes.containLeftContent}
-                    />
-                    <FormControl className={classes.modalRightContent}>
-                        <InputLabel htmlFor="standard-adornment-password">
-                            Password
-                        </InputLabel>
-                        <Input
-                            id="standard-adornment-password"
-                            type={showPassword ? "text" : "password"}
-                            defaultValue={value?.password}
-                            onChange={e =>
-                                setValue({ ...value, password: e.target.value })
-                            }
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={() =>
-                                            setShowPassword(!showPassword)
-                                        }
-                                    >
-                                        {showPassword ? (
-                                            <Visibility />
-                                        ) : (
-                                            <VisibilityOff />
-                                        )}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
+                <div className={classes.containInput}>
+                    <div className={classes.containError}>
+                        {errors.name && (
+                            <span className={classes.textError}>
+                                {errors.name?.message}
+                            </span>
+                        )}
+                        <Controller
+                            control={control}
+                            name="name"
+                            render={({ field: { onChange, value } }) => (
+                                <TextField
+                                    value={value}
+                                    onChange={onChange}
+                                    id="standard-basic"
+                                    label="Nome"
+                                    className={classes.containLeftContent}
+                                />
+                            )}
                         />
-                    </FormControl>
+                    </div>
+
+                    <div className={classes.containError}>
+                        {errors.email && (
+                            <span className={classes.textErrorRight}>
+                                {errors.email?.message}
+                            </span>
+                        )}
+                        <Controller
+                            control={control}
+                            name="email"
+                            render={({ field: { onChange, value } }) => (
+                                <TextField
+                                    value={value}
+                                    onChange={onChange}
+                                    disabled={edit}
+                                    id="standard-basic"
+                                    label="Email"
+                                    className={classes.modalRightContent}
+                                />
+                            )}
+                        />
+                    </div>
+                </div>
+                <div className={classes.containInput}>
+                    <div className={classes.containError}>
+                        {errors.phone && (
+                            <span className={classes.textError}>
+                                {errors.phone?.message}
+                            </span>
+                        )}
+                        <Controller
+                            control={control}
+                            name="phone"
+                            render={({ field: { onChange, value } }) => (
+                                <TextField
+                                    value={value}
+                                    onChange={onChange}
+                                    id="standard-basic"
+                                    label="Telefone"
+                                    className={classes.containLeftContent}
+                                />
+                            )}
+                        />
+                    </div>
+
+                    <div className={classes.containError}>
+                        {errors.addres && (
+                            <span className={classes.textErrorRight}>
+                                {errors.addres?.message}
+                            </span>
+                        )}
+                        <Controller
+                            control={control}
+                            name="addres"
+                            render={({ field: { onChange, value } }) => (
+                                <TextField
+                                    value={value}
+                                    onChange={onChange}
+                                    id="standard-basic"
+                                    label="Endereço"
+                                    className={classes.modalRightContent}
+                                />
+                            )}
+                        />
+                    </div>
+                </div>
+                <div className={classes.containInput}>
+                    <div className={classes.containError}>
+                        {errors.cpf && (
+                            <span className={classes.textError}>
+                                {errors.cpf?.message}
+                            </span>
+                        )}
+                        <Controller
+                            control={control}
+                            name="cpf"
+                            render={({ field: { onChange, value } }) => (
+                                <TextField
+                                    value={value}
+                                    onChange={onChange}
+                                    disabled={edit}
+                                    id="standard-basic"
+                                    label="CPF"
+                                    className={classes.containLeftContent}
+                                />
+                            )}
+                        />
+                    </div>
+
+                    <div className={classes.containError}>
+                        {errors.password && (
+                            <span className={classes.textErrorRight}>
+                                {errors.password?.message}
+                            </span>
+                        )}
+                        <Controller
+                            control={control}
+                            name="password"
+                            render={({ field: { onChange, value } }) => (
+                                <FormControl
+                                    className={classes.modalRightContent}
+                                >
+                                    <InputLabel htmlFor="standard-adornment-password">
+                                        Password
+                                    </InputLabel>
+                                    <Input
+                                        id="standard-adornment-password"
+                                        type={
+                                            showPassword ? "text" : "password"
+                                        }
+                                        value={value}
+                                        onChange={onChange}
+                                        endAdornment={
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    aria-label="toggle password visibility"
+                                                    onClick={() =>
+                                                        setShowPassword(
+                                                            !showPassword
+                                                        )
+                                                    }
+                                                >
+                                                    {showPassword ? (
+                                                        <Visibility />
+                                                    ) : (
+                                                        <VisibilityOff />
+                                                    )}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        }
+                                    />
+                                </FormControl>
+                            )}
+                        />
+                    </div>
                 </div>
                 <div className="containButton">
                     <ColorGreen
@@ -279,8 +423,8 @@ const ModalAddUser: React.FC<IProps> = ({
                                 className={classes.containIconSave}
                             />
                         }
-                        onClick={editOrRegister}
-                        className={classes.containLeftContent}
+                        onClick={handleSubmit(editOrRegister, feedBackError)}
+                        className={classes.containLeftButton}
                     >
                         <span className={classes.containIconSave}>Salvar</span>
                     </ColorGreen>
@@ -289,7 +433,7 @@ const ModalAddUser: React.FC<IProps> = ({
                         color="primary"
                         startIcon={<Cancel />}
                         onClick={handleClose}
-                        className={classes.modalRightContent}
+                        className={classes.modalRightButton}
                     >
                         Cancelar
                     </ColorRed>
