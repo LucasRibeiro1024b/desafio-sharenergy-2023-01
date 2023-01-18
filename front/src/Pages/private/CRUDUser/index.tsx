@@ -40,6 +40,7 @@ const CRUDUser: React.FC = () => {
     const [feedbackSeverity, setFeedbackSeverity] = useState<any>();
     const [modalData, setModalData] = useState<Data>({} as Data);
     const [editUser, setEditUser] = useState<boolean>(false);
+    const [refresh, setRefresh] = useState<boolean>(true);
 
     const handleOpen = (value?: Data) => {
         if (value !== undefined) setModalData(value);
@@ -110,10 +111,14 @@ const CRUDUser: React.FC = () => {
                     className={classes.modal}
                 >
                     <ModalAddUser
+                        setMessageFeedback={setMessageFeedback}
+                        setFeedbackSeverity={setFeedbackSeverity}
                         edit={editUser}
                         handleClose={handleClose}
                         value={modalData}
                         setValue={setModalData}
+                        setRefresh={setRefresh}
+                        setOpenFeedback={setOpenFeedback}
                     />
                 </Modal>
                 <TableCrud
@@ -122,6 +127,9 @@ const CRUDUser: React.FC = () => {
                     setModalData={setModalData}
                     setEditUser={setEditUser}
                     setOpen={setOpen}
+                    refresh={refresh}
+                    setRefresh={setRefresh}
+                    setOpenFeedback={setOpenFeedback}
                 />
             </div>
             <Footer colorWhite={false} />

@@ -14,9 +14,10 @@ import {
     createStyles,
     withStyles,
 } from "@material-ui/core/styles";
+
 import { Visibility, VisibilityOff, Save, Cancel } from "@material-ui/icons";
 import { green, red } from "@material-ui/core/colors";
-
+import { api } from "../../../../../Services/API";
 import "./index.css";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -88,26 +89,86 @@ interface Data {
 }
 
 interface IProps {
+    setFeedbackSeverity: Function;
+    setMessageFeedback: Function;
     edit: boolean;
     handleClose(): void;
     value: Data;
     setValue: Function;
+    setRefresh: Function;
+    setOpenFeedback: Function;
 }
 
 const ModalAddUser: React.FC<IProps> = ({
+    setFeedbackSeverity,
+    setMessageFeedback,
     edit,
     handleClose,
     value,
     setValue,
+    setRefresh,
+    setOpenFeedback,
 }) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
 
-    /*
     const editOrRegister = () => {
-        api.post("/user", value).then(({data}) => console.log(data))
-        api.put("/user", value).then(({data}) => console.log(data))
-    }
-    */
+        if (
+            value.addres.length < 4 ||
+            value.cpf.length < 4 ||
+            value.email.length < 4 ||
+            value.name.length < 4 ||
+            value.phone.length < 4
+        ) {
+            setFeedbackSeverity("error");
+            setMessageFeedback("Os dados são inválidos!");
+            setOpenFeedback(true);
+            return;
+        }
+
+        if (value.password === undefined) {
+            setFeedbackSeverity("error");
+            setMessageFeedback("Os dados são inválidos!");
+            setOpenFeedback(true);
+            return;
+        }
+
+        if (value.password?.length < 4) {
+            setFeedbackSeverity("error");
+            setMessageFeedback("Os dados são inválidos!");
+            setOpenFeedback(true);
+            return;
+        }
+
+        if (edit) {
+            api.put("/user", value)
+                .then(() => {
+                    setFeedbackSeverity("success");
+                    setMessageFeedback("Usuário editado com sucesso!");
+                    setRefresh(true);
+                    setOpenFeedback(true);
+                })
+                .catch(() => {
+                    setFeedbackSeverity("error");
+                    setMessageFeedback("Não foi possível editar o usuário!");
+                    setOpenFeedback(true);
+                });
+        } else {
+            api.post("/user", value)
+                .then(() => {
+                    setFeedbackSeverity("success");
+                    setMessageFeedback("Usuário adicionado com sucesso!");
+                    setRefresh(true);
+                    setOpenFeedback(true);
+                })
+                .catch(() => {
+                    setFeedbackSeverity("error");
+                    setMessageFeedback(
+                        "Não foi possível adicionar o usuário, já possuí um usuário com este email ou cpf!"
+                    );
+                    setOpenFeedback(true);
+                });
+        }
+    };
 
     const classes = useStyles();
 
@@ -209,6 +270,7 @@ const ModalAddUser: React.FC<IProps> = ({
                                 className={classes.containIconSave}
                             />
                         }
+                        onClick={editOrRegister}
                         className={classes.containLeftContent}
                     >
                         <span className={classes.containIconSave}>Salvar</span>

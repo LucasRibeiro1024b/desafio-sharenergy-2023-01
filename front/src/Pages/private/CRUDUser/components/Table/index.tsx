@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Paper,
     Table,
@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { Edit, Delete } from "@material-ui/icons";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import Skeleton from "@material-ui/lab/Skeleton";
 
 import { api } from "../../../../../Services/API";
 
@@ -62,7 +63,7 @@ interface Data {
     actions?: any;
 }
 
-function createData(
+/* function createData(
     name: string,
     email: string,
     phone: string,
@@ -88,7 +89,7 @@ const rows = [
     createData("user13", "user13", "146793744", "alameda", "17098246"),
     createData("user14", "user14", "200962417", "alameda", "923768"),
     createData("user15", "user15", "210147125", "alameda", "8515767"),
-];
+]; */
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -121,9 +122,12 @@ interface IProps {
     setModalData: Function;
     setEditUser: Function;
     setOpen: Function;
+    refresh: boolean;
+    setRefresh: Function;
+    setOpenFeedback: Function;
 }
 
-/* global HTMLInputElement */
+/* global HTMLInputElement, window */
 
 const TableCrud: React.FC<IProps> = ({
     setFeedbackSeverity,
@@ -131,9 +135,14 @@ const TableCrud: React.FC<IProps> = ({
     setModalData,
     setEditUser,
     setOpen,
+    refresh,
+    setRefresh,
+    setOpenFeedback,
 }) => {
     const [page, setPage] = useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
+    const [rows, setRows] = useState<Data[]>([] as Data[]);
+    const [ready, setReady] = useState<boolean>(false);
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -153,15 +162,43 @@ const TableCrud: React.FC<IProps> = ({
             .then(() => {
                 setFeedbackSeverity("success");
                 setMessageFeedback("Usuário excluido com sucesso!");
+                setOpenFeedback(true);
+                setRefresh(true);
             })
             .catch(() => {
                 setFeedbackSeverity("error");
                 setMessageFeedback("Não foi possível excluir o usuário!");
+                setOpenFeedback(true);
             });
     };
 
+    const getAllUsers: Function = () => {
+        api.get("/user")
+            .then(({ data }) => {
+                setRows(data);
+                setReady(true);
+            })
+            .catch(() => {
+                setFeedbackSeverity("error");
+                setMessageFeedback("Não foi possível encontrar os usuários!");
+                setOpenFeedback(true);
+            });
+    };
+
+    useEffect(() => {
+        if (refresh) {
+            getAllUsers();
+            setRefresh(false);
+        }
+    }, [refresh]);
+
     const classes = useStyles();
 
+    if (!ready) {
+        return (
+            <Skeleton variant="rect" width={window.screen.width} height={500} />
+        );
+    }
     return (
         <Paper className={classes.root}>
             <TableContainer className={classes.container}>
