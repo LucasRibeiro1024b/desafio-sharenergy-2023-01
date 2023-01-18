@@ -22,6 +22,7 @@ import { Visibility, VisibilityOff, Save, Cancel } from "@material-ui/icons";
 import { green, red } from "@material-ui/core/colors";
 import { api } from "../../../../../Services/API";
 import "./index.css";
+import { checkValidCpfCnpj } from "../../../../../Utils";
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -123,10 +124,14 @@ interface Data {
     actions?: any;
 }
 
-const regexPhone =
-    /^(?:+)[0-9]{2}s?(?:()[0-9]{2}(?:))s?[0-9]{4,5}(?:-)[0-9]{4}$/;
 /* eslint-disable-next-line */
-const regexCpf = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/;
+const regex = new RegExp(
+    "^((1[1-9])|([2-9][0-9]))((3[0-9]{3}[0-9]{4})|(9[0-9]{3}[0-9]{5}))$"
+);
+/* eslint-disable-next-line */
+const regex2 = new RegExp(
+    "^(([0-9]{11}))$"
+);
 
 const schema = yup.object({
     name: yup
@@ -144,13 +149,13 @@ const schema = yup.object({
     cpf: yup
         .string()
         .required("Preencha com seu cpf")
-        .matches(regexCpf, "O formato do CPF está incorreto!"),
+        .matches(regex2, "O formato do CPF está incorreto!"),
     addres: yup.string().required("Preencha o nome da sua rua e número"),
     phone: yup
         .string()
         .required("Digite o número do seu telefone")
         .min(11, "Digite o número de telefone igual o modelo (99) 99999-9999")
-        .matches(regexPhone, "O formato de número de celular está incorreto!"),
+        .matches(regex, "O formato de número de celular está incorreto!"),
 });
 
 interface IProps {
@@ -222,6 +227,16 @@ const ModalAddUser: React.FC<IProps> = ({
     };
 
     const editOrRegister = (value: Data) => {
+        const cpf1 = value.cpf.slice(0, 3) 
+        const cpf2 = value.cpf.slice(3, 6) 
+        const cpf3 = value.cpf.slice(6, 9) 
+        const cpf4 = value.cpf.slice(9, 11) 
+
+        if (!checkValidCpfCnpj(`${cpf1}.${cpf2}.${cpf3}-${cpf4}`)) {
+            showError("O CPF informado é inválido!")
+            return
+        }
+
         if (edit) {
             api.put("/user", value)
                 .then(() => {
