@@ -29,7 +29,7 @@ const columns: Column[] = [
     { id: "email", label: "E-mail", minWidth: 100, align: "center" },
     {
         id: "phone",
-        label: "phone",
+        label: "Telefone",
         minWidth: 170,
         align: "center",
     },
@@ -62,34 +62,6 @@ interface Data {
     password?: string;
     actions?: any;
 }
-
-/* function createData(
-    name: string,
-    email: string,
-    phone: string,
-    addres: string,
-    cpf: string
-): Data {
-    return { name, email, phone, addres, cpf };
-}
-
-const rows = [
-    createData("user1", "user1", "1324171354", "alameda", "3287263"),
-    createData("user2", "user2", "1403500365", "alameda", "9596961"),
-    createData("user3", "user3", "60483973", "alameda", "301340"),
-    createData("user4", "user4", "327167434", "alameda", "9833520"),
-    createData("user5", "user5", "37602103", "alameda", "9984670"),
-    createData("user6", "user6", "25475400", "alameda", "7692024"),
-    createData("user7", "user7", "83019200", "alameda", "357578"),
-    createData("user8", "user8", "4857000", "alameda", "70273"),
-    createData("user9", "user9", "126577691", "alameda", "1972550"),
-    createData("user10", "user10", "126317000", "alameda", "377973"),
-    createData("user11", "user11", "67022000", "alameda", "640679"),
-    createData("user12", "user12", "67545757", "alameda", "242495"),
-    createData("user13", "user13", "146793744", "alameda", "17098246"),
-    createData("user14", "user14", "200962417", "alameda", "923768"),
-    createData("user15", "user15", "210147125", "alameda", "8515767"),
-]; */
 
 const useStyles = makeStyles(() =>
     createStyles({
@@ -276,8 +248,8 @@ const TableCrud: React.FC<IProps> = ({
                                                             }
                                                             onClick={() =>
                                                                 deleteUser(
-                                                                    value.cpf,
-                                                                    value.email
+                                                                    row.cpf,
+                                                                    row.email
                                                                 )
                                                             }
                                                         >

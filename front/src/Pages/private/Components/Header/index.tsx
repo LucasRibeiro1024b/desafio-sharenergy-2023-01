@@ -112,6 +112,7 @@ const useStyles = makeStyles((theme: Theme) =>
         lastContainIcon: {
             display: "flex",
             alignItems: "center",
+            cursor: "pointer",
             [theme.breakpoints.up("xs")]: {
                 position: "relative",
                 right: 23,

@@ -113,19 +113,26 @@ const ModalAddUser: React.FC<IProps> = ({
 
     const editOrRegister = () => {
         if (
+            value === undefined ||
+            value === undefined ||
+            value === undefined ||
+            value === undefined ||
+            value === undefined ||
+            value.password === undefined
+        ) {
+            setFeedbackSeverity("error");
+            setMessageFeedback("Algum dado não foi preenchido!");
+            setOpenFeedback(true);
+            return;
+        }
+
+        if (
             value.addres.length < 4 ||
             value.cpf.length < 4 ||
             value.email.length < 4 ||
             value.name.length < 4 ||
             value.phone.length < 4
         ) {
-            setFeedbackSeverity("error");
-            setMessageFeedback("Os dados são inválidos!");
-            setOpenFeedback(true);
-            return;
-        }
-
-        if (value.password === undefined) {
             setFeedbackSeverity("error");
             setMessageFeedback("Os dados são inválidos!");
             setOpenFeedback(true);
@@ -146,6 +153,7 @@ const ModalAddUser: React.FC<IProps> = ({
                     setMessageFeedback("Usuário editado com sucesso!");
                     setRefresh(true);
                     setOpenFeedback(true);
+                    handleClose();
                 })
                 .catch(() => {
                     setFeedbackSeverity("error");
@@ -159,6 +167,7 @@ const ModalAddUser: React.FC<IProps> = ({
                     setMessageFeedback("Usuário adicionado com sucesso!");
                     setRefresh(true);
                     setOpenFeedback(true);
+                    handleClose();
                 })
                 .catch(() => {
                     setFeedbackSeverity("error");
@@ -193,7 +202,7 @@ const ModalAddUser: React.FC<IProps> = ({
                         onChange={e =>
                             setValue({ ...value, email: e.target.value })
                         }
-                        disabled={!edit}
+                        disabled={edit}
                         id="standard-basic"
                         label="Email"
                         className={classes.modalRightContent}
@@ -225,7 +234,7 @@ const ModalAddUser: React.FC<IProps> = ({
                         onChange={e =>
                             setValue({ ...value, cpf: e.target.value })
                         }
-                        disabled={!edit}
+                        disabled={edit}
                         id="standard-basic"
                         label="CPF"
                         className={classes.containLeftContent}

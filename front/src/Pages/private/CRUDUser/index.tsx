@@ -88,7 +88,7 @@ const CRUDUser: React.FC = () => {
                 <div
                     className="contain-add-user"
                     onClick={() => {
-                        setEditUser(true);
+                        setEditUser(false);
                         setModalData({
                             name: "",
                             email: "",
