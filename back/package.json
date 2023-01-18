@@ -17,7 +17,8 @@
       "mongoose": "^6.8.3",
       "morgan": "^1.10.0",
       "reflect-metadata": "^0.1.13",
-      "typeorm": "0.3.11"
+      "typeorm": "0.3.11",
+      "zod": "^3.20.2"
    },
    "scripts": {
       "dev": "nodemon --exec ts-node src/index.ts",

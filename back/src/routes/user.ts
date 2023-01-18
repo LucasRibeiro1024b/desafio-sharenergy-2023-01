@@ -1,4 +1,6 @@
 import { Router } from "express"
+import { z } from "zod"
+
 import { userController, IDataUser} from "../controller/userController"
 import { User } from "../entity/User"
 
@@ -16,7 +18,16 @@ userRouter.get("/", async (req, res) => {
 
 userRouter.post("/", async (req, res) => {
   try{
-    const { name, password, email, cpf, addres, phone } = req.body
+    const createUserZod = z.object({
+      name: z.string().min(3),
+      password: z.string().min(5),
+      email: z.string().email(),
+      cpf: z.string().min(11),
+      addres: z.string().min(1),
+      phone: z.string().min(10),  
+    })
+
+    const { name, password, email, cpf, addres, phone } = createUserZod.parse(req.body)
 
     const checkIfEmailWasRegistred = await userCtrl.recoverUser(email, cpf)
 
@@ -37,7 +48,16 @@ userRouter.post("/", async (req, res) => {
 
 userRouter.put("/", async (req, res) => {
   try{
-    const { name, password, email, cpf, addres, phone } = req.body
+    const editUserZod = z.object({
+      name: z.string().min(3),
+      password: z.string().min(5),
+      email: z.string().email(),
+      cpf: z.string().min(11),
+      addres: z.string().min(1),
+      phone: z.string().min(10),   
+    })
+
+    const { name, password, email, cpf, addres, phone } = editUserZod.parse(req.body)
 
     const data: IDataUser = {
       name, password, email, cpf, addres, phone
@@ -57,7 +77,12 @@ userRouter.put("/", async (req, res) => {
 
 userRouter.delete("/", async (req, res) => {
   try {
-    const { email, cpf } = req.body
+    const deleteUserZod = z.object({
+      email: z.string().email(),
+      cpf: z.string().min(11),  
+    })
+
+    const { email, cpf } = deleteUserZod.parse(req.body)
 
     const userSelected = await userCtrl.recoverUser(email, cpf)
 

@@ -1,4 +1,6 @@
 import { Router } from "express"
+import { z } from "zod"
+
 import { adminController } from "../controller/userAdminController"
 import { UserAdmin } from "../entity/UserAdmin"
 
@@ -7,6 +9,11 @@ const adminCtrl = new adminController()
 
 adminRouter.post("/login", async (req, res) => {
   try{
+    const loginData = z.object({
+      username: z.string().min(5),
+      password: z.string().min(5),
+    })
+
     const { username, password } = req.body
 
     const response = await adminCtrl.recoverAllAdmins()
