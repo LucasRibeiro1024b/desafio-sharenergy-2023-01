@@ -27,7 +27,7 @@ type name = {
 
 type login = {
     username: string;
-    md5: string;
+    uuid: string;
 };
 
 type age = {
@@ -65,14 +65,14 @@ let isRequested: boolean = false;
 
 interface IPropsCard {
     value: IFakerUser;
-    index: number;
+    index?: number;
 }
 
 const Cards: React.FC<IPropsCard> = ({ value, index }) => {
     const classes = useStyles();
 
     return (
-        <div key={index}>
+        <div key={`${value.login.uuid}${index !== undefined && "1a2b"}`}>
             <Card className={classes.root}>
                 <CardActionArea className={classes.action}>
                     <CardMedia
@@ -202,11 +202,11 @@ const Home: React.FC = () => {
                     ) : (
                         fakeUsersData.length > 1 &&
                         fakeUsersData.map(
-                            (value, index) =>
+                            value =>
                                 value.name.first.includes(search) ||
                                 value.login.username.includes(search) ||
                                 (value.email.includes(search) && (
-                                    <Cards value={value} index={index} />
+                                    <Cards value={value} />
                                 ))
                         )
                     )}

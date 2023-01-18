@@ -2,6 +2,7 @@
     background: url(../../../Assets/bghome.gif);
     background-attachment: fixed;
 	background-position: center center;
+    background-size: cover;
     min-width: 98vw;
     min-height: 100vh;
     display: flex;
@@ -49,5 +50,5 @@
     color: darkgray;
     margin-left: 5px;
     position: relative;
-    top: 4px;
+    top: 2px;
 }

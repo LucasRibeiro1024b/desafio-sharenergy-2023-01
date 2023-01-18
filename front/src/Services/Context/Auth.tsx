@@ -1,4 +1,4 @@
-import React, { createContext, useState, useMemo } from "react";
+import { createContext, useState, useMemo, useEffect } from "react";
 
 export interface IUserData {
     username: string;
@@ -14,9 +14,21 @@ export interface IContextData {
 
 export const AuthContext = createContext<IContextData>({} as IContextData);
 
+/* global localStorage */
+
 const AuthProvider = ({ children }: any) => {
     const [userData, setUserData] = useState<IUserData>({} as IUserData);
     const [logined, setLogined] = useState<boolean>(false);
+
+    useEffect(() => {
+        const username = localStorage.getItem("username");
+        const password = localStorage.getItem("password");
+
+        if (username !== null && password !== null) {
+            setUserData({ username, password });
+            setLogined(true);
+        }
+    }, [])
 
     const valueContext = useMemo(
         () => ({
