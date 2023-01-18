@@ -52,19 +52,3 @@
     position: relative;
     top: 2px;
 }
-
-.title-modal {
-    font-family: Playfair;
-    font-size: 20px;
-    font-weight: 800;
-    letter-spacing: 3;
-    text-align: center;
-}
-
-.modalAllContent {
-    margin-left: 30px;
-}
-
-.containButton {
-    margin-top: 25px;
-}
