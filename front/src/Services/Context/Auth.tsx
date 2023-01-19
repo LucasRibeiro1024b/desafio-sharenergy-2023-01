@@ -18,7 +18,7 @@ export const AuthContext = createContext<IContextData>({} as IContextData);
 
 const AuthProvider = ({ children }: any) => {
     const [userData, setUserData] = useState<IUserData>({} as IUserData);
-    const [logined, setLogined] = useState<boolean>(true);
+    const [logined, setLogined] = useState<boolean>(false);
 
     useEffect(() => {
         const username = localStorage.getItem("username");
