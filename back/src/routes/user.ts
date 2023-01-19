@@ -22,9 +22,9 @@ userRouter.post("/", async (req, res) => {
       name: z.string().min(3),
       password: z.string().min(5),
       email: z.string().email(),
-      cpf: z.string().min(11),
+      cpf: z.string().min(14).max(14),
       addres: z.string().min(1),
-      phone: z.string().min(10),  
+      phone: z.string().min(16).max(16),  
     })
 
     const { name, password, email, cpf, addres, phone } = createUserZod.parse(req.body)
@@ -52,9 +52,9 @@ userRouter.put("/", async (req, res) => {
       name: z.string().min(3),
       password: z.string().min(5),
       email: z.string().email(),
-      cpf: z.string().min(11),
+      cpf: z.string().min(14).max(14),
       addres: z.string().min(1),
-      phone: z.string().min(10),   
+      phone: z.string().min(16).max(16),   
     })
 
     const { name, password, email, cpf, addres, phone } = editUserZod.parse(req.body)
@@ -79,7 +79,7 @@ userRouter.delete("/", async (req, res) => {
   try {
     const deleteUserZod = z.object({
       email: z.string().email(),
-      cpf: z.string().min(11),  
+      cpf: z.string().min(14).max(14),  
     })
 
     const { email, cpf } = deleteUserZod.parse(req.body)
