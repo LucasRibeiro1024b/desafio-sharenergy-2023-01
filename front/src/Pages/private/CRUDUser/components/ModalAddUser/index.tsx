@@ -7,6 +7,7 @@ import {
     InputAdornment,
     FormControl,
     Button,
+    CircularProgress,
 } from "@material-ui/core";
 import {
     makeStyles,
@@ -140,14 +141,14 @@ const schema = yup.object({
     cpf: yup
         .string()
         .required("Preencha com seu cpf")
-        .min(14, "Digite o número de telefone igual o modelo (99) 99999-9999")
-        .max(14, "Digite o número de telefone igual o modelo (99) 99999-9999"),
+        .min(14, "Digite o número de CPF igual o modelo 999.999.999-99")
+        .max(14, "Digite o número de CPF igual o modelo 999.999.999-99"),
     addres: yup.string().required("Preencha o nome da sua rua e número"),
     phone: yup
         .string()
         .required("Digite o número do seu telefone")
-        .min(16, "Digite o número de telefone igual o modelo (99) 99999-9999")
-        .max(16, "Digite o número de telefone igual o modelo (99) 99999-9999"),
+        .min(14, "Digite o número de telefone igual o modelo (99) 99999-9999!")
+        .max(16, "Digite o número de telefone igual o modelo (99) 99999-9999!"),
 });
 
 interface IProps {
@@ -170,6 +171,7 @@ const ModalAddUser: React.FC<IProps> = ({
     setOpenFeedback,
 }) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [isRequest, setIsRequest] = useState<boolean>(false);
 
     const {
         control,
@@ -223,6 +225,7 @@ const ModalAddUser: React.FC<IProps> = ({
             showError("O CPF informado é inválido!");
             return;
         }
+        setIsRequest(true);       
 
         if (edit) {
             api.put("/user", value)
@@ -237,7 +240,8 @@ const ModalAddUser: React.FC<IProps> = ({
                     setFeedbackSeverity("error");
                     setMessageFeedback("Não foi possível editar o usuário!");
                     setOpenFeedback(true);
-                });
+                })
+                .finally(() => setIsRequest(false));
         } else {
             api.post("/user", value)
                 .then(() => {
@@ -430,6 +434,7 @@ const ModalAddUser: React.FC<IProps> = ({
                     <ColorGreen
                         variant="contained"
                         color="primary"
+	     disabled={isRequest}
                         startIcon={
                             <Save
                                 color="inherit"
@@ -439,7 +444,7 @@ const ModalAddUser: React.FC<IProps> = ({
                         onClick={handleSubmit(editOrRegister, feedBackError)}
                         className={classes.containLeftButton}
                     >
-                        <span className={classes.containIconSave}>Salvar</span>
+                        {isRequest ? <CircularProgress /> : <span className={classes.containIconSave}>Salvar</span>}
                     </ColorGreen>
                     <ColorRed
                         variant="contained"

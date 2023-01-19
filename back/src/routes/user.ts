@@ -24,14 +24,13 @@ userRouter.post("/", async (req, res) => {
       email: z.string().email(),
       cpf: z.string().min(14).max(14),
       addres: z.string().min(1),
-      phone: z.string().min(16).max(16),  
+      phone: z.string().min(14).max(16),  
     })
 
     const { name, password, email, cpf, addres, phone } = createUserZod.parse(req.body)
 
     const checkIfEmailWasRegistred = await userCtrl.recoverUser(email, cpf)
 
-    console.log(checkIfEmailWasRegistred)
     if (checkIfEmailWasRegistred === null){
       const userForRegister = new User(name, email, phone, addres, cpf, password)
 
@@ -54,7 +53,7 @@ userRouter.put("/", async (req, res) => {
       email: z.string().email(),
       cpf: z.string().min(14).max(14),
       addres: z.string().min(1),
-      phone: z.string().min(16).max(16),   
+      phone: z.string().min(14).max(16),   
     })
 
     const { name, password, email, cpf, addres, phone } = editUserZod.parse(req.body)
