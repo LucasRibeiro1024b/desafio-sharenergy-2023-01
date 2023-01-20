@@ -1,3 +1,4 @@
+// variável para fazer um map para paginação
 export const pagCount = [
     { id: 0 },
     { id: 1 },
@@ -26,6 +27,7 @@ interface IStatusCode {
     valid: boolean;
 }
 
+// códigos de status da página dos gatinhos
 export const statusCode: IStatusCode[] = [
     { status: "100", valid: true },
     { status: "101", valid: true },
@@ -114,6 +116,7 @@ export const statusCode: IStatusCode[] = [
     { status: "600", valid: false },
 ];
 
+// função para verificar se o cpf é válido
 export const checkValidCpfCnpj: Function = (val: string): boolean => {
     if (val.length === 14) {
         let cpf = val.trim();
@@ -228,6 +231,7 @@ export const checkValidCpfCnpj: Function = (val: string): boolean => {
     return false;
 };
 
+// aplica mascara no cpf
 export const cpfMask = (value: string) =>
     value
         .replace(/\D/g, "")
@@ -237,6 +241,7 @@ export const cpfMask = (value: string) =>
         .replace(/(-\d{2})\d+?$/, "$1");
 
 
+// aplica mascara no número de telefone
 export const phoneMask = (value: string) => {
     let valueAux = value
     valueAux = valueAux.replace(/\D/g, '');

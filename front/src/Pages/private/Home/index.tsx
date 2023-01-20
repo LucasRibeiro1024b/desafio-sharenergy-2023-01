@@ -61,6 +61,7 @@ const useStyles = makeStyles({
 
 const numberContentUsers: number = 20;
 const auxSetUsers: IFakerUser[] = [];
+// variável para renderização condional se mostra card do usuário ou skeleton
 let isRequested: boolean = false;
 
 interface IPropsCard {
@@ -68,10 +69,12 @@ interface IPropsCard {
     index?: number;
 }
 
+// o cards e um componente e poderia ser separado mas como o arquivo é pequeno o mantive aqui
 const Cards: React.FC<IPropsCard> = ({ value, index }) => {
     const classes = useStyles();
 
     return (
+        /* key que por algum motivo não é única e nao sei explicar o porque */
         <div key={`${value.login.uuid}${index !== undefined && "1a2b"}`}>
             <Card className={classes.root}>
                 <CardActionArea className={classes.action}>
@@ -116,15 +119,23 @@ const Cards: React.FC<IPropsCard> = ({ value, index }) => {
 /* global window */
 
 const Home: React.FC = () => {
+    /* armazena todos os 500 usuários */
     const [fakeUsersData, setFakeUsersData] = useState<IFakerUser[]>(
         [] as IFakerUser[]
     );
+    /* armazena usuário de acordo com a paginação */
     const [usersPag, setUsersPag] = useState<IFakerUser[]>([] as IFakerUser[]);
+    /*
+        variável para forcar a renderização caso haja uma modificação
+        caso seja tirado não exibi os dados corretamente, ainda não consigo
+        entender o porque, acredito que tenha haver com o ciclo de vida do react
+    */
     const [, setForceRenderer] = useState<IFakerUser[]>();
     const [search, setSearch] = useState<string>("");
     const [numberPag, setNumberPag] = useState<number>(1);
     const [page, setPage] = useState<number>(1);
 
+    // seta os usuário de acordo com a paginação
     const refreshUsers: Function = (data?: IFakerUser[]) => {
         auxSetUsers.length = 0;
         pagCount.forEach(value => {
@@ -153,6 +164,7 @@ const Home: React.FC = () => {
         }
     }, []);
 
+    // Ao paginar muda o page e ativa o gatilho para mudar os usuários exibidos
     useEffect(() => {
         setUsersPag([] as IFakerUser[]);
         if (fakeUsersData.length > 1) {
@@ -161,6 +173,7 @@ const Home: React.FC = () => {
         window.scrollTo({ top: 0 });
     }, [page]);
 
+    // monitora a busca
     useEffect(() => {
         if (search.length > 0) setUsersPag([] as IFakerUser[]);
         else if (fakeUsersData.length > 1 && usersPag.length === 0) {
@@ -178,6 +191,13 @@ const Home: React.FC = () => {
                 <Header search={search} setSearch={setSearch} input />
                 <h2 className="title-name">Usuários</h2>
                 <div className="contain-cards">
+                    {/*
+                        primeiro checka se há buscas se não mostra os usuários
+                        paginados e caso sim mostra todos os usuários aplicando
+                        o filtro.
+                        segundo checka se já foi povoado com os dados caso sim
+                        mostra os cards e caso não mostra o skeleton
+                    */}
                     {search.length === 0 ? (
                         usersPag.length > 1 ? (
                             usersPag.map((value, index) => (

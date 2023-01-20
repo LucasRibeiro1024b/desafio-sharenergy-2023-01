@@ -171,6 +171,7 @@ const ModalAddUser: React.FC<IProps> = ({
     setOpenFeedback,
 }) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
+    // isRequest para mostrar loading caso esteja fazendo requisição
     const [isRequest, setIsRequest] = useState<boolean>(false);
 
     const {
@@ -182,6 +183,7 @@ const ModalAddUser: React.FC<IProps> = ({
         resolver: yupResolver(schema),
     });
 
+    // setar dados do usuário caso seja para operação de editar usuário
     const setDefaultValues = (valuesData: Data) => {
         setValue("cpf", valuesData.cpf);
         setValue("email", valuesData.email);
@@ -225,7 +227,7 @@ const ModalAddUser: React.FC<IProps> = ({
             showError("O CPF informado é inválido!");
             return;
         }
-        setIsRequest(true);       
+        setIsRequest(true);
 
         if (edit) {
             api.put("/user", value)
@@ -434,7 +436,7 @@ const ModalAddUser: React.FC<IProps> = ({
                     <ColorGreen
                         variant="contained"
                         color="primary"
-	     disabled={isRequest}
+                        disabled={isRequest}
                         startIcon={
                             <Save
                                 color="inherit"
@@ -444,7 +446,13 @@ const ModalAddUser: React.FC<IProps> = ({
                         onClick={handleSubmit(editOrRegister, feedBackError)}
                         className={classes.containLeftButton}
                     >
-                        {isRequest ? <CircularProgress /> : <span className={classes.containIconSave}>Salvar</span>}
+                        {isRequest ? (
+                            <CircularProgress />
+                        ) : (
+                            <span className={classes.containIconSave}>
+                                Salvar
+                            </span>
+                        )}
                     </ColorGreen>
                     <ColorRed
                         variant="contained"

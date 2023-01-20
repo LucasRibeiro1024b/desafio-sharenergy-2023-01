@@ -114,6 +114,7 @@ const TableCrud: React.FC<IProps> = ({
     const [page, setPage] = useState<number>(0);
     const [rowsPerPage, setRowsPerPage] = useState<number>(10);
     const [rows, setRows] = useState<Data[]>([] as Data[]);
+    // variável para renderização condiciona se mostra skeleton ou tabela
     const [ready, setReady] = useState<boolean>(false);
 
     const handleChangePage = (event: unknown, newPage: number) => {
@@ -158,6 +159,7 @@ const TableCrud: React.FC<IProps> = ({
     };
 
     useEffect(() => {
+        // checka se é preciso atualizar os dados
         if (refresh) {
             getAllUsers();
             setRefresh(false);

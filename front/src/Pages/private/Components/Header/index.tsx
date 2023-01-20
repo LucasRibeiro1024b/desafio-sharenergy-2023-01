@@ -176,6 +176,7 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
                     >
                         Sharenergy challenge
                     </Typography>
+                    {/* header so tem input search no home */}
                     {input && (
                         <div className={classes.search}>
                             <div className={classes.searchIcon}>
@@ -196,6 +197,7 @@ const Header: React.FC<IProps> = ({ search, setSearch, input }) => {
                             />
                         </div>
                     )}
+                    {/* links para página de deslogar da página */}
                     <div>
                         <ul className={classes.containIcons}>
                             <li className={classes.containIcon}>

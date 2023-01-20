@@ -22,10 +22,16 @@ const useStyles = makeStyles((theme: Theme) =>
 let isRequested = false;
 
 const PictureDog: React.FC = () => {
+    // a variável guarda o link de todas as fotos q podem ser exibidas
     const [allDogs, setAllDogs] = useState<string[]>([]);
+    /*
+        a variável guarda o número de fotos e randomicamente e escolhido para
+        mostrar outra foto quando o botão é apertado.
+     */
     const [indexPicture, setIndexPiture] = useState<number>(0);
 
     const getIndexPicture: Function = () => {
+        // gera um index aleatório
         setIndexPiture(Math.round(Math.random() * allDogs.length));
     };
 

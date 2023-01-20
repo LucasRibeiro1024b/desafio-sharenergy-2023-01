@@ -57,6 +57,7 @@ const Login: React.FC = () => {
     const [data, setData] = useState<IDataLogin>({} as IDataLogin);
     const [open, setOpen] = useState<boolean>(false);
     const [messageError, setMessageError] = useState<string>("");
+    // mostra um loading caso o esteja fazendo a requisição
     const [loading, setLoading] = useState<boolean>(false);
 
     const { setLogined, setUserData } = useContext(AuthContext);
@@ -112,6 +113,7 @@ const Login: React.FC = () => {
 
     return (
         <div>
+            {/* mostra um feedback para o usuário */}
             <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
                 <MuiAlert
                     elevation={6}

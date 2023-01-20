@@ -6,7 +6,6 @@ import MuiAlert from "@material-ui/lab/Alert";
 
 import Header from "../Components/Header";
 import Footer from "../../components/Footer";
-/* import { api } from "../../../Services/API"; */
 import "./index.css";
 import TableCrud from "./components/Table";
 import ModalAddUser from "./components/ModalAddUser";
@@ -34,6 +33,7 @@ interface Data {
 }
 
 const CRUDUser: React.FC = () => {
+    // variável para abrir o modal de adicionar ou editar usuário
     const [open, setOpen] = useState<boolean>(false);
     const [openFeedback, setOpenFeedback] = useState<boolean>(false);
     const [messageFeedback, setMessageFeedback] = useState<string>("");
@@ -67,6 +67,7 @@ const CRUDUser: React.FC = () => {
 
     return (
         <div>
+            {/* mostra um feedback para o usuário depois de uma ação */}
             <Snackbar
                 open={openFeedback}
                 autoHideDuration={4000}
