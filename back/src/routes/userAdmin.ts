@@ -7,6 +7,7 @@ import { UserAdmin } from "../entity/UserAdmin"
 export const adminRouter = Router()
 const adminCtrl = new adminController()
 
+// rota para usuário se logar no sistema
 adminRouter.post("/login", async (req, res) => {
   try{
     const loginData = z.object({
@@ -18,6 +19,7 @@ adminRouter.post("/login", async (req, res) => {
 
     const response = await adminCtrl.recoverAllAdmins()
 
+    // lógica para criar usuário default caso não esteja criado no sistema
     if (response.length === 0) {
       const newAdmin = new UserAdmin("desafiosharenergy", "sh@r3n3rgy")
       const admin = await adminCtrl.save(newAdmin)
@@ -26,7 +28,7 @@ adminRouter.post("/login", async (req, res) => {
         res.json(admin)
       }
       else res.status(401).json({message: "The user is not registred"})
-    } else {
+    } else { // lógica caso o usuario default já esteja cadastrado
       const admin = await adminCtrl.recoverByUsername(username)
       
       if (admin !== null && admin.password === password && admin.username === username) {

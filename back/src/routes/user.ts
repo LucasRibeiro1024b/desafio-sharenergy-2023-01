@@ -7,6 +7,7 @@ import { User } from "../entity/User"
 export const userRouter = Router()
 const userCtrl = new userController()
 
+// rota para buscar todos os usuários
 userRouter.get("/", async (req, res) => {
   try{
     const response = await userCtrl.recoverAllUsers()
@@ -16,6 +17,7 @@ userRouter.get("/", async (req, res) => {
   }
 })
 
+// rota para criar novo usuario
 userRouter.post("/", async (req, res) => {
   try{
     const createUserZod = z.object({
@@ -45,6 +47,7 @@ userRouter.post("/", async (req, res) => {
   }
 })
 
+// rota para editar usuario
 userRouter.put("/", async (req, res) => {
   try{
     const editUserZod = z.object({
@@ -74,6 +77,7 @@ userRouter.put("/", async (req, res) => {
   }
 })
 
+// rota para deletar usuário
 userRouter.delete("/", async (req, res) => {
   try {
     const deleteUserZod = z.object({
