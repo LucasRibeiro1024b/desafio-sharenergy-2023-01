@@ -123,7 +123,7 @@ class ClienteRepository implements Repository<Retorno<Cliente>> {
       },
 
     }).catch(
-      (err) => erro = err as any
+      (err : any) => erro = err as any
     )
 
     await this.desconectar()
