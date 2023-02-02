@@ -22,7 +22,7 @@ const defaultValueCliente :IContextoCliente = {
 const ContextoCliente = createContext<IContextoCliente>(defaultValueCliente)
 
 
-function ClienteProvider ({ children }: IClienteProvider) {
+export function ClienteProvider ({ children }: IClienteProvider) {
   const [clientes, setClientes] = useState<ICliente[] | undefined>()
 
  async function atualizarDados(){

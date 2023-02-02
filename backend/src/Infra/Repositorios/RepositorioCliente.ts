@@ -84,13 +84,13 @@ class ClienteRepository implements Repository<Retorno<Cliente>> {
       where: {
         id
       }
-    }).catch(err =>
-      err
+    }).catch((err:any) =>
+      console.log(err)
     )
     await this.desconectar()
     return {
       id,
-      erros: resultado,
+      erros: resultado as any,
       mensagem: "Cliente excluído com sucesso"
     }
   }
@@ -123,7 +123,7 @@ class ClienteRepository implements Repository<Retorno<Cliente>> {
       },
 
     }).catch(
-      err => erro = err
+      (err : any) => erro = err as any
     )
 
     await this.desconectar()

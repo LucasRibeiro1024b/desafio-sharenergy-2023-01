@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "backend projeto",
   "main": "out/server.js",
+
   "scripts": {
     "test": "test",
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules ./server.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node out/server.js"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"

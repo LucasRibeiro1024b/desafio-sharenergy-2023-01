@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'antd/dist/reset.css';
 import App from './App';
-
+import {ClienteProvider} from "./services/Clientes/contexto/ContextoCliente"
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <App />
+     <ClienteProvider>
+       <App />
+      </ClienteProvider>
   </React.StrictMode>
 );
 
