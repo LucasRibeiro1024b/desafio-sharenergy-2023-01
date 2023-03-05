@@ -17,7 +17,7 @@ app.use("/api",routerUsuarios)
 app.use("/api", routerGatos)
 app.use("/api", routerClientes)
 
-const port = process.env.PORT_SERVER ?? 3001
+const port = process.env.PORT_SERVER || 3001
 
 app.listen(port,() =>{
   console.log(`Você está conectado na porta ${port}`)
