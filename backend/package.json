@@ -11,7 +11,7 @@
     "start": "node out/server.js"
   },
   "prisma": {
-    "seed": "ts-node prisma/seed.ts"
+    "schema": " src/infra/prisma/schema.prisma"
   },
   "author": "Rafael carlos de souza",
   "license": "ISC",
