@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors"
-import  routerLogin from "./src/Controllers/LoginController";
+import routerLogin from "./src/Controllers/LoginController";
 import routerUsuarios from "./src/Controllers/UsuariosController";
 import routerGatos from "./src/Controllers/GatosController";
 import routerClientes from "./src/Controllers/ClientesController";
@@ -10,7 +10,7 @@ import routerClientes from "./src/Controllers/ClientesController";
 const app = express();
 
 
-app.use(cors({origin:"http://localhost:3000"}))
+app.use(cors({origin:"*"}))
 app.use(express.json());
 app.use("/api",routerLogin)
 app.use("/api",routerUsuarios)

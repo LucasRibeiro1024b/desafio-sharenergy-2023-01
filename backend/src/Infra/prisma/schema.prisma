@@ -16,7 +16,7 @@ model Cliente {
   email    String
   telefone String
   endereco  Endereco?
-  cpf       String   
+  cpf       String
   create_at DateTime @default(now())
   update_at DateTime @updatedAt
 }
