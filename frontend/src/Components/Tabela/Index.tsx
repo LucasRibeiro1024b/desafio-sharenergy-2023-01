@@ -43,6 +43,7 @@ function Tabela<T extends object = never>({
           onChange={onShowSizeChange}
           defaultPageSize={1}
           total={params?.total}
+
         />
     </S.ContainerPaginacao>
 </div>

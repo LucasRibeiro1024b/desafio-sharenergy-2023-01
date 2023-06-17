@@ -1,3 +1,7 @@
 {
-  "cSpell.words": ["acao", "visivel"]
+  "cSpell.words": [
+    "acao",
+    "visivel"
+  ],
+  "dotenv.enableAutocloaking": false
 }
