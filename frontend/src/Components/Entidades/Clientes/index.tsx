@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useEffect, useState } from 'react';
-import { Button, TablePaginationConfig, message } from 'antd';
+import { Button, message } from 'antd';
 import useSWR from 'swr';
 import qs from 'qs';
 import { ICliente, IDadosTabela } from '../../../Interfaces/Cliente';

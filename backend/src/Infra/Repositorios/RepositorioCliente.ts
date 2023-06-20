@@ -1,8 +1,9 @@
-import { PrismaClient } from '@prisma/client'
+
 import { Cliente } from '../../Domain/Interfaces/Cliente';
 import IPaginacao from '../../Domain/Interfaces/Paginacao';
 import { Repository } from '../../Domain/Interfaces/Repositorio';
 import Retorno from '../../Domain/Interfaces/Retorno';
+import { PrismaClient } from "@prisma/client";
 
 
 class ClienteRepository implements Repository<Retorno<Cliente>> {
@@ -84,7 +85,7 @@ class ClienteRepository implements Repository<Retorno<Cliente>> {
       where: {
         id
       }
-    }).catch((err:any) =>
+    }).catch((err: any) =>
       console.log(err)
     )
     await this.desconectar()
@@ -108,22 +109,22 @@ class ClienteRepository implements Repository<Retorno<Cliente>> {
       include: {
         endereco: true
       },
-      data :{
+      data: {
         cpf: data.cpf,
-        email : data.email,
+        email: data.email,
         nome: data.nome,
-        telefone : data.telefone,
-        endereco :{
-          update :{
-            bairro : data.endereco?.bairro || '',
-            cidade : data.endereco?.cidade || '',
-            rua : data.endereco?.rua || ''
+        telefone: data.telefone,
+        endereco: {
+          update: {
+            bairro: data.endereco?.bairro || '',
+            cidade: data.endereco?.cidade || '',
+            rua: data.endereco?.rua || ''
           }
         }
       },
 
     }).catch(
-      (err : any) => erro = err as any
+      (err: any) => erro = err as any
     )
 
     await this.desconectar()

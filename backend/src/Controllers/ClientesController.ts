@@ -7,10 +7,11 @@ const routerClientes = Router();
 
 
 routerClientes.get("/clientes", async (req: Request, res: Response) => {
-  const paginacao  = req.query
+  const paginacao = req.query
   const comando = await servico.comandoClienteBuscar({
     skip: Number(paginacao.skip) ? Number(paginacao.skip) : 0,
-    take: Number(paginacao.take) ? Number(paginacao.take):10 } as IPaginacao)
+    take: Number(paginacao.take) ? Number(paginacao.take) : 10
+  } as IPaginacao)
   res.send({ comando })
 })
 
@@ -23,7 +24,7 @@ routerClientes.post("/clientes", async (req: Request, res: Response) => {
 routerClientes.delete("/clientes/:id", async (req: Request, res: Response) => {
   const id = req.body.id
   const comando = await servico.comandoClienteDelete(id)
-  res.send({comando})
+  res.send({ comando })
 })
 
 

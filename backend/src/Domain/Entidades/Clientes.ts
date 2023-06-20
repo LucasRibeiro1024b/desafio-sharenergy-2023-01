@@ -21,14 +21,14 @@ class Clientes implements Cliente {
 
 
   private async ValidarNome(nome: string) {
-    if (nome) {
-     return this.nome = nome
+    if (nome.length < 3) {
+      this.erro.push({
+        campo: "nome",
+        mensagem: "Campo invalido"
+      })
     }
 
-    this.erro.push({
-      campo: "nome",
-      mensagem: "Campo invalido"
-    })
+    return this.nome = nome
   }
 
   private async ValidarTelefone(telefone: string) {
@@ -53,7 +53,7 @@ class Clientes implements Cliente {
   }
 
   private async ValidarCPF(cpf: string) {
-    const newCpf =  cpf.replace(/[.-]/g, '')
+    const newCpf = cpf.replace(/[.-]/g, '')
     if (newCpf) {
       return this.cpf = newCpf
     }
@@ -65,7 +65,7 @@ class Clientes implements Cliente {
 
   private async ValidarEndereco(endereco?: Endereco) {
     if (endereco) {
-    return  this.endereco = {
+      return this.endereco = {
         bairro: endereco?.bairro,
         cidade: endereco?.cidade,
         rua: endereco?.rua
